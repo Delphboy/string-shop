@@ -1,0 +1,73 @@
+<?php require('template/header.phtml') ?>
+
+
+<section class="container container-fluid">
+    <!-- Banner Image -->
+    <section class="row">
+        <div class="col-*-*">
+            <img src="http://placehold.it/1900x700" width="100%"/>
+        </div>
+    </section>
+
+    <!-- Search Bar -->
+    <section class="container container-fluid">
+        <form name="search-function">
+            <fieldset>
+                <legend>Search</legend>
+                <div class="form-control">
+                    <select name="search-category" class="col-md-2">
+                        <option value="violin">Everything</option>
+                        <option value="violin">Violins</option>
+                        <option value="viola">Violas</option>
+                        <option value="cello">Cellos</option>
+                        <option value="double-bass">Double Basses</option>
+                        <option value="accessories">Accessories</option>
+                        <option value="sheet-music">Sheet Music</option>
+                    </select>
+
+                    <input type="text" class="col-md-6" placeholder="Search for an item here">
+
+                    <button class="btn btn-default col-md-2" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </section>
+
+    <!-- Categories -->
+    <section class="container">
+        <h2 class="text-center">Categories</h2>
+
+        <div id="categories" class="text-center container container-fluid col-md-12">
+            <div class="text-center col-md-4">
+                <h3>Violins</h3>
+                <img src="http://placehold.it/150x150"/>
+            </div>
+            <div class="text-center col-md-4">
+                <h3>Violas</h3>
+                <img src="http://placehold.it/150x150"/>
+            </div>
+            <div class="text-center col-md-4">
+                <h3>Cellos</h3>
+                <img src="http://placehold.it/150x150"/>
+            </div>
+            <div class="text-center col-md-4">
+                <h3>Double Basses</h3>
+                <img src="http://placehold.it/150x150"/>
+            </div>
+            <div class="text-center col-md-4">
+                <h3>Accessories</h3>
+                <img src="http://placehold.it/150x150"/>
+            </div>
+            <div class="text-center col-md-4">
+                <h3>Sheet Music</h3>
+                <img src="http://placehold.it/150x150"/>
+            </div>
+        </div>
+
+    </section>
+</section>
+
+
+<?php require('template/footer.phtml') ?>
