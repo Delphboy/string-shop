@@ -1,6 +1,5 @@
 # Client-Server Systems Assignment
 
-[![Build Status](https://travis-ci.com/Delphboy/css-assignment.svg?token=njEJ6SsEepLz7sCFXKxz&branch=master)](https://travis-ci.com/Delphboy/css-assignment)
 ## Task
 Your task is to develop an Interactive classified adverts website using 
 PHP, MySQL, HTML/CSS and JavaScript, which allows users to post and 
@@ -33,4 +32,4 @@ information and the MVC Design Pattern with the Bootstrap CSS framework,
  provided workshop template as your start point.
  
  ## Idea
- A sales page for NTK Martial Arts
+ A gumtree like site for buying and selling stringed instruments
