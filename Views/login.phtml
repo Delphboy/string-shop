@@ -16,15 +16,15 @@
                 <div id="CollapseLogin" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <div class="col-md-3"></div>
-                        <form class="col-md-6 col-xs-12 center-block">
+                        <form class="col-md-6 col-xs-12 center-block" name="Login-Form"
+                              onsubmit="return validateLoginForm()"
+                              action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="LoginEmail"/>
+                            <input type="email" class="form-control" name="LoginEmail" placeholder="name@example.com" required/>
                             <label>Password</label>
-                            <input type="password" class="form-control" name="LoginPassword"/>
+                            <input type="password" class="form-control" name="LoginPassword" placeholder="password" required/>
                             <br />
-                            <button type="button" class="btn btn-default btn-sm form-control">
-                                <span class="glyphicon glyphicon-log-in"></span> Log in
-                            </button
+                            <input type="submit" name="login" value="Login" class="btn btn-default btn-sm form-control" />
                         </form>
                         <div class="col-md-3"></div>
                     </div>
@@ -41,29 +41,28 @@
                 <div id="CollapseRegister" class="panel-collapse collapse">
                     <div class="panel-body">
                         <div class="col-md-3"></div>
-                        <form class="col-md-6 col-xs-12 center-block">
+                        <form class="col-md-6 col-xs-12 center-block" name="Registration-Form"
+                              onSubmit="return validateRegisterForm()"
+                              action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+                            <br>
                             <label>First Name</label>
-                            <input type="text" class="form-control" name="RegistrationFirstName"/>
+                            <input type="text" class="form-control" name="RegistrationFirstName" />
                             <label>Surname</label>
-                            <input type="text" class="form-control" name="RegistrationSurname"/>
+                            <input type="text" class="form-control" name="RegistrationSurname" />
                             <label>Email</label>
-                            <input type="email" class="form-control" name="RegistrationEmail"/>
+                            <input type="email" class="form-control" name="RegistrationEmail" />
                             <label>Confirm Email</label>
-                            <input type="email" class="form-control" name="RegistrationEmailConfirmation"/>
-                            <label>Password</label>
-                            <input type="password" class="form-control" name="RegistrationPassword"/>
+                            <input type="email" class="form-control" name="RegistrationEmailConfirmation" />
+                            <label>Password <small>(Must be at least 8 characters)</small></label>
+                            <input type="password" class="form-control" name="RegistrationPassword" />
                             <label>Confirm Password</label>
-                            <input type="password" class="form-control" name="RegistrationPasswordConfirmation"/>
+                            <input type="password" class="form-control" name="RegistrationPasswordConfirmation" />
                             <label>Address</label>
-                            <textarea name="RegistrationAddress" class="form-control"></textarea>
+                            <textarea name="RegistrationAddress" class="form-control" ></textarea>
                             <label>Mobile Number</label>
-                            <input type="text" class="form-control" name="RegistrationMobileNumber"/>
+                            <input type="text" class="form-control" name="RegistrationMobileNumber" />
                             <br />
-                            <marquee><h1>HAVE A CAPCHA SYSTEM HERE</h1></marquee>
-                            <br />
-                            <button type="button" class="btn btn-default btn-sm form-control">
-                                <span class="glyphicon glyphicon-log-in"></span> Log in
-                            </button
+                            <input type="submit" name="submit" value="Register" class="btn btn-default btn-sm form-control" />
                         </form>
                         <div class="col-md-3"></div>
                     </div>
@@ -71,31 +70,6 @@
             </div>
         </div>
     </section>
-
-    <br>
-    <br>
-    <br>
-    <?php
-    $host = "helios.csesalford.com";
-    $dbName = "stc765";
-    $user = "stc765";
-    $pass = 'MySQLPassword';
-
-    $dbHandle = new PDO("mysql:host=$host;dbname=$dbName",$user,$pass);
-    $sqlQuery = 'SELECT * FROM Users'; // put your students table name
-    echo $sqlQuery;  //helpful for debugging to see what SQL query has been created
-    $statement = $dbHandle->prepare($sqlQuery); // prepare PDO statement
-    $statement->execute();   // execute the PDO statement
-    echo "<table border='1' style='padding: 4%;'>";
-    while ($row = $statement->fetch()) {
-        echo "<tr><td>" . $row[0] ."</td><td>". $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3]. "</td><td>" . $row[4]. "</td><td>" . $row[5]. "</td><td>" . $row[6];
-    }
-    echo "</table>";
-    $dbHandle = null;
-
-    ?>
-
 </section>
-
 
 <?php require('template/footer.phtml') ?>

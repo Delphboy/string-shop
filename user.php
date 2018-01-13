@@ -2,4 +2,4 @@
 
 $view = new stdClass();
 $view->pageTitle = 'String Shop';
-require_once('Views/index.phtml');
+require_once('Views/user.phtml');
