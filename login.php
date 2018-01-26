@@ -14,7 +14,7 @@ if(isset($_POST['login']))
     $result = $reg->signIn($_POST['LoginEmail'], $_POST['LoginPassword']);
     if($result == true)
     {
-        $_SESSION['isSignedIn'] = true;
+        header('Location: user.php');
     }
 }
 
@@ -26,9 +26,10 @@ if(isset($_POST['submit']))
     $email = htmlentities($_POST['RegistrationEmail']);
     $password = password_hash(htmlentities($_POST['RegistrationPassword']), PASSWORD_BCRYPT);
     $address = htmlentities($_POST['RegistrationAddress']);
+    $postcode = htmlentities($_POST['RegistrationPostcode']);
     $mobNum = htmlentities($_POST['RegistrationMobileNumber']);
 
-    $wasAccountMade = $reg->registerNewUser($firstName, $surname, $email, $password, $address, $mobNum);
+    $wasAccountMade = $reg->registerNewUser($firstName, $surname, $email, $password, $address, $postcode, $mobNum);
 
     if($wasAccountMade == true)
     {
@@ -40,4 +41,14 @@ if(isset($_POST['submit']))
     }
 }
 
-require_once('Views/login.phtml');
+if(isset($_SESSION['isSignedIn']))
+{
+    if($_SESSION['isSignedIn'])
+    {
+        header('Location: user.php');
+    }
+}
+else
+{
+    require_once('Views/login.phtml');
+}

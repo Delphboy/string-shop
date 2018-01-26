@@ -1,0 +1,74 @@
+<?php require('template/header.phtml') ?>
+
+<div class="container">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 col-xs-12 center-block">
+        <h2>Post an Advert</h2>
+        <p>Please provide as much accurate detail about the product as you can</p>
+
+        <form name="Registration-Form"
+              onSubmit="return validateRegisterForm()"
+              action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+            <br>
+
+            <label>Advert Title</label>
+            <input required type="text" class="form-control" name="PostTitle" />
+
+            <label>Product Description</label>
+            <textarea required name="PostDescription" class="form-control" ></textarea>
+
+            <label>Advert Category</label>
+            <select required class="form-control" name="PostSize">
+                <option class="form-control" value="violin">Violin</option>
+                <option class="form-control" value="viola">Viola</option>
+                <option class="form-control" value="cello">Cello</option>
+                <option class="form-control" value="bass">Double Bass</option>
+                <option class="form-control" value="music">Sheet Music</option>
+                <option class="form-control" value="accessory">Accessory</option>
+            </select>
+
+            <label>Product Size</label>
+            <select required class="form-control" name="PostSize">
+                <option class="form-control" value="0">Not applicable</option>
+                <option class="form-control" value="4/4">Full Size</option>
+                <option class="form-control" value="1/2">Half Size</option>
+                <option class="form-control" value="3/4">Three Quarter Size</option>
+                <option class="form-control" value="1/4">Quarter Size</option>
+                <option class="form-control" value="1/8">1/8</option>
+                <option class="form-control" value="1/16">1/16</option>
+                <option class="form-control" value="1/64">1/64</option>
+            </select>
+
+            <label>Age of Product</label>
+            <select required class="form-control" name="PostAge">
+                <option class="form-control" value="unknown">Unknown</option>
+                <option class="form-control" value="new">New</option>
+                <option class="form-control" value="<10">Less than 10 Years Old</option>
+                <option class="form-control" value="<50">Less than 50 Years Old</option>
+                <option class="form-control" value="<100">Less than 100 Years Years Old</option>
+                <option class="form-control" value=">100">More than 100 Years Years Old</option>
+            </select>
+
+            <div class="checkbox">
+                <label>Comes with a case <input type="checkbox"></label>
+            </div>
+
+            <div class="checkbox">
+                <label>Comes with a bow <input type="checkbox"></label>
+            </div>
+
+            <label>Picture(s) of Item</label>
+            <input type="file" name="PostImages" accept="image/*" multiple/>
+
+            <br>
+            <label>Price (£)</label>
+            <input required type="number" step="0.01" class="form-control" name="PostPrice"/>
+
+            <br />
+            <input type="submit" name="submit" value="Create Advert" class="btn btn-default btn-sm form-control" />
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<?php require('template/footer.phtml') ?>

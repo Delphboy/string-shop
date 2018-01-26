@@ -23,26 +23,48 @@
 </head>
 
 <body role="document">
-
-<!--Navigation-->
-<div class="container container-fluid">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">String Shop</a>
+                <a class="navbar-brand" href="/index.php">String Shop</a>
             </div>
-
-            <div class="collapse navbar-collapse" id="myNavbar">
+            <div id="navbar" class="navbar-collapse collapse">
+    <!--            <ul class="nav navbar-nav">-->
+    <!--                <li class="active"><a href="#">Home</a></li>-->
+    <!--            </ul>-->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../../login.php"><span class="glyphicon glyphicon-log-in"></span> Login / Register</a></li>
+
+                    <?php
+                        if(isset($_SESSION['isSignedIn']))
+                        {
+                            if ($_SESSION['isSignedIn'])
+                            {
+                                echo "<li class=\"dropdown\">";
+                                    echo "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">" . $_SESSION['firstName'] . "<span class=\"caret\"></span></a>";
+                                    echo "<ul class=\"dropdown-menu\">";
+                                        echo "<li><a href=\"/post.php\">Post Advert</a></li>";
+                                        echo "<li><a href=\"/user.php\">Your Adverts</a></li>";
+                                        echo "<li><a href=\"/wishlist.php\">Wishlist</a></li>";
+                                        echo "<li><a href=\"/settings.php\">Settings</a></li>";
+                                        echo "<li role=\"separator\" class=\"divider\"></li>";
+    //                                    echo "<li class=\"dropdown-header\">Nav header</li>";
+                                        echo "<li><a href=\"/session_destroy.php\"><span class=\"glyphicon glyphicon-log-out\"></span> Sign Out</a></li>";
+                                    echo "</ul>";
+                                echo "</li>";
+                            }
+                        }
+                        else
+                        {
+                            echo "<li><a href=\"/login.php\"><span class=\"glyphicon glyphicon - log - in\"></span> Sign In / Register</a></li>";
+                        }
+                    ?>
                 </ul>
             </div>
         </div>
     </nav>
-</div>

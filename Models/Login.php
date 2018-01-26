@@ -10,7 +10,7 @@ class Login
 {
     function __construct()
     {
-
+        session_start();
     }
 
     /**
@@ -23,16 +23,18 @@ class Login
     function signIn($email, $password)
     {
         $dbConnection = DBConnection::getInstance();
-        $testQuery = "SELECT email, password FROM Users WHERE email LIKE :email;";
+        $testQuery = "SELECT email, password, firstName FROM Users WHERE email LIKE :email;";
         $dbConnection->setQuery($testQuery);
         $dbConnection->bindQueryValue(':email', $email);
 //        $dbConnection->bindQueryValue(':pass', $password);
         $dbConnection->run();
         $row = $dbConnection->getRow();
-        echo 'Email: ' . $row[0] . " Password: " .$row[1];
+//        echo 'Email: ' . $row[0] . " Password: " . $row[1];
 
         if(($row[0] == $email) && password_verify($password, $row[1]))
         {
+            $_SESSION['firstName'] = $row[2];
+            $_SESSION['isSignedIn'] = true;
             return true;
         }
         else
@@ -52,7 +54,7 @@ class Login
      *
      * @return true if the new user was created
      */
-    function registerNewUser($fName, $sName, $email, $password, $address, $mobNum)
+    function registerNewUser($fName, $sName, $email, $password, $address, $postcode, $mobNum)
     {
         $dbConnection = DBConnection::getInstance();
         $testQuery = "SELECT email FROM Users WHERE email LIKE :email;";
@@ -64,7 +66,7 @@ class Login
 
         if($row == "")
         {
-            $query = "INSERT INTO Users(firstName, surname, email, password, address, mobileNumber) VALUES (:fName, :sName, :email, :pass, :address, :mob)";
+            $query = "INSERT INTO Users(firstName, surname, email, password, addressLineOne, postcode, mobileNumber) VALUES (:fName, :sName, :email, :pass, :address, :postcode, :mob)";
 
             $dbConnection->setQuery($query);
             $dbConnection->bindQueryValue(':fName', $fName);
@@ -72,6 +74,7 @@ class Login
             $dbConnection->bindQueryValue(':email', $email);
             $dbConnection->bindQueryValue(':pass', $password);
             $dbConnection->bindQueryValue(':address', $address);
+            $dbConnection->bindQueryValue(':postcode', $postcode);
             $dbConnection->bindQueryValue(':mob', $mobNum);
 
             $dbConnection->run();

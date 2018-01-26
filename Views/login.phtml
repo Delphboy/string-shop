@@ -46,21 +46,23 @@
                               action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                             <br>
                             <label>First Name</label>
-                            <input type="text" class="form-control" name="RegistrationFirstName" />
+                            <input required type="text" class="form-control" name="RegistrationFirstName" />
                             <label>Surname</label>
-                            <input type="text" class="form-control" name="RegistrationSurname" />
+                            <input required type="text" class="form-control" name="RegistrationSurname" />
                             <label>Email</label>
-                            <input type="email" class="form-control" name="RegistrationEmail" />
+                            <input required type="email" class="form-control" name="RegistrationEmail" />
                             <label>Confirm Email</label>
-                            <input type="email" class="form-control" name="RegistrationEmailConfirmation" />
+                            <input required type="email" class="form-control" name="RegistrationEmailConfirmation" />
                             <label>Password <small>(Must be at least 8 characters)</small></label>
-                            <input type="password" class="form-control" name="RegistrationPassword" />
+                            <input required type="password" class="form-control" name="RegistrationPassword" />
                             <label>Confirm Password</label>
-                            <input type="password" class="form-control" name="RegistrationPasswordConfirmation" />
-                            <label>Address</label>
-                            <textarea name="RegistrationAddress" class="form-control" ></textarea>
+                            <input required type="password" class="form-control" name="RegistrationPasswordConfirmation" />
+                            <label>Address Line One</label>
+                            <textarea required name="RegistrationAddress" class="form-control" ></textarea>
+                            <label>Postcode</label>
+                            <input required type="text" class="form-control" name="RegistrationPostcode" />
                             <label>Mobile Number</label>
-                            <input type="text" class="form-control" name="RegistrationMobileNumber" />
+                            <input required type="text" class="form-control" name="RegistrationMobileNumber" />
                             <br />
                             <input type="submit" name="submit" value="Register" class="btn btn-default btn-sm form-control" />
                         </form>
