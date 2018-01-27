@@ -43,10 +43,11 @@ class DBConnection
         try
         {
             $this->db = new PDO($dsn, $this->user, $this->pass);
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //get PDO to throw exceptions
         }
         catch (PDOException $ex)
         {
-            echo 'Connection failed: ' . $ex->getMessage();
+            echo "<h1>Connection failed: " . $ex->getMessage() . "</h1>";
             $this->db = NULL;
         }
     }
@@ -78,12 +79,25 @@ class DBConnection
 
     public function run()
     {
-        $this->SQLQuery->execute();
+        try
+        {
+            $this->SQLQuery->execute();
+        }
+        catch (PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
     }
 
     public function getRow()
     {
-        return $this->SQLQuery->fetch();
+        $this->run();
+        return $this->SQLQuery->fetchAll();
+    }
+
+    public function getLastID()
+    {
+        return $this->db->lastInsertId();
     }
 
 

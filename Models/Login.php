@@ -10,7 +10,6 @@ class Login
 {
     function __construct()
     {
-        session_start();
     }
 
     /**
@@ -23,17 +22,17 @@ class Login
     function signIn($email, $password)
     {
         $dbConnection = DBConnection::getInstance();
-        $testQuery = "SELECT email, password, firstName FROM Users WHERE email LIKE :email;";
+        $testQuery = "SELECT userID, email, password, firstName FROM Users WHERE email LIKE :email;";
         $dbConnection->setQuery($testQuery);
         $dbConnection->bindQueryValue(':email', $email);
-//        $dbConnection->bindQueryValue(':pass', $password);
         $dbConnection->run();
         $row = $dbConnection->getRow();
 //        echo 'Email: ' . $row[0] . " Password: " . $row[1];
 
-        if(($row[0] == $email) && password_verify($password, $row[1]))
+        if(($row[1] == $email) && password_verify($password, $row[2]))
         {
-            $_SESSION['firstName'] = $row[2];
+            $_SESSION['userID'] = $row[0];
+            $_SESSION['firstName'] = $row[3];
             $_SESSION['isSignedIn'] = true;
             return true;
         }
