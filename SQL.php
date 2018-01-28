@@ -25,18 +25,18 @@ if(isset($_POST['click']))
 
     $dbHandle->runQuery($sqlQuery);
 
-    echo "<table border='1'>";
-//echo "<tr><td>PK</td><td>First Name</td><td>Surname</td><td>Email</td><td>Password</td><td>Address Line 1</td><td>Postcode</td><td>Number</td></tr>";
+    $data = $dbHandle->getRow();
 
-    while ($row = $dbHandle->getRow())
+    echo "<table border='1'>";
+
+    for($i = 0; $i < count($data) / 2; $i++)
     {
         echo "<tr>";
-        for($i = 0; $i < sizeof($row) / 2; $i++)
+        for($j = 0; $j < count($data[$i]) / 2; $j++)
         {
-            if($row != null)
-                echo "<td>" . $row[$i] ."</td>";
+            echo "<td>" . $data[$i][$j] . "</td>\n";
         }
-        echo "</tr>";
+        echo "</tr>\n";
     }
 
     echo "</table>";

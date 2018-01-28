@@ -114,4 +114,19 @@ class Advert
     {
         return $this->pictures;
     }
+
+    /**
+     * Take the information held in the advert object and place it in a HTML div that can be used to display the information
+     * @return string
+     */
+    public function createDisplayCode()
+    {
+        $output = "<div>";
+
+
+
+        $output = $output . "</div>";
+        return $output;
+    }
+
 }
