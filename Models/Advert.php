@@ -121,13 +121,22 @@ class Advert
      */
     public function createDisplayCode()
     {
-        $output = "<div>";
-        $output = $output . "<h2>$this->title</h2>";
-        $output = $output . "<p><strong>Price:</strong> £$this->price</p>";
-        $output = $output . "<p>$this->description</p>";
+        if(strlen($this->description) > 325)
+            $descriptionPreview = substr($this->description, 0, 325) . "...";
+        else
+            $descriptionPreview = $this->description;
 
-
-        $output = $output . "</div>";
+        $output = "<div class='col-md-12'>\n";
+        $output = $output . "\t<div class='col-md-2'>\n";
+        $output = $output . "\t\t<img src='http://placehold.it/150x150' />\n";
+        $output = $output . "\t</div>\n";
+        $output = $output . "\t<div class='col-md-8'>\n";
+        $output = $output . "\t\t<h2>$this->title</h2>\n";
+        $output = $output . "\t\t<p><strong>Price:</strong> £$this->price</p>\n";
+        $output = $output . "\t\t<p>$descriptionPreview</p>\n";
+        $output = $output . "\t</div>\n";
+        $output = $output . "\t<div class=\"col-xs-12\" style=\"height:50px;\"></div>\n"; //add vertical spacing between the adverts
+        $output = $output . "</div>\n\n";
         return $output;
     }
 

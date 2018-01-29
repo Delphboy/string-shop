@@ -35,7 +35,7 @@ class User
         $db->setQuery($query);
         $db->bindQueryValue(':ID', $this->userID);
         $data = $db->getResults();
-        for($rowCount = 0; $rowCount < count($data) / 2; $rowCount++)
+        for($rowCount = 0; $rowCount < count($data); $rowCount++)
         {
             //__construct($title, $description, $category, $size, $age, $hasCase, $hasBow, $price, $pictures)
             $advert = new Advert($data[$rowCount][2], $data[$rowCount][3], $data[$rowCount][4], $data[$rowCount][7],

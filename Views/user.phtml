@@ -1,19 +1,17 @@
 <?php require('template/header.phtml') ?>
 
 <div class="container">
-    <div class="jumbotron">
-        <h1>Your Adverts</h1>
-        <?php
-            if(isset($view->userAdverts))
-            {
-                echo $view->userAdverts;
-            }
-            else
-            {
-                echo "<h2>It appears you don't have any adverts. </h2>";
-                echo "<h3><a href='/post.php'>Post an advert</a></h3>";
-            }
-        ?>
-    </div>
+    <h1>Your Adverts</h1>
+    <?php
+    if(isset($view->userAdverts))
+    {
+        echo $view->userAdverts;
+    }
+    else
+    {
+        echo "<h2>It appears you don't have any adverts. </h2>";
+        echo "<h3><a href='/post.php'>Post an advert</a></h3>";
+    }
+    ?>
 </div>
 <?php require('template/footer.phtml') ?>

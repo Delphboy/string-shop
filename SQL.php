@@ -29,7 +29,7 @@ if(isset($_POST['click']))
 
     echo "<table border='1'>";
 
-    for($i = 0; $i < count($data) / 2; $i++)
+    for($i = 0; $i < count($data); $i++)
     {
         echo "<tr>";
         for($j = 0; $j < count($data[$i]) / 2; $j++)
