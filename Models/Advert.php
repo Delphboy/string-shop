@@ -122,7 +122,9 @@ class Advert
     public function createDisplayCode()
     {
         $output = "<div>";
-
+        $output = $output . "<h2>$this->title</h2>";
+        $output = $output . "<p><strong>Price:</strong> £$this->price</p>";
+        $output = $output . "<p>$this->description</p>";
 
 
         $output = $output . "</div>";

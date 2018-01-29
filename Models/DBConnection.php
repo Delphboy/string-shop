@@ -89,7 +89,7 @@ class DBConnection
         }
     }
 
-    public function getRow()
+    public function getResults()
     {
         $this->run();
         return $this->SQLQuery->fetchAll();

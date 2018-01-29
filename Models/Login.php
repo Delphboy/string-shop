@@ -26,13 +26,13 @@ class Login
         $dbConnection->setQuery($testQuery);
         $dbConnection->bindQueryValue(':email', $email);
         $dbConnection->run();
-        $row = $dbConnection->getRow();
+        $row = $dbConnection->getResults();
 //        echo 'Email: ' . $row[0] . " Password: " . $row[1];
 
-        if(($row[1] == $email) && password_verify($password, $row[2]))
+        if(($row[0][1] == $email) && password_verify($password, $row[0][2]))
         {
-            $_SESSION['userID'] = $row[0];
-            $_SESSION['firstName'] = $row[3];
+            $_SESSION['userID'] = $row[0][0];
+            $_SESSION['firstName'] = $row[0][3];
             $_SESSION['isSignedIn'] = true;
             return true;
         }
@@ -60,7 +60,7 @@ class Login
         $dbConnection->setQuery($testQuery);
         $dbConnection->bindQueryValue(':email', $email);
         $dbConnection->run();
-        $row = $dbConnection->getRow();
+        $row = $dbConnection->getResults();
 
 
         if($row == "")
