@@ -2,7 +2,7 @@
 
 
 
-<form action="/sql.php" method="post">
+<form action="/SQL.php" method="post">
     <select name="click">
         <option value='select * from Users'>select all users</option>
         <option value='select * from Adverts'>select all adverts</option>
