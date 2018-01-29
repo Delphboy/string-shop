@@ -23,6 +23,10 @@ class User
         }
     }
 
+    /**
+     * Load user's adverts and store them in a displayable string
+     * @return string
+     */
     function loadUserMadeAdverts()
     {
         $output = "";
@@ -33,8 +37,9 @@ class User
         $data = $db->getResults();
         for($rowCount = 0; $rowCount < count($data) / 2; $rowCount++)
         {
+            //__construct($title, $description, $category, $size, $age, $hasCase, $hasBow, $price, $pictures)
             $advert = new Advert($data[$rowCount][2], $data[$rowCount][3], $data[$rowCount][4], $data[$rowCount][7],
-                $data[$rowCount][8], $data[$rowCount][2], $data[$rowCount][9], $data[$rowCount][10], "");
+                $data[$rowCount][8], $data[$rowCount][9], $data[$rowCount][10], $data[$rowCount][6], "");
             $output = $output . $advert->createDisplayCode();
         }
         return $output;
