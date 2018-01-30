@@ -174,49 +174,49 @@ class Advert
     public function createDisplayCode()
     {
         $numOfImgs = count($this->pictures);
-
-        $output = "<div class='col-md-12'>\n";
-        $output = $output . "\t<h1>$this->title</h1>\n\n\n";
-//        $output = $output . "\t<div class='col-md-4'>\n";
-
-
-
-//        $output = $output . "\t\t<img src='/images/uploads/" . $this->pictures[0][0] . "' alt='Picture of the product'/>\n";
-
-        $output = $output . "<div id=\"carouselExampleControls\" class=\"carousel slide\" data-ride=\"carousel\">\n
-        <div class=\"carousel-inner\" role=\"listbox\">\n
-        <div class=\"carousel-item active\">\n
-        <img class=\"d-block img-fluid\" src='/images/uploads/" . $this->pictures[0][0] . "' alt=\"User uploaded image\">\n
-        </div>\n";
-
-        for($i = 1; $i < $numOfImgs; $i++)
-        {
-            $output = $output . "<div class=\"carousel-item \">\n";
-            $output = $output . "<img class=\"d-block img-fluid\" src='/images/uploads/" . $this->pictures[$i][0] . "' alt=\"User uploaded image\">\n";
-            $output = $output . "</div>\n";
-        }
-
-        $output = $output . "<a class=\"carousel-control-prev\" href=\"#carouselExampleControls\" role=\"button\" data-slide=\"prev\">\n";
-        $output = $output . "<span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\n";
-        $output = $output . "<span class=\"sr-only\">Previous</span>\n";
-        $output = $output . "</a>\n";
-        $output = $output . "<a class=\"carousel-control-next\" href=\"#carouselExampleControls\" role=\"button\" data-slide=\"next\">\n";
-        $output = $output . "<span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\n";
-        $output = $output . "<span class=\"sr-only\">Next</span>\n";
-        $output = $output . "</a>\n";
+        $output = "";
+        $output = $output . "<div class='col-md-12'>\n";
+        $output = $output . "\t<h1>$this->title</h1>\n";
         $output = $output . "</div>\n";
 
-
-
-//        $output = $output . "\t</div>\n";
-        $output = $output . "\t<div class='col-md-8'>\n";
-        $output = $output . "\t\t<h3>Description</h3>\n";
-        $output = $output . "\t\t<p>$this->description</p>\n";
+        $output = $output . "\t<div class='col-md-6'>\n";
         $output = $output . "\t\t<p><strong>Price:</strong> £$this->price</p>\n";
-        $output = $output . "\t<input type='button' value='Add To Wishlist' class='glyphicon-bullhorn'/>";
-        $output = $output . "\t<input type='button' value='Message Seller' class='glyphicon-bullhorn'/>";
+        $output = $output . "\t\t<p>$this->description</p>\n";
         $output = $output . "\t</div>\n";
-        $output = $output . "</div>\n\n";
+
+        $output = $output . "\t<div class='col-md-6'>\n";
+
+        $output = $output . "<div id=\"advert-picture-slides\" class=\"carousel slide\" data-ride=\"carousel\">\n";
+        $output = $output . "\t\t<ol class=\"carousel-indicators\">\n";
+        $output = $output . "\t\t\t<li data-target=\"#advert-picture-slides\" data-slide-to=\"0\" class=\"active\"></li>\n";
+        for($i = 1; $i < $numOfImgs; $i++)
+            $output = $output . "\t\t\t<li data-target=\"#advert-picture-slides\" data-slide-to=\"" . $i . "\"></li>\n";
+        $output = $output . "\t\t</ol>\n";
+
+        $output = $output . "\t<div class=\"carousel-inner\">\n";
+        $output = $output . "\t\t<div class=\"item active animated fadeInRight\">\n";
+        $output = $output . "\t\t\t<img src='/images/uploads/" . $this->pictures[0][0] . "' class=\"img-responsive\" />\n";
+        $output = $output . "\t\t</div>\n";
+        for($j = 1; $j < $numOfImgs; $j++)
+        {
+            $output = $output . "\t\t<div class=\"item animated fadeInRight\">\n";
+            $output = $output . "\t\t\t<img src='/images/uploads/" . $this->pictures[$j][0] . "' class=\"img-responsive\" />\n";
+            $output = $output . "\t\t</div>\n";
+        }
+        $output = $output . "\t</div>\n";
+
+        $output = $output . "\t<div id=\"my-carousel\" class=\"carousel slide\" data-ride=\"carousel\">\n";
+        $output = $output . "\t\t<div class=\"carousel-inner\">...</div>\n";
+        $output = $output . "\t</div>\n";
+        $output = $output . "\t<a class=\"left carousel-control\" href=\"#advert-picture-slides\" data-slide=\"prev\">\n";
+        $output = $output . "\t<span class=\"icon-prev\"></span>\n";
+        $output = $output . "\t</a>\n";
+        $output = $output . "\t<a class=\"right carousel-control\" href=\"#advert-picture-slides\" data-slide=\"next\">\n";
+        $output = $output . "\t<span class=\"icon-next\"></span>\n";
+        $output = $output . "\t</a>\n";
+
+        $output = $output . "\t</div>\n";
+
         return $output;
     }
 
