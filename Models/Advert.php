@@ -153,17 +153,17 @@ class Advert
 
         $code = dechex(($this->PK * 7));
 
-        $output = "<div class='col-md-12'>\n";
-        $output = $output . "\t<div class='col-md-2'>\n";
-        $output = $output . "\t\t<img src='/images/uploads/" . $this->pictures[0][0] . "' width='150px' alt='Picture of the product'/>\n";
-        $output = $output . "\t</div>\n";
-        $output = $output . "\t<div class='col-md-8'>\n";
-        $output = $output . "\t\t<h2><a href='/advert.php?advert=" . $code . "'>$this->title</a></h2>\n";
-        $output = $output . "\t\t<p><strong>Price:</strong> £$this->price</p>\n";
-        $output = $output . "\t\t<p>$descriptionPreview</p>\n";
-        $output = $output . "\t</div>\n";
-        $output = $output . "\t<div class=\"col-xs-12\" style=\"height:50px;\"></div>\n"; //add vertical spacing between the adverts
-        $output = $output . "</div>\n\n";
+        $output = "<div class='col-md-12'>\n
+        \t<div class='col-md-2'>\n
+        \t\t<img src='/images/uploads/" . $this->pictures[0][0] . "' width='150px' alt='Picture of the product'/>\n
+        \t</div>\n
+        \t<div class='col-md-8'>\n
+        \t\t<h2><a href='/advert.php?advert=" . $code . "'>$this->title</a></h2>\n
+        \t\t<p><strong>Price:</strong> £$this->price</p>\n
+        \t\t<p>$descriptionPreview</p>\n
+        \t</div>\n
+        \t<div class=\"col-xs-12\" style=\"height:50px;\"></div>\n
+        </div>\n\n";
         return $output;
     }
 
@@ -173,11 +173,42 @@ class Advert
      */
     public function createDisplayCode()
     {
+        $numOfImgs = count($this->pictures);
+
         $output = "<div class='col-md-12'>\n";
-        $output = $output . "\t<h1>$this->title</h1>\n";
-        $output = $output . "\t<div class='col-md-4'>\n";
+        $output = $output . "\t<h1>$this->title</h1>\n\n\n";
+//        $output = $output . "\t<div class='col-md-4'>\n";
+
+
+
 //        $output = $output . "\t\t<img src='/images/uploads/" . $this->pictures[0][0] . "' alt='Picture of the product'/>\n";
-        $output = $output . "\t</div>\n";
+
+        $output = $output . "<div id=\"carouselExampleControls\" class=\"carousel slide\" data-ride=\"carousel\">\n
+        <div class=\"carousel-inner\" role=\"listbox\">\n
+        <div class=\"carousel-item active\">\n
+        <img class=\"d-block img-fluid\" src='/images/uploads/" . $this->pictures[0][0] . "' alt=\"User uploaded image\">\n
+        </div>\n";
+
+        for($i = 1; $i < $numOfImgs; $i++)
+        {
+            $output = $output . "<div class=\"carousel-item \">\n";
+            $output = $output . "<img class=\"d-block img-fluid\" src='/images/uploads/" . $this->pictures[$i][0] . "' alt=\"User uploaded image\">\n";
+            $output = $output . "</div>\n";
+        }
+
+        $output = $output . "<a class=\"carousel-control-prev\" href=\"#carouselExampleControls\" role=\"button\" data-slide=\"prev\">\n";
+        $output = $output . "<span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\n";
+        $output = $output . "<span class=\"sr-only\">Previous</span>\n";
+        $output = $output . "</a>\n";
+        $output = $output . "<a class=\"carousel-control-next\" href=\"#carouselExampleControls\" role=\"button\" data-slide=\"next\">\n";
+        $output = $output . "<span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\n";
+        $output = $output . "<span class=\"sr-only\">Next</span>\n";
+        $output = $output . "</a>\n";
+        $output = $output . "</div>\n";
+
+
+
+//        $output = $output . "\t</div>\n";
         $output = $output . "\t<div class='col-md-8'>\n";
         $output = $output . "\t\t<h3>Description</h3>\n";
         $output = $output . "\t\t<p>$this->description</p>\n";

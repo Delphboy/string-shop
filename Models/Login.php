@@ -27,7 +27,7 @@ class Login
         $dbConnection->bindQueryValue(':email', $email);
         $dbConnection->run();
         $row = $dbConnection->getResults();
-//        echo 'Email: ' . $row[0] . " Password: " . $row[1];
+        echo 'Email: ' . $row[0] . " Password: " . $row[1];
 
         if(($row[0][1] == $email) && password_verify($password, $row[0][2]))
         {
