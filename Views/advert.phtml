@@ -1,0 +1,15 @@
+<?php require('template/header.phtml') ?>
+<div class="container">
+    <?php
+    if(isset($view->advert))
+    {
+        echo $view->advert;
+    }
+    else
+    {
+        echo "<h2>It appears this advert doesn't exist anymore</h2>";
+        echo "<h3><a href='/index.php'>Find other products</a></h3>";
+    }
+    ?>
+</div>
+<?php require('template/footer.phtml') ?>

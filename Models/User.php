@@ -41,9 +41,9 @@ class User
             $db->bindQueryValue(":ad", $data[$rowCount][0]);
             $pictures = $db->getResults();
 
-            $advert = new Advert($data[$rowCount][2], $data[$rowCount][3], $data[$rowCount][4], $data[$rowCount][7],
+            $advert = new Advert($data[$rowCount][0], $data[$rowCount][2], $data[$rowCount][3], $data[$rowCount][4], $data[$rowCount][7],
                 $data[$rowCount][8], $data[$rowCount][9], $data[$rowCount][10], $data[$rowCount][6], $pictures);
-            $output = $output . $advert->createDisplayCode();
+            $output = $output . $advert->createPreviewCode();
         }
         return $output;
     }
