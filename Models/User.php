@@ -37,9 +37,12 @@ class User
         $data = $db->getResults();
         for($rowCount = 0; $rowCount < count($data); $rowCount++)
         {
-            //__construct($title, $description, $category, $size, $age, $hasCase, $hasBow, $price, $pictures)
+            $db->setQuery("SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :ad");
+            $db->bindQueryValue(":ad", $data[$rowCount][0]);
+            $pictures = $db->getResults();
+
             $advert = new Advert($data[$rowCount][2], $data[$rowCount][3], $data[$rowCount][4], $data[$rowCount][7],
-                $data[$rowCount][8], $data[$rowCount][9], $data[$rowCount][10], $data[$rowCount][6], "");
+                $data[$rowCount][8], $data[$rowCount][9], $data[$rowCount][10], $data[$rowCount][6], $pictures);
             $output = $output . $advert->createDisplayCode();
         }
         return $output;

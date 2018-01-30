@@ -128,7 +128,7 @@ class Advert
 
         $output = "<div class='col-md-12'>\n";
         $output = $output . "\t<div class='col-md-2'>\n";
-        $output = $output . "\t\t<img src='http://placehold.it/150x150' />\n";
+        $output = $output . "\t\t<img src='/images/uploads/" . $this->pictures[0][0] . "' width='150px' alt='Picture of the product'/>\n";
         $output = $output . "\t</div>\n";
         $output = $output . "\t<div class='col-md-8'>\n";
         $output = $output . "\t\t<h2>$this->title</h2>\n";
