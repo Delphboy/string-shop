@@ -4,6 +4,12 @@
     if(isset($view->advert))
     {
         echo $view->advert;
+        echo "<br>" .
+            "<form name='advertOptions' action='" . $_SERVER['PHP_SELF'] . "' method='post'>" .
+            "<div class='col-md-4'><button name='wishList' class=\"btn btn-success\"><span class=\"glyphicon glyphicon-plus\"></span> Add to Wish List</button></div>" .
+            "<div class='col-md-4'><button name='msgSeller' class=\"btn btn-success\"><span class=\"glyphicon glyphicon-envelope\"></span> Message Seller</button></div>" .
+            "</form>" .
+            "</div>";
     }
     else
     {

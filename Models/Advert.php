@@ -154,24 +154,24 @@ class Advert
      */
     public function createPreviewCode()
     {
-        if(strlen($this->description) > 325)
-            $descriptionPreview = substr($this->description, 0, 325) . "...";
+        if(strlen($this->description) > 120)
+            $descriptionPreview = substr($this->description, 0, 120) . "...";
         else
             $descriptionPreview = $this->description;
 
         $code = dechex(($this->PK * 7));
 
-        $output = "<div class='col-md-12'>\n
-        \t<div class='col-md-2'>\n";
+        $output = "<div class='col-md-6'>\n
+        \t<div class='col-md-6'>\n";
 
         if($this->pictures == null)
-            $output = $output . "\t\t<img src='/images/no-image.png' width='150px' alt='Picture of the product'/>\n";
+            $output = $output . "\t\t<img src='/images/no-image.png' width='250px' alt='Picture of the product'/>\n";
         else
-            $output = $output . "\t\t<img src='/images/uploads/" . $this->pictures[0][0] . "' width='150px' alt='Picture of the product'/>\n";
+            $output = $output . "\t\t<img src='/images/uploads/" . $this->pictures[0][0] . "' width='250px' alt='Picture of the product'/>\n";
 
 
         $output = $output . "\t</div>\n
-        \t<div class='col-md-8'>\n
+        \t<div class='col-md-6'>\n
         \t\t<h2><a href='/advert.php?advert=" . $code . "'>$this->title</a></h2>\n
         \t\t<p><strong>Price:</strong> £$this->price</p>\n
         \t\t<p>$descriptionPreview</p>\n
@@ -185,6 +185,7 @@ class Advert
     {
         if($this->title == null)
             return null;
+
         $output = "";
         $output = $output . "<div class='col-md-12'>\n";
         $output = $output . "\t<h1>$this->title</h1>\n";
@@ -228,6 +229,9 @@ class Advert
      */
     public function createDisplayPictures()
     {
+        if($this->title == null)
+            return null;
+
         $output = "\t<div class='col-md-6'>\n";
         $numOfImgs = count($this->pictures);
 
