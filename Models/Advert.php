@@ -293,4 +293,36 @@ class Advert
         }
         return $output;
     }
+
+    public function isOnWishlist($userID)
+    {
+        $db = DBConnection::getInstance();
+        $query = "SELECT * FROM wishlist WHERE userPK = :user AND :advert;";
+        $db->setQuery($query);
+        $db->bindQueryValue(':user', $userID);
+        $db->bindQueryValue(':advert', $this->PK);
+        $db->run();
+        $count = $db->getRowCount();
+        return($count != 0);
+    }
+
+    public function addToWishlist($userID)
+    {
+        $db = DBConnection::getInstance();
+        $query = "INSERT INTO wishlist(userPK, advertPK) VALUES(:user, :advert);";
+        $db->setQuery($query);
+        $db->bindQueryValue(':user', $userID);
+        $db->bindQueryValue(':advert', $this->PK);
+        $db->run();
+    }
+
+    public function removeFromWishlist()
+    {
+        $db = DBConnection::getInstance();
+        $query = "DELETE FROM wishlist WHERE advertPK = :advert;";
+        $db->setQuery($query);
+        $db->bindQueryValue(':advert', $this->PK);
+        $db->run();
+    }
+
 }

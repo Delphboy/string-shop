@@ -7,7 +7,7 @@
         <option value='select * from Users'>select all users</option>
         <option value='select * from Adverts'>select all adverts</option>
         <option value='select * from AdvertPictures'>select all advert pics</option>
-        <option value='select * from Wishlists'>select all wishlist</option>
+        <option value='select * from wishlist'>select all wishlist</option>
 
     </select>
     <input type="submit" value="Quick Search">

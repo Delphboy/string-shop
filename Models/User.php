@@ -48,4 +48,26 @@ class User
         return $output;
     }
 
+    function loadWishlist()
+    {
+        $output = "";
+        $db = DBConnection::getInstance();
+        $query = "SELECT * FROM wishlist INNER JOIN Adverts On wishlist.advertPK = Adverts.advertID WHERE wishlist.userPK = :ID;";
+        $db->setQuery($query);
+        $db->bindQueryValue(':ID', $this->userID);
+        $data = $db->getAllResults();
+        for($rowCount = 0; $rowCount < count($data); $rowCount++)
+        {
+            $db->setQuery("SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :ad");
+            $db->bindQueryValue(":ad", $data[$rowCount][2]);
+            $pictures = $db->getAllResults();
+
+            //__construct($PK, $title, $description, $category, $size, $age, $hasCase, $hasBow, $price, $pictures)
+            $advert = new Advert($data[$rowCount][2], $data[$rowCount][5], $data[$rowCount][6], $data[$rowCount][7], $data[$rowCount][10],
+                $data[$rowCount][11], $data[$rowCount][12], $data[$rowCount][13], $data[$rowCount][9], $pictures);
+            $output = $output . $advert->createPreviewCode();
+        }
+        return $output;
+    }
+
 }
