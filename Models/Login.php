@@ -26,8 +26,11 @@ class Login
         $dbConnection->setQuery($testQuery);
         $dbConnection->bindQueryValue(':email', $email);
         $dbConnection->run();
-        $row = $dbConnection->getResults();
-        echo 'Email: ' . $row[0] . " Password: " . $row[1];
+        $row = $dbConnection->getAllResults();
+//        echo 'Email: ' . $row[0][0] . " Password: " . $row[0][1];
+
+        if($row == null)
+            return false;
 
         if(($row[0][1] == $email) && password_verify($password, $row[0][2]))
         {
@@ -60,10 +63,10 @@ class Login
         $dbConnection->setQuery($testQuery);
         $dbConnection->bindQueryValue(':email', $email);
         $dbConnection->run();
-        $row = $dbConnection->getResults();
+        $row = $dbConnection->getAllResults();
 
 
-        if($row == "")
+        if($row == null)
         {
             $query = "INSERT INTO Users(firstName, surname, email, password, addressLineOne, postcode, mobileNumber) VALUES (:fName, :sName, :email, :pass, :address, :postcode, :mob)";
 

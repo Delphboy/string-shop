@@ -13,7 +13,12 @@ $view->pageTitle = 'Advert Page';
 $advertCode = $_GET['advert'];
 $advertPK = (hexdec($advertCode) / 7);
 $advert = Advert::buildFromPK($advertPK);
-$view->advert = $advert->createDisplayCode();
+$view->advert = $advert->createDisplayTitle() . "\t<div class='col-md-6'>\n" . $advert->createDisplayCategory() .
+    $advert->createDisplayPrice() . $advert->createDisplayDescription() . "</div>"  . $advert->createDisplayPictures() .
+    "<br>" .
+    "<a href=\"\" class=\"btn btn-success\"><span class=\"glyphicon glyphicon-plus\"></span> Add to Wish List</a>" .
+    "<a href=\"\" class=\"btn btn-success\"><span class=\"glyphicon glyphicon-envelope\"></span> Message Seller</a>" .
+    "</div>";
 
 if($_SESSION['isSignedIn'])
 {

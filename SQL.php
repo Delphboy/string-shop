@@ -25,7 +25,7 @@ if(isset($_POST['click']))
 
     $dbHandle->runQuery($sqlQuery);
 
-    $data = $dbHandle->getResults();
+    $data = $dbHandle->getAllResults();
 
     echo "<table border='1'>";
 

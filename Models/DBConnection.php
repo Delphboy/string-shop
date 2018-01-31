@@ -52,11 +52,20 @@ class DBConnection
         }
     }
 
+    /**
+     * Set the query so that values can be bound
+     * @param $query
+     */
     public function setQuery($query)
     {
         $this->SQLQuery = $this->db->prepare($query);
     }
 
+    /**
+     * Bind an actual values to the placeholder given in the query
+     * @param $parameter
+     * @param $value
+     */
     public function bindQueryValue($parameter, $value)
     {
         $type = null;
@@ -71,12 +80,19 @@ class DBConnection
         }
     }
 
+    /**
+     * Run a simple query given as a string
+     * @param $newQuery
+     */
     public function runQuery($newQuery)
     {
         $this->SQLQuery = $this->db->prepare($newQuery);
         $this->SQLQuery->execute();
     }
 
+    /**
+     * Once a SQLstatement has been set and had it's values bound, execute the statement
+     */
     public function run()
     {
         try
@@ -89,12 +105,39 @@ class DBConnection
         }
     }
 
-    public function getResults()
+    /**
+     * Execute the SQL statement and return the results as a 2D array
+     * @return mixed
+     */
+    public function getAllResults()
     {
         $this->run();
         return $this->SQLQuery->fetchAll();
     }
 
+    /**
+     * Return a single row as an array from the results
+     * @return mixed
+     */
+    public function getRow()
+    {
+        $this->run();
+        return $this->SQLQuery->fetch();
+    }
+
+    /**
+     * Get the number of rows the query would return
+     * @return mixed
+     */
+    public function getRowCount()
+    {
+        return $this->SQLQuery->rowCount();
+    }
+
+    /**
+     * Return the ID of the last inserted value
+     * @return mixed
+     */
     public function getLastID()
     {
         return $this->db->lastInsertId();

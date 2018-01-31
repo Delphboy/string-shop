@@ -34,12 +34,12 @@ class User
         $query = "SELECT * FROM Adverts WHERE userPK = :ID;";
         $db->setQuery($query);
         $db->bindQueryValue(':ID', $this->userID);
-        $data = $db->getResults();
+        $data = $db->getAllResults();
         for($rowCount = 0; $rowCount < count($data); $rowCount++)
         {
             $db->setQuery("SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :ad");
             $db->bindQueryValue(":ad", $data[$rowCount][0]);
-            $pictures = $db->getResults();
+            $pictures = $db->getAllResults();
 
             $advert = new Advert($data[$rowCount][0], $data[$rowCount][2], $data[$rowCount][3], $data[$rowCount][4], $data[$rowCount][7],
                 $data[$rowCount][8], $data[$rowCount][9], $data[$rowCount][10], $data[$rowCount][6], $pictures);
