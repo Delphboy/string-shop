@@ -337,10 +337,55 @@ class Advert
         $db->run();
     }
 
-    public function removeFromWishlist()
+    public function removeFromWishlist($userID)
     {
         $db = DBConnection::getInstance();
+        $query = "DELETE FROM wishlist WHERE advertPK = :advert AND userPK = :userPK;";
+        $db->setQuery($query);
+        $db->bindQueryValue(':advert', $this->PK);
+        $db->bindQueryValue(':userPK', $this->user);
+        $db->run();
+    }
+
+    public function delete()
+    {
+        /*Delete from
+            -Adverts WHERE ID = ID
+            -Wishlist WHERE AdvertPK = ID
+
+        SELECT pictureLocation FROM Pictures WHERE AdvertPK = ID;
+        Remove those files
+        DELETE FROM Pictures WHERE AdvertPK = ID;
+
+         *
+         * */
+
+        // REMOVE FROM WISHLIST TABLE
+        $db = DBConnection::getInstance();
         $query = "DELETE FROM wishlist WHERE advertPK = :advert;";
+        $db->setQuery($query);
+        $db->bindQueryValue(':advert', $this->PK);
+        $db->run();
+
+        // REMOVE PICTURES
+        $query = "SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :advert;";
+        $db->setQuery($query);
+        $db->bindQueryValue(':advert', $this->PK);
+        $data = $db->getAllResults();
+        for($i = 0; $i < count($data); $i++)
+        {
+            unlink("images/uploads/" . $data[$i][0]);
+        }
+
+        // REMOVE FROM PICTURES TABLE
+        $query = "DELETE FROM AdvertPictures WHERE advertPK = :advert;";
+        $db->setQuery($query);
+        $db->bindQueryValue(':advert', $this->PK);
+        $db->run();
+
+        //REMOVE FROM ADVERTS TABLE
+        $db = DBConnection::getInstance();
+        $query = "DELETE FROM Adverts WHERE advertID = :advert;";
         $db->setQuery($query);
         $db->bindQueryValue(':advert', $this->PK);
         $db->run();
