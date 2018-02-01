@@ -1,15 +1,14 @@
 <?php require('template/header.phtml') ?>
 
 <div class="container">
-    <h1>Your Wishlist</h1>
     <?php
-    if(isset($view->userWishlist))
+    if(isset($view->searchResults) && $view->searchResults != "")
     {
-        echo $view->userWishlist;
+        echo $view->searchResults;
     }
     else
     {
-        echo "<h2>It appears you don't have any adverts in your wishlist</h2>";
+        echo "<h2>No search results</h2>";
         echo "<h3><a href='/index.php'>Search for products</a></h3>";
     }
     ?>

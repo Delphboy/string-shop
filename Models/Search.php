@@ -18,12 +18,12 @@ class Search
         $db = DBConnection::getInstance();
         $query = "SELECT * FROM Adverts WHERE TRUE ";
 
-        if($category != null) $query = $query . "AND type LIKE :cat";
+        if(($category != null) && ($category !="everything")) $query = $query . "AND type LIKE :cat";
 
         $query = $query . ";";
         $db->setQuery($query);
 
-        if($category != null) $db->bindQueryValue(':cat', $category);
+        if(($category != null) && ($category !="everything")) $db->bindQueryValue(':cat', $category);
 
         $data = $db->getAllResults();
         for($rowCount = 0; $rowCount < count($data); $rowCount++)

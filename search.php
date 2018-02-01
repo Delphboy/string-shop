@@ -15,7 +15,7 @@ if($_SESSION['isSignedIn'])
 
     if(isset($_GET['category']))
     {
-        echo $search->loadAdvertsBySearch($_GET['category']);
+        $view->searchResults =  $search->loadAdvertsBySearch($_GET['category']);
     }
 
     require_once('Views/search.phtml');

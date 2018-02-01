@@ -368,7 +368,8 @@ class Advert
         $data = $db->getAllResults();
         for($i = 0; $i < count($data); $i++)
         {
-            unlink("images/uploads/" . $data[$i][0]);
+            if($data[$i][0] != "no-image.png")
+                unlink("images/uploads/" . $data[$i][0]);
         }
 
         // REMOVE FROM PICTURES TABLE

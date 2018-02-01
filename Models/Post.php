@@ -36,19 +36,33 @@ class Post
         $advertPK = $db->getLastID();
 
         //Handle Images
-        for ($i = 0; $i < count($pictures['name']); $i++)
+        if($pictures['name'][0] != null)
         {
-            $fileTmp = $_FILES['PostImages']['tmp_name'][$i];
-            $fileName = $_FILES['PostImages']['name'][$i];
-            $newFileName = $this->renameImage($fileName);
+            for ($i = 0; $i < count($pictures['name']); $i++)
+            {
+                $fileTmp = $_FILES['PostImages']['tmp_name'][$i];
+                $fileName = $_FILES['PostImages']['name'][$i];
+                $newFileName = $this->renameImage($fileName);
+                $pictureQuery = "INSERT INTO AdvertPictures(advertPK, pictureLocation) VALUES (:advert, :fileLoc);";
+                $db->setQuery($pictureQuery);
+                $db->bindQueryValue(':advert', $advertPK);
+                $db->bindQueryValue(':fileLoc', $newFileName);
+                $db->run();
+                $filePath = "images/uploads/" . $newFileName;
+                move_uploaded_file($fileTmp, $filePath);
+            }
+        }
+        else
+        {
+            echo "<h1>NULL</h1>";
+            $noImage = "no-image.png";
             $pictureQuery = "INSERT INTO AdvertPictures(advertPK, pictureLocation) VALUES (:advert, :fileLoc);";
             $db->setQuery($pictureQuery);
             $db->bindQueryValue(':advert', $advertPK);
-            $db->bindQueryValue(':fileLoc', $newFileName);
+            $db->bindQueryValue(':fileLoc', $noImage);
             $db->run();
-            $filePath = "images/uploads/" . $newFileName;
-            move_uploaded_file($fileTmp, $filePath);
         }
+
     }
 
     /**
