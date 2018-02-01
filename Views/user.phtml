@@ -3,7 +3,7 @@
 <div class="container">
     <h1>Your Adverts</h1>
     <?php
-    if(isset($view->userAdverts))
+    if(strlen($view->userAdverts) > 0)
     {
         echo $view->userAdverts;
     }

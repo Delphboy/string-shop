@@ -9,32 +9,8 @@
         </div>
     </section>
 
-    <!-- Search Field -->
-    <section class="container container-fluid">
-        <form name="search-function" method="get" action="/search.php">
-            <fieldset>
-                <legend>Search</legend>
-                <div class="form-control">
-                    <select name="category" class="col-md-2">
-                        <option value="everything">Everything</option>
-                        <option value="violin">Violins</option>
-                        <option value="viola">Violas</option>
-                        <option value="cello">Cellos</option>
-                        <option value="bass">Double Basses</option>
-                        <option value="music">Accessories</option>
-                        <option value="accessory">Sheet Music</option>
-                    </select>
-
-                    <input type="text" class="col-md-6" placeholder="Search for an item here">
-
-                    <button class="btn btn-default col-md-2" type="submit">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </button>
-                </div>
-            </fieldset>
-        </form>
-    </section>
-
+    <!-- Display Search -->
+    <?php require_once('template/search.phtml');?>
 
     <!-- Categories -->
     <section class="container">
@@ -42,28 +18,40 @@
 
         <div id="categories" class="text-center container container-fluid col-md-12">
             <div class="text-center col-md-4">
+                <a href="/search.php?category=violin">
                 <h3>Violins</h3>
                 <img src="http://placehold.it/150x150"/>
+                </a>
             </div>
             <div class="text-center col-md-4">
+                <a href="/search.php?category=viola">
                 <h3>Violas</h3>
                 <img src="http://placehold.it/150x150"/>
+                </a>
             </div>
             <div class="text-center col-md-4">
+                <a href="/search.php?category=cello">
                 <h3>Cellos</h3>
                 <img src="http://placehold.it/150x150"/>
+                </a>
             </div>
             <div class="text-center col-md-4">
+                <a href="/search.php?category=bass">
                 <h3>Double Basses</h3>
                 <img src="http://placehold.it/150x150"/>
+                </a>
             </div>
             <div class="text-center col-md-4">
-                <h3>Accessories</h3>
-                <img src="http://placehold.it/150x150"/>
+                <a href="/search.php?category=music">
+                    <h3>Sheet Music</h3>
+                    <img src="http://placehold.it/150x150"/>
+                </a>
             </div>
             <div class="text-center col-md-4">
-                <h3>Sheet Music</h3>
-                <img src="http://placehold.it/150x150"/>
+                <a href="/search.php?category=accessory">
+                    <h3>Accessories</h3>
+                    <img src="http://placehold.it/150x150"/>
+                </a>
             </div>
         </div>
 

@@ -343,7 +343,7 @@ class Advert
         $query = "DELETE FROM wishlist WHERE advertPK = :advert AND userPK = :userPK;";
         $db->setQuery($query);
         $db->bindQueryValue(':advert', $this->PK);
-        $db->bindQueryValue(':userPK', $this->user);
+        $db->bindQueryValue(':userPK', $userID);
         $db->run();
     }
 

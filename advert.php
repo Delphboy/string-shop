@@ -38,8 +38,9 @@ if(isset($_POST['wishList']))
 
 if(isset($_POST['wishListRemove']))
 {
+    echo "HI";
    $advert->removeFromWishlist($_SESSION['userID']);
-    header("Refresh:0");
+    header("Refresh: 0");
 }
 
 if(isset($_POST['msgSeller']))

@@ -3,14 +3,14 @@
 <div class="container">
     <h1>Your Wishlist</h1>
     <?php
-    if(isset($view->userWishlist))
+    if(strlen($view->userWishlist) > 0)
     {
         echo $view->userWishlist;
     }
     else
     {
         echo "<h2>It appears you don't have any adverts in your wishlist</h2>";
-        echo "<h3><a href='/index.php'>Search for products</a></h3>";
+        echo "<h3><a href='/search.php?category=everything'>Search for products</a></h3>";
     }
     ?>
 </div>

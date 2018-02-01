@@ -1,5 +1,8 @@
 <?php require('template/header.phtml') ?>
 
+<!-- Search Field -->
+<?php require_once('template/search.phtml');?>
+
 <div class="container">
     <?php
     if(isset($view->searchResults) && $view->searchResults != "")
@@ -9,7 +12,6 @@
     else
     {
         echo "<h2>No search results</h2>";
-        echo "<h3><a href='/index.php'>Search for products</a></h3>";
     }
     ?>
 </div>
