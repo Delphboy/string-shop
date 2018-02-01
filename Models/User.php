@@ -41,7 +41,7 @@ class User
             $db->bindQueryValue(":ad", $data[$rowCount][0]);
             $pictures = $db->getAllResults();
 
-            $advert = new Advert($data[$rowCount][0], $data[$rowCount][2], $data[$rowCount][3], $data[$rowCount][4], $data[$rowCount][7],
+            $advert = new Advert($data[$rowCount][0], $data[$rowCount][1], $data[$rowCount][2], $data[$rowCount][3], $data[$rowCount][4], $data[$rowCount][7],
                 $data[$rowCount][8], $data[$rowCount][9], $data[$rowCount][10], $data[$rowCount][6], $pictures);
             $output = $output . $advert->createPreviewCode();
         }
@@ -63,7 +63,7 @@ class User
             $pictures = $db->getAllResults();
 
             //__construct($PK, $title, $description, $category, $size, $age, $hasCase, $hasBow, $price, $pictures)
-            $advert = new Advert($data[$rowCount][2], $data[$rowCount][5], $data[$rowCount][6], $data[$rowCount][7], $data[$rowCount][10],
+            $advert = new Advert($data[$rowCount][2], $data[$rowCount][1], $data[$rowCount][5], $data[$rowCount][6], $data[$rowCount][7], $data[$rowCount][10],
                 $data[$rowCount][11], $data[$rowCount][12], $data[$rowCount][13], $data[$rowCount][9], $pictures);
             $output = $output . $advert->createPreviewCode();
         }

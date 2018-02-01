@@ -18,6 +18,7 @@ if(isset($_GET['advert']))
     $view->PKCode = $advertCode;
     if($advert->getTitle() != null)
     {
+        $view->isMadeByUser = ($advert->getUser() == $_SESSION['userID']);
         $view->advert = $advert->createDisplayTitle() . "\t<div class='col-md-6' xmlns=\"http://www.w3.org/1999/html\">\n" . $advert->createDisplayCategory() .
             $advert->createDisplayPrice() . $advert->createDisplayDescription() . "</div>"  . $advert->createDisplayPictures();
     }

@@ -9,6 +9,7 @@ require_once ('DBConnection.php');
 class Advert
 {
     private $PK;
+    private $user;
     private $title;
     private $description;
     private $category;
@@ -21,6 +22,8 @@ class Advert
 
     /**
      * Advert constructor.
+     * @param $PK
+     * @param $user
      * @param $title
      * @param $description
      * @param $category
@@ -31,9 +34,10 @@ class Advert
      * @param $price
      * @param $pictures
      */
-    public function __construct($PK, $title, $description, $category, $size, $age, $hasCase, $hasBow, $price, $pictures)
+    public function __construct($PK, $user, $title, $description, $category, $size, $age, $hasCase, $hasBow, $price, $pictures)
     {
         $this->PK = $PK;
+        $this->user = $user;
         $this->title = $title;
         $this->description = $description;
         $this->category = $category;
@@ -65,16 +69,33 @@ class Advert
         //Create an advert with the data from DB, if DB doesn't return, create an empty advert
         if($data != null)
         {
-            $advert = new Advert($PK, $data[0][2], $data[0][3], $data[0][4], $data[0][7],
+            $advert = new Advert($PK, $data[0][1], $data[0][2], $data[0][3], $data[0][4], $data[0][7],
                 $data[0][8], $data[0][9], $data[0][10], $data[0][6], $pictures);
         }
         else
         {
-            $advert = new Advert(null, null, null, null, null, null, null, null, null, null);
+            $advert = new Advert(null, null, null, null, null, null, null, null, null, null, null);
         }
 
         return $advert;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPK()
+    {
+        return $this->PK;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
 
     /**
      * @return mixed
