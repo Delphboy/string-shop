@@ -54,7 +54,6 @@ class Post
         }
         else
         {
-            echo "<h1>NULL</h1>";
             $noImage = "no-image.png";
             $pictureQuery = "INSERT INTO AdvertPictures(advertPK, pictureLocation) VALUES (:advert, :fileLoc);";
             $db->setQuery($pictureQuery);

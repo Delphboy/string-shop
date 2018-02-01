@@ -6,18 +6,6 @@ $view->pageTitle = 'Post an Advert';
 require_once ('Models/Post.php');
 require_once ('Models/Advert.php');
 
-//$bool = false;
-//if(!(empty($_FILES['PostImages'])))
-//{
-//    $bool = true;
-//}
-//if($bool==true)
-//{
-//    echo "<h1>SET</h1>";
-//    $bool=false;
-//} else {
-//    echo "<h1>UNSET</h1>";
-//}
 
 if(isset($_POST['submit']))
 {
@@ -40,15 +28,6 @@ if(isset($_POST['submit']))
         $bow= 0;
 
     $images = $_FILES['PostImages'];
-//    if($_FILES['PostImages']['name'][0] == "")
-//    {
-//        echo "<h1>No file</h1>";
-//    }
-//    else
-//    {
-//        echo "<h1>File</h1>";
-//    }
-
     $postObj->postAdvert($title, $desc, $category, $size, $age, $case, $bow, $price, $images);
 }
 
