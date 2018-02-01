@@ -8,7 +8,7 @@ require_once ('Models/User.php');
 if($_SESSION['isSignedIn'])
 {
     $user = new User($_SESSION['userID']);
-    $view->userAdverts = $user->loadWishlist();
+    $view->userWishlist = $user->loadWishlist();
 
     require_once('Views/wishlist.phtml');
 }

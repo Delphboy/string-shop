@@ -50,7 +50,7 @@ if(isset($_POST['msgSeller']))
 if(isset($_POST['deleteAdvert']))
 {
     $advert->delete();
-    header("Location: index.php");
+    header("Location: user.php");
 }
 
 if($_SESSION['isSignedIn'])

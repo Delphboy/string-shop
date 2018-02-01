@@ -347,21 +347,15 @@ class Advert
         $db->run();
     }
 
+    /**
+     * Delete the advert from all the tables it exists in
+     * Also removes any pictures associated with the advert
+     */
     public function delete()
     {
-        /*Delete from
-            -Adverts WHERE ID = ID
-            -Wishlist WHERE AdvertPK = ID
-
-        SELECT pictureLocation FROM Pictures WHERE AdvertPK = ID;
-        Remove those files
-        DELETE FROM Pictures WHERE AdvertPK = ID;
-
-         *
-         * */
+        $db = DBConnection::getInstance();
 
         // REMOVE FROM WISHLIST TABLE
-        $db = DBConnection::getInstance();
         $query = "DELETE FROM wishlist WHERE advertPK = :advert;";
         $db->setQuery($query);
         $db->bindQueryValue(':advert', $this->PK);
