@@ -5,13 +5,13 @@ $view->pageTitle = 'Sign In or Register';
 
 spl_autoload_register(function ($class)
 {
-   include 'Models/' . $class . '.php';
+    include 'Models/' . $class . '.php';
 });
 
 if(isset($_POST['login']))
 {
     $reg = new Login();
-    $result = $reg->signIn($_POST['LoginEmail'], $_POST['LoginPassword']);
+    $result = $reg->signIn(htmlentities($_POST['LoginEmail']), htmlentities($_POST['LoginPassword']));
     if($result == true)
     {
         header('Location: user.php');

@@ -15,20 +15,31 @@
                         <option value="accessory">Accessories</option>
                     </select>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-10">
                     <input name="search" type="text" class="form-control" placeholder="Search for an item here" />
                 </div>
-
-                <div class="form-group col-md-3">
+<!--            </div>-->
+<!--            <div class="form-group col-md-12">-->
+                <div class="form-group col-md-4">
+                    <select name="order" class="form-control col-md-2">
+                        <option value="relevant">Most Relevant</option>
+                        <option value="highToLow">Price: Highest to Lowest</option>
+                        <option value="lowToHigh">Price: Lowest to Highest</option>
+                        <option value="newToOld">Date: Newest Adverts</option>
+                        <option value="oldToNew">Date: Oldest Adverts</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
                     <label class="checkbox-inline">
                         <input type="checkbox" name="hasCase">Has a case
                     </label>
+                </div>
+                <div class="form-group col-md-2">
                     <label class="checkbox-inline">
                         <input type="checkbox" name="hasBow">Has a bow
                     </label>
                 </div>
-
-                <div class="form-group col-md-1">
+                <div class="form-group col-md-4">
                     <button class="btn btn-default form-control" type="submit">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>

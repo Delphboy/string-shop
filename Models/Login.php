@@ -27,7 +27,6 @@ class Login
         $dbConnection->bindQueryValue(':email', $email);
         $dbConnection->run();
         $row = $dbConnection->getAllResults();
-//        echo 'Email: ' . $row[0][0] . " Password: " . $row[0][1];
 
         if($row == null)
             return false;
