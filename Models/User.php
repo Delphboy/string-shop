@@ -25,19 +25,20 @@ class User
 
     /**
      * Load user's adverts and store them in a displayable string
+     * @param $page
      * @return string
      */
-    function loadUserMadeAdverts()
+    function loadUserMadeAdverts($page)
     {
         $output = "";
         $db = DBConnection::getInstance();
-        $query = "SELECT * FROM Adverts WHERE userPK = :ID;";
+        $query = "SELECT * FROM Adverts WHERE userPK = :ID LIMIT " . ($page * 10) . ", 10;";
         $db->setQuery($query);
         $db->bindQueryValue(':ID', $this->userID);
         $data = $db->getAllResults();
         for($rowCount = 0; $rowCount < count($data); $rowCount++)
         {
-            $db->setQuery("SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :ad");
+            $db->setQuery("SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :ad;");
             $db->bindQueryValue(":ad", $data[$rowCount][0]);
             $pictures = $db->getAllResults();
 
@@ -48,11 +49,11 @@ class User
         return $output;
     }
 
-    function loadWishlist()
+    function loadWishlist($page)
     {
         $output = "";
         $db = DBConnection::getInstance();
-        $query = "SELECT * FROM wishlist INNER JOIN Adverts On wishlist.advertPK = Adverts.advertID WHERE wishlist.userPK = :ID;";
+        $query = "SELECT * FROM wishlist INNER JOIN Adverts On wishlist.advertPK = Adverts.advertID WHERE wishlist.userPK = :ID LIMIT " . ($page * 10) . ", 10;";
         $db->setQuery($query);
         $db->bindQueryValue(':ID', $this->userID);
         $data = $db->getAllResults();

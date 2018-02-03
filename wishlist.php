@@ -8,7 +8,11 @@ require_once ('Models/User.php');
 if($_SESSION['isSignedIn'])
 {
     $user = new User($_SESSION['userID']);
-    $view->userWishlist = $user->loadWishlist();
+    if(! isset($_GET['page']))
+    {
+        $_GET['page'] = 0;
+    }
+    $view->userWishlist = $user->loadWishlist($_GET['page']);
 
     require_once('Views/wishlist.phtml');
 }

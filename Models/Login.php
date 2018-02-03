@@ -22,7 +22,7 @@ class Login
     function signIn($email, $password)
     {
         $dbConnection = DBConnection::getInstance();
-        $testQuery = "SELECT userID, email, password, firstName FROM Users WHERE email LIKE :email;";
+        $testQuery = "SELECT userID, email, password, firstName, isAdmin FROM Users WHERE email LIKE :email;";
         $dbConnection->setQuery($testQuery);
         $dbConnection->bindQueryValue(':email', $email);
         $dbConnection->run();
@@ -35,6 +35,7 @@ class Login
         {
             $_SESSION['userID'] = $row[0][0];
             $_SESSION['firstName'] = $row[0][3];
+            $_SESSION['isAdmin'] = $row[0][4];
             $_SESSION['isSignedIn'] = true;
             return true;
         }

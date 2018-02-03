@@ -24,6 +24,7 @@
 </head>
 
 <body role="document">
+
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -47,16 +48,20 @@
                             if ($_SESSION['isSignedIn'])
                             {
                                 echo "<li class=\"dropdown\">";
-                                    echo "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">" . $_SESSION['firstName'] . "<span class=\"caret\"></span></a>";
-                                    echo "<ul class=\"dropdown-menu\">";
-                                        echo "<li><a href=\"/post.php\">Post an Advert</a></li>";
-                                        echo "<li><a href=\"/user.php\">Your Adverts</a></li>";
-                                        echo "<li><a href=\"/wishlist.php\">Wishlist</a></li>";
-                                        echo "<li><a href=\"/settings.php\">Settings</a></li>";
-                                        echo "<li role=\"separator\" class=\"divider\"></li>";
-    //                                    echo "<li class=\"dropdown-header\">Nav header</li>";
-                                        echo "<li><a href=\"/session_destroy.php\"><span class=\"glyphicon glyphicon-log-out\"></span> Sign Out</a></li>";
-                                    echo "</ul>";
+                                echo "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">" . $_SESSION['firstName'] . "<span class=\"caret\"></span></a>";
+                                echo "<ul class=\"dropdown-menu\">";
+                                echo "<li><a href=\"/post.php\">Post an Advert</a></li>";
+                                echo "<li><a href=\"/user.php?page=0\">Your Adverts</a></li>";
+                                echo "<li><a href=\"/wishlist.php?page=0\">Wishlist</a></li>";
+                                echo "<li><a href=\"/settings.php\">Settings</a></li>";
+                                if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == TRUE)
+                                {
+                                    echo "<li role=\"separator\" class=\"divider\"></li>";
+                                    echo "<li><a href=\"/Admin.php\">Admin</a></li>";
+                                }
+                                echo "<li role=\"separator\" class=\"divider\"></li>";
+                                echo "<li><a href=\"/session_destroy.php\"><span class=\"glyphicon glyphicon-log-out\"></span> Sign Out</a></li>";
+                                echo "</ul>";
                                 echo "</li>";
                             }
                         }

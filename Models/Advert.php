@@ -339,7 +339,7 @@ class Advert
     public function isOnWishlist($userID)
     {
         $db = DBConnection::getInstance();
-        $query = "SELECT * FROM wishlist WHERE userPK = :user AND :advert;";
+        $query = "SELECT userPK, advertPK FROM wishlist WHERE userPK = :user AND advertPK = :advert;";
         $db->setQuery($query);
         $db->bindQueryValue(':user', $userID);
         $db->bindQueryValue(':advert', $this->PK);

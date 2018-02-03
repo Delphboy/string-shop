@@ -8,7 +8,11 @@ require_once ('Models/User.php');
 if($_SESSION['isSignedIn'])
 {
     $user = new User($_SESSION['userID']);
-    $view->userAdverts = $user->loadUserMadeAdverts();
+    if(! isset($_GET['page']))
+    {
+        $_GET['page'] = 0;
+    }
+    $view->userAdverts = $user->loadUserMadeAdverts($_GET['page']);
 
     require_once('Views/user.phtml');
 }

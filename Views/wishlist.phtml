@@ -1,5 +1,9 @@
 <?php require('template/header.phtml') ?>
 
+<form name="pageCount" action="<?php echo htmlentities($_SERVER['PHP_SELF'])?>" method="get">
+    <input type="hidden" name="page" value="0">
+</form>
+
 <div class="container">
     <h1>Your Wishlist</h1>
     <?php
@@ -13,5 +17,16 @@
         echo "<h3><a href='/search.php?category=everything'>Search for products</a></h3>";
     }
     ?>
+</div>
+<div class="container center-block">
+    <ul class="pager">
+        <li><a href="wishlist.php?<?php
+            echo "page=" . ($_GET['page'] - 1);
+            ?>">Previous</a></li>
+
+        <li><a href="wishlist.php?<?php
+            echo "page=" . ($_GET['page'] + 1);
+            ?>">Next</a></li>
+    </ul>
 </div>
 <?php require('template/footer.phtml') ?>
