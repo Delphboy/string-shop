@@ -15,4 +15,16 @@
     }
     ?>
 </div>
+
+<div class="container center-block">
+        <ul class="pager">
+            <li><a href="search.php?<?php
+                echo "category=" . $_GET['category'] . "&search=" . $_GET['search'] . "&order=" . $_GET['order'] . "&page=" . ($_GET['page'] - 1);
+                ?>">Previous</a></li>
+
+            <li><a href="search.php?<?php
+                echo "category=" . $_GET['category'] . "&search=" . $_GET['search'] . "&order=" . $_GET['order'] . "&page=" . ($_GET['page'] + 1);
+                ?>">Next</a></li>
+        </ul>
+</div>
 <?php require('template/footer.phtml') ?>

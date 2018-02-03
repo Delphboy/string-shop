@@ -230,7 +230,28 @@ class Advert
             return null;
 //        $output = "\t<div class='col-md-12'>\n";
         $output = "\t\t<h4>$this->category</h4>\n";
-//        $output = $output . "\t</div>\n";
+
+        $output = $output . "\t\t<div class='col-md-6'>\n";
+        if($this->hasCase == 1)
+        {
+            $output = $output . "\t\t<h4>Has Case: Yes</h4>\n";
+        }
+        else
+        {
+            $output = $output . "\t\t<h4>Has Case: No</h4>\n";
+        }
+        $output = $output . "\t\t</div>\n";
+
+        $output = $output . "\t\t<div class='col-md-6'>\n";
+        if($this->hasBow == 1)
+        {
+            $output = $output . "\t\t<h4>Has Bow: Yes</h4>\n";
+        }
+        else
+        {
+            $output = $output . "\t\t<h4>Has Bow: No</h4>\n";
+        }
+        $output = $output . "\t\t</div>\n";
         return $output;
     }
 

@@ -12,7 +12,6 @@ if($_SESSION['isSignedIn'])
 {
     $user = new User($_SESSION['userID']);
     $search = new Search();
-
     if(isset($_GET['search']))
     {
         if(isset($_GET['hasCase']))
@@ -54,8 +53,7 @@ if($_SESSION['isSignedIn'])
             $group = null;
         }
 
-
-        $view->searchResults =  $search->loadAdvertsBySearch(htmlentities($_GET['category']), htmlentities($_GET['search']), $bow, $case, $group);
+        $view->searchResults =  $search->loadAdvertsBySearch(htmlentities($_GET['category']), htmlentities($_GET['search']), $bow, $case, $group, $_GET['page']);
     }
 
     require_once('Views/search.phtml');

@@ -12,7 +12,7 @@ class Search
     {
     }
 
-    function loadAdvertsBySearch($category, $search, $hasBow, $hasCase, $group)
+    function loadAdvertsBySearch($category, $search, $hasBow, $hasCase, $group, $page)
     {
         $output = "";
         $db = DBConnection::getInstance();
@@ -25,6 +25,7 @@ class Search
 
 //        if(($group != null) && ($group != "")) $query = $query . " ORDER BY :group";
         if(($group != null) && ($group != "")) $query = $query . $group;
+        if(($page !=null) && ($page >= 0)) $query = $query . " LIMIT " . ($page * 10) . ", 10";
 
         $query = $query . ";";
         $db->setQuery($query);
