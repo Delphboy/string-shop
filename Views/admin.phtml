@@ -1,5 +1,87 @@
 <?php require('template/header.phtml') ?>
 
-<h1>ADMIN PAGE</h1>
+
+<section class="container container-fluid">
+    <!-- Login/Register -->
+    <section class="container">
+        <div class="panel-group" id="accordion">
+
+            <!-- Login Form -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#CollapseLogin">Manage Users</a>
+                    </h4>
+                </div>
+                <div id="CollapseLogin" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 col-xs-12 center-block">
+                            <table border='1' class="table" name="usersTable">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Admin</th>
+                                    <th scope="col">Delete Account</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                    if(isset($view->usersTable))
+                                    {
+                                        echo $view->usersTable;
+                                    }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#CollapseRegister">Manage Adverts</a>
+                    </h4>
+                </div>
+                <div id="CollapseRegister" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 col-xs-12 center-block">
+                            <table border='1' class="table" name="usersTable">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">User Code</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Date Created</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Delete Advert</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                if(isset($view->advertsTable))
+                                {
+                                    echo $view->advertsTable;
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
 
 <?php require('template/footer.phtml') ?>

@@ -1,8 +1,6 @@
 <?php session_start();?>
 <h4>mySQL DB connection test</h4>
 
-
-
 <form action="/SQL.php" method="post">
     <select name="click">
         <option value='select * from Users'>select all users</option>

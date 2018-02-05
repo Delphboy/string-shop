@@ -8,6 +8,7 @@
 
 require_once ('DBConnection.php');
 require_once ('Advert.php');
+require_once ('User.php');
 
 class User
 {
@@ -69,6 +70,62 @@ class User
             $output = $output . $advert->createPreviewCode();
         }
         return $output;
+    }
+
+    public function delete()
+    {
+        $db = DBConnection::getInstance();
+
+        // REMOVE FROM WISHLIST TABLE
+        $query = "DELETE FROM wishlist WHERE userPK = :user;";
+        $db->setQuery($query);
+        $db->bindQueryValue(':user', $this->userID);
+        $db->run();
+
+        // Delete Adverts
+        $query = "SELECT advertID FROM Adverts WHERE userPK = :user;";
+        $db->setQuery($query);
+        $db->bindQueryValue(':user', $this->userID);
+        $data = $db->getAllResults();
+        for($i = 0; $i < count($data); $i++)
+        {
+            $ad = Advert::buildFromPK($data[$i][0]);
+            $ad->delete();
+        }
+
+        //Delete User
+        $query = "DELETE FROM Users WHERE userID = :user;";
+        $db->setQuery($query);
+        $db->bindQueryValue(':user', $this->userID);
+        $db->run();
+    }
+
+    public function toggleAdmin()
+    {
+        $db = DBConnection::getInstance();
+        $query = "SELECT isAdmin FROM Users WHERE userID = :user;";
+        $db->setQuery($query);
+        $db->bindQueryValue(':user', $this->userID);
+        $isAdmin = $db->getRow()[0];
+
+        if($isAdmin == 1)
+        {
+            $query = "UPDATE Users SET isAdmin = 0 WHERE userID = :user;";
+            $db->setQuery($query);
+            $db->bindQueryValue(':user', $this->userID);
+            $db->run();
+            if($this->userID == $_SESSION['userID'])
+            {
+                $_SESSION['isAdmin'] = false;
+            }
+        }
+        else
+        {
+            $query = "UPDATE Users SET isAdmin = 1 WHERE userID = :user;";
+            $db->setQuery($query);
+            $db->bindQueryValue(':user', $this->userID);
+            $db->run();
+        }
     }
 
 }
