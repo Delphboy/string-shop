@@ -175,6 +175,11 @@ class Advert
      */
     public function createPreviewCode()
     {
+        if(strlen($this->title) > 15)
+            $titlePreview = substr($this->title, 0, 15) . "...";
+        else
+            $titlePreview = $this->title;
+
         if(strlen($this->description) > 120)
             $descriptionPreview = substr($this->description, 0, 120) . "...";
         else
@@ -193,7 +198,7 @@ class Advert
 
         $output = $output . "\t</div>\n
         \t<div class='col-md-6'>\n
-        \t\t<h2><a href='/advert.php?advert=" . $code . "'>$this->title</a></h2>\n
+        \t\t<h2><a href='/advert.php?advert=" . $code . "'>$titlePreview</a></h2>\n
         \t\t<p><strong>Price:</strong> £$this->price</p>\n
         \t\t<p>$descriptionPreview</p>\n
         \t</div>\n
