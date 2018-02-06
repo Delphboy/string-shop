@@ -8,7 +8,9 @@
 session_start();
 require_once ('Models/Advert.php');
 $view = new stdClass();
-$view->pageTitle = 'Advert Page';
+$view->pageTitle = 'Advert Page | Advert';
+
+
 if(isset($_GET['advert']))
 {
     $advertCode = $_GET['advert'];
@@ -18,6 +20,8 @@ if(isset($_GET['advert']))
     $view->PKCode = $advertCode;
     if($advert->getTitle() != null)
     {
+        $view->pageTitle = $advert->getTitle();
+        $view->advertEmail = $advert->getEmail();
         $view->isMadeByUser = ($advert->getUser() == $_SESSION['userID']);
         $view->advert = $advert->createDisplayTitle() . "\t<div class='col-md-6' xmlns=\"http://www.w3.org/1999/html\">\n" . $advert->createDisplayCategory() .
             $advert->createDisplayPrice() . $advert->createDisplayDescription() . "</div>"  . $advert->createDisplayPictures();

@@ -169,6 +169,16 @@ class Advert
         return $this->pictures;
     }
 
+    public function getEmail()
+    {
+        $db = DBConnection::getInstance();
+        $query = "SELECT DISTINCT email FROM Users INNER JOIN Adverts On userID = Adverts.userPK WHERE advertID = :ID;";
+        $db->setQuery($query);
+        $db->bindQueryValue(':ID', $this->PK);
+        $db->run();
+        return $db->getRow()[0];
+    }
+
     /**
      * Take the information held in the advert object and place it in a HTML div that can be used to display the information
      * @return string
