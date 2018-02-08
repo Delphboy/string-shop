@@ -10,25 +10,11 @@
 
 class Captcha
 {
-    private static $instance = NULL;
-
-    /**
-     * Return an instance of the capcha creation system
-     */
-    public static function getInstance()
-    {
-        if(self::$instance == NULL)
-        {
-            self::$instance = new Captcha();
-        }
-        return self::$instance;
-    }
-
     /**
      * Captcha constructor.
      * Private as part of singleton design pattern
      */
-    private function __construct()
+    public function __construct()
     {    }
 
     /**
@@ -36,13 +22,6 @@ class Captcha
      */
     public function getNextQuestion()
     {
-        
-    }
-
-    private function generateCaptchaQuestion()
-    {
-        session_start();
-
         $number = mt_rand(100, 999);
         $_SESSION['captchaAnswer'] = $number;
         $imageToMake = imagecreate(100,100);
@@ -52,7 +31,7 @@ class Captcha
         imagestring($imageToMake, 10, 10, 10, $number, $textColour);
 
         header("Content-type:image/png");
-        $image = imagepng($imageToMake);
+        return $image = imagepng($imageToMake);
     }
 
     private function createImage($number)

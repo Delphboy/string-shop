@@ -15,6 +15,8 @@
 
 <?php
 require_once ('Models/DBConnection.php');
+require_once ('Models/Captcha.php');
+
 if(isset($_POST['search']))
 {
     $sql = $_POST["click"];
@@ -77,5 +79,9 @@ if(isset($_POST['generate']))
         $db->run();
     }
 }
+
+$cap = new Captcha();
+$cap->getNextQuestion();
+echo $_SESSION['captchaAnswer'];
 
 ?>
