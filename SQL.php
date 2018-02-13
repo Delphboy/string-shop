@@ -80,8 +80,8 @@ if(isset($_POST['generate']))
     }
 }
 
-$cap = new Captcha();
-$cap->getNextQuestion();
-echo $_SESSION['captchaAnswer'];
+//$cap = new Captcha();
+//$cap->getNextQuestion();
+//echo $_SESSION['captchaAnswer'];
 
 ?>

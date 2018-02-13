@@ -40,8 +40,8 @@ class Post
         {
             for ($i = 0; $i < count($pictures['name']); $i++)
             {
-                $fileTmp = $_FILES['PostImages']['tmp_name'][$i];
-                $fileName = $_FILES['PostImages']['name'][$i];
+                $fileTmp = $pictures['tmp_name'][$i];
+                $fileName = $pictures['name'][$i];
                 $newFileName = $this->renameImage($fileName);
                 $pictureQuery = "INSERT INTO AdvertPictures(advertPK, pictureLocation) VALUES (:advert, :fileLoc);";
                 $db->setQuery($pictureQuery);
