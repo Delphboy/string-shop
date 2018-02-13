@@ -65,7 +65,6 @@ class Login
         $dbConnection->run();
         $row = $dbConnection->getAllResults();
 
-
         if($row == null)
         {
             $query = "INSERT INTO Users(firstName, surname, email, password, addressLineOne, postcode, mobileNumber) VALUES (:fName, :sName, :email, :pass, :address, :postcode, :mob)";

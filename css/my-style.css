@@ -17,6 +17,7 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
 }
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -34,5 +35,6 @@ body {
 
 .previewImage
 {
-    width: inherit;
+    width: auto;
+    height: 185px;
 }

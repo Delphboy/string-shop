@@ -201,9 +201,9 @@ class Advert
         \t<div class='col-md-6'>\n";
 
         if($this->pictures == null)
-            $output = $output . "\t\t<img src='/images/no-image.png' width='250px' alt='Picture of the product'/>\n";
+            $output = $output . "\t\t<img src='/images/no-image.png' class='previewImage' alt='Picture of the product'/>\n";
         else
-            $output = $output . "\t\t<img src='/images/uploads/" . $this->pictures[0][0] . "' width='250px' alt='Picture of the product'/>\n";
+            $output = $output . "\t\t<img src='/images/uploads/" . $this->pictures[0][0] . "' class='previewImage' alt='Picture of the product'/>\n";
 
 
         $output = $output . "\t</div>\n
