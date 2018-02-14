@@ -22,20 +22,9 @@ class Captcha
      */
     public function getNextQuestion()
     {
-        $number = mt_rand(100, 999);
-        $_SESSION['captchaAnswer'] = $number;
-        $imageToMake = imagecreate(100,100);
-        $bgColour = imagecolorallocate($imageToMake, 0, 0, 255);
-        $textColour = imagecolorallocate($imageToMake, 255, 255, 255);
-
-        imagestring($imageToMake, 10, 10, 10, $number, $textColour);
-
-        header("Content-type:image/png");
-        return $image = imagepng($imageToMake);
-    }
-
-    private function createImage($number)
-    {
-
+        $rnd1 = random_int(1,100);
+        $rnd2 = random_int(1,100);
+        $_SESSION['captchaAns'] = $rnd1 + $rnd2;
+        return "$rnd1 + $rnd2";
     }
 }

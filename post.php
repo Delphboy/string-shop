@@ -1,7 +1,7 @@
 <?php
 session_start();
 $view = new stdClass();
-$view->pageTitle = 'Post an Advert';
+$view->pageTitle = 'String Shop | Post an Advert';
 
 require_once ('Models/Post.php');
 require_once ('Models/Advert.php');

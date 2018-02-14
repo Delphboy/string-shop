@@ -20,7 +20,7 @@ if(isset($_GET['advert']))
     $view->PKCode = $advertCode;
     if($advert->getTitle() != null)
     {
-        $view->pageTitle = $advert->getTitle();
+        $view->pageTitle = "Advert | " . $advert->getTitle();
         $view->advertEmail = $advert->getEmail();
         $view->isMadeByUser = ($advert->getUser() == $_SESSION['userID']);
         $view->advert = $advert->createDisplayTitle() . "\t<div class='col-md-6' xmlns=\"http://www.w3.org/1999/html\">\n" . $advert->createDisplayCategory() .

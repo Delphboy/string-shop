@@ -1,7 +1,7 @@
 <?php
 session_start();
 $view = new stdClass();
-$view->pageTitle = 'String Shop';
+$view->pageTitle = 'String Shop | Wishlist';
 require_once ('Models/DBConnection.php');
 require_once ('Models/User.php');
 

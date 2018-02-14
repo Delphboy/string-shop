@@ -33,6 +33,11 @@ class User
     {
         $output = "";
         $db = DBConnection::getInstance();
+        if($page < 0)
+        {
+            $page = 0;
+            $_GET['page'] = 0;
+        }
         $query = "SELECT * FROM Adverts WHERE userPK = :ID LIMIT " . ($page * 10) . ", 10;";
         $db->setQuery($query);
         $db->bindQueryValue(':ID', $this->userID);
@@ -54,6 +59,11 @@ class User
     {
         $output = "";
         $db = DBConnection::getInstance();
+        if($page < 0)
+        {
+            $page = 0;
+            $_GET['page'] = 0;
+        }
         $query = "SELECT * FROM wishlist INNER JOIN Adverts On wishlist.advertPK = Adverts.advertID WHERE wishlist.userPK = :ID LIMIT " . ($page * 10) . ", 10;";
         $db->setQuery($query);
         $db->bindQueryValue(':ID', $this->userID);

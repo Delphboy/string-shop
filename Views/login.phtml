@@ -1,5 +1,13 @@
 <?php require('template/header.phtml') ?>
 
+<section class="container container-fluid">
+    <?php
+        if(isset($view->loginMsg))
+        {
+            echo "$view->loginMsg";
+        }
+    ?>
+</section>
 
 <section class="container container-fluid">
     <!-- Login/Register -->
@@ -63,6 +71,20 @@
                             <input required type="text" class="form-control" name="RegistrationPostcode" />
                             <label>Mobile Number</label>
                             <input required type="text" class="form-control" name="RegistrationMobileNumber" />
+                            <label>
+                                Please prove you are human:
+                                <?php
+                                    if(isset($view->captchaQuestion))
+                                    {
+                                        echo $view->captchaQuestion;
+                                    }
+                                    else
+                                    {
+                                        echo "An error occurred displaying the Captcha, please refresh the page";
+                                    }
+                                ?>
+                            </label>
+                            <input required type="text" class="form-control" name="RegistrationCaptchaAns" />
                             <br />
                             <input type="submit" name="submit" value="Register" class="btn btn-default btn-sm form-control" />
                         </form>

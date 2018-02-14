@@ -5,7 +5,8 @@
  * Date: 13/01/2018
  * Time: 10:04
  */
-
+require_once 'Captcha.php';
+require_once 'DBConnection.php';
 class Login
 {
     function __construct()
@@ -26,16 +27,16 @@ class Login
         $dbConnection->setQuery($testQuery);
         $dbConnection->bindQueryValue(':email', $email);
         $dbConnection->run();
-        $row = $dbConnection->getAllResults();
+        $row = $dbConnection->getRow();
 
         if($row == null)
             return false;
 
-        if(($row[0][1] == $email) && password_verify($password, $row[0][2]))
+        if(($row[1] == $email) && password_verify($password, $row[2]))
         {
-            $_SESSION['userID'] = $row[0][0];
-            $_SESSION['firstName'] = $row[0][3];
-            $_SESSION['isAdmin'] = $row[0][4];
+            $_SESSION['userID'] = $row[0];
+            $_SESSION['firstName'] = $row[3];
+            $_SESSION['isAdmin'] = $row[4];
             $_SESSION['isSignedIn'] = true;
             return true;
         }
@@ -50,6 +51,7 @@ class Login
      * @param $sName
      * @param $email
      * @param $password
+     * @param $postcode
      * @param $address
      * @param $mobNum
      * Take parameters of a new user, and add them to the database if the user doesn't already exist
@@ -63,7 +65,7 @@ class Login
         $dbConnection->setQuery($testQuery);
         $dbConnection->bindQueryValue(':email', $email);
         $dbConnection->run();
-        $row = $dbConnection->getAllResults();
+        $row = $dbConnection->getRow();
 
         if($row == null)
         {

@@ -5,7 +5,7 @@ require_once ('Models/User.php');
 require_once ('Models/Search.php');
 
 $view = new stdClass();
-$view->pageTitle = 'String Shop';
+$view->pageTitle = 'String Shop | Find an Instrument';
 
 
 if($_SESSION['isSignedIn'])

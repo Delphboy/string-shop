@@ -79,9 +79,4 @@ if(isset($_POST['generate']))
         $db->run();
     }
 }
-
-$cap = new Captcha();
-$cap->getNextQuestion();
-echo $_SESSION['captchaAnswer'];
-
 ?>
