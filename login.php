@@ -28,18 +28,28 @@ if(isset($_POST['submit']))
     $firstName = htmlentities($_POST['RegistrationFirstName']);
     $surname = htmlentities($_POST['RegistrationSurname']);
     $email = htmlentities($_POST['RegistrationEmail']);
-    $password = password_hash(htmlentities($_POST['RegistrationPassword']), PASSWORD_BCRYPT);
+    $password = htmlentities($_POST['RegistrationPassword']);
     $address = htmlentities($_POST['RegistrationAddress']);
     $postcode = htmlentities($_POST['RegistrationPostcode']);
     $mobNum = htmlentities($_POST['RegistrationMobileNumber']);
     $capAns = htmlentities($_POST['RegistrationCaptchaAns']);
 
+    if($email != htmlentities($_POST['RegistrationEmailConfirmation']))
+    {
+        $view->loginMsg .= "<p class='label-warning'>Different emails</p>";
+    }
+
+    if($password != htmlentities($_POST['RegistrationPasswordConfirmation']))
+    {
+        $view->loginMsg .= "<p class='label-warning'>Different passwords</p>";
+    }
+
     if((int)$cap != (int)$capAns)
     {
-
         $view->loginMsg .= "<p class='label-warning'>Captcha Failed</p>";
     }
-    else
+
+    if(strlen($view->loginMsg) <= 0)
     {
         $wasAccountMade = $reg->registerNewUser($firstName, $surname, $email, $password, $address, $postcode, $mobNum);
         if($wasAccountMade == true)

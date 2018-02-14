@@ -10,10 +10,28 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#CollapseLogin">Manage Users</a>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#CollapseLogin">Manage Advert Expiry</a>
                     </h4>
                 </div>
                 <div id="CollapseLogin" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 col-xs-12 center-block">
+                            <h2>Change Expiry</h2>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#CollapseRegister">Manage Users</a>
+                    </h4>
+                </div>
+                <div id="CollapseRegister" class="panel-collapse collapse">
                     <div class="panel-body">
                         <div class="col-md-3"></div>
                         <div class="col-md-6 col-xs-12 center-block">
@@ -30,10 +48,10 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                    if(isset($view->usersTable))
-                                    {
-                                        echo $view->usersTable;
-                                    }
+                                if(isset($view->usersTable))
+                                {
+                                    echo $view->usersTable;
+                                }
                                 ?>
                                 </tbody>
                             </table>

@@ -60,6 +60,7 @@ class Login
      */
     function registerNewUser($fName, $sName, $email, $password, $address, $postcode, $mobNum)
     {
+        $passwordEncrypt = password_hash($password, PASSWORD_BCRYPT);
         $dbConnection = DBConnection::getInstance();
         $testQuery = "SELECT email FROM Users WHERE email LIKE :email;";
         $dbConnection->setQuery($testQuery);
@@ -75,7 +76,7 @@ class Login
             $dbConnection->bindQueryValue(':fName', $fName);
             $dbConnection->bindQueryValue(':sName', $sName);
             $dbConnection->bindQueryValue(':email', $email);
-            $dbConnection->bindQueryValue(':pass', $password);
+            $dbConnection->bindQueryValue(':pass', $passwordEncrypt);
             $dbConnection->bindQueryValue(':address', $address);
             $dbConnection->bindQueryValue(':postcode', $postcode);
             $dbConnection->bindQueryValue(':mob', $mobNum);
