@@ -1,5 +1,14 @@
 <?php require('template/header.phtml') ?>
 
+<section class="container container-fluid">
+    <?php
+    if(isset($view->errorMsg))
+    {
+        echo "$view->errorMsg";
+    }
+    ?>
+</section>
+
 <div class="container">
     <div class="col-md-3"></div>
     <div class="col-md-6 col-xs-12 center-block">
@@ -57,7 +66,7 @@
                 <label>Comes with a bow <input type="checkbox" name="PostBow"></label>
             </div>
 
-            <label>Picture(s) of Item</label>
+            <label>Picture(s) of Item (Must be less than 2MB) </label>
             <input type="file" name="PostImages[]" id="PostImages" accept="image/*" multiple/>
 
             <br />

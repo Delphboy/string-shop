@@ -2,10 +2,9 @@
 session_start();
 $view = new stdClass();
 $view->pageTitle = 'String Shop | Post an Advert';
-
+$view->errorMsg = "";
 require_once ('Models/Post.php');
 require_once ('Models/Advert.php');
-
 
 if(isset($_POST['submit']))
 {
@@ -28,7 +27,31 @@ if(isset($_POST['submit']))
         $bow= 0;
 
     $images = $_FILES['PostImages'];
-    $postObj->postAdvert($title, $desc, $category, $size, $age, $case, $bow, $price, $images);
+    if($images['name'][0] != null)
+    {
+        $maxsize    = 2097152;
+        $acceptable = array(
+            'image/jpeg',
+            'image/jpg',
+            'image/gif',
+            'image/png'
+        );
+
+        for ($i = 0; $i < count($images['name']); $i++)
+        {
+            if(($images['size'][$i] >= $maxsize) || ($images["size"][$i] == 0))
+            {
+                $view->errorMsg .= "<p class='label-warning'>File too large. File must be less than 2 megabytes.</p>";
+            }
+
+            if((!in_array($images['type'][$i], $acceptable)) && (!empty($images["type"][$i])))
+            {
+                $view->errorMsg .= "<p class='label-warning'>Invalid file type. Only JPG, GIF and PNG types are accepted.</p>";
+            }
+        }
+    }
+    if(strlen($view->errorMsg) <= 0)
+        $postObj->postAdvert($title, $desc, $category, $size, $age, $case, $bow, $price, $images);
 }
 
 if($_SESSION['isSignedIn'])
