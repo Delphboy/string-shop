@@ -429,27 +429,39 @@ class Advert
      */
     function hasAdvertExpired()
     {
-        $file = fopen("Models/expire.txt", "r") or die("Unable to open file!");
-        $expireTimeString = fread($file,filesize("Models/expire.txt"));
-        fclose($file);
+        define("DATE_PATTERN", "Y-m-d");
+        try
+        {
+            $file = fopen("Models/expire.txt", "r") or die("Unable to open file!");
+            $expireTimeString = fread($file,filesize("Models/expire.txt"));
+            fclose($file);
+        }
+        catch (Exception $exception)
+        {
+            $expireTimeString = "2 weeks";
+        }
+
 
         switch ($expireTimeString )
         {
             case "1 week":
-                $expireTime = "4 DAY";
+                $expireTime = "7 days";
                 break;
             case "2 weeks":
-                $expireTime = "14";
+                $expireTime = "14 days";
                 break;
             case "1 month":
-                $expireTime = "30";
+                $expireTime = "30 days";
                 break;
             default:
-                $expireTime = "14";
+                $expireTime = "14 days";
                 break;
         }
-        echo (date('Y-m-d') - $expireTime);
-        return (new DateTime($this->creationDate) > (date('Y-m-d') - $expireTime)) == false;
+
+        $creationTime = strtotime($this->creationDate);
+        $creationDate = date(DATE_PATTERN, $creationTime);
+
+        return (strtotime($creationDate) <= strtotime(date(DATE_PATTERN, strtotime("-$expireTime"))));
     }
 
 }

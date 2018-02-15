@@ -11,7 +11,12 @@
     </section>
 
     <!-- Display Search -->
-    <?php require_once('template/searchBar.phtml');?>
+    <?php
+    if(isset($_SESSION['isSignedIn']))
+    {
+        require_once('template/searchBar.phtml');
+    }
+    ?>
 
     <!-- Categories -->
     <section class="container">

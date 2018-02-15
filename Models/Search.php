@@ -27,7 +27,7 @@ class Search
         switch ($this->expireTimeString)
         {
             case "1 week":
-                $this->expireTime = "4 DAY";
+                $this->expireTime = "7 DAY";
                 break;
             case "2 weeks":
                 $this->expireTime = "14 DAY";
@@ -76,7 +76,7 @@ class Search
                 $pictures = $db->getAllResults();
 
                 $advert = new Advert($data[$rowCount][0], $data[$rowCount][1], $data[$rowCount][2], $data[$rowCount][3], $data[$rowCount][4], $data[$rowCount][7],
-                    $data[$rowCount][8], $data[$rowCount][9], $data[$rowCount][10], $data[$rowCount][6], $pictures);
+                    $data[$rowCount][8], $data[$rowCount][9], $data[$rowCount][10], $data[$rowCount][6], $pictures, $data[$rowCount][5]);
                 $output = $output . $advert->createPreviewCode();
             }
         }
