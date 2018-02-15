@@ -11,6 +11,9 @@ class Search
     private $expireTimeString;
     private $expireTime;
 
+    /**
+     * Search constructor.
+     */
     function __construct()
     {
         $file = fopen("Models/expire.txt", "r") or die("Unable to open file!");
@@ -41,6 +44,16 @@ class Search
         }
     }
 
+    /**
+     * Generate a list of adverts based on search conditions and return the display code for the search results
+     * @param $category
+     * @param $search
+     * @param $hasBow
+     * @param $hasCase
+     * @param $group
+     * @param $page
+     * @return string
+     */
     function loadAdvertsBySearch($category, $search, $hasBow, $hasCase, $group, $page)
     {
         $output = "";

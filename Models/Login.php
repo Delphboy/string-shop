@@ -9,6 +9,9 @@ require_once 'Captcha.php';
 require_once 'DBConnection.php';
 class Login
 {
+    /**
+     * Login constructor.
+     */
     function __construct()
     {
     }

@@ -9,10 +9,25 @@
 require_once ('DBConnection.php');
 class Post
 {
+    /**
+     * Post constructor.
+     */
     function __construct()
     {
     }
 
+    /**
+     * Post an advert based on some attributes
+     * @param $title
+     * @param $description
+     * @param $category
+     * @param $size
+     * @param $age
+     * @param $hasCase
+     * @param $hasBow
+     * @param $price
+     * @param $pictures
+     */
     function postAdvert($title, $description, $category, $size, $age, $hasCase, $hasBow, $price, $pictures)
     {
         $db = DBConnection::getInstance();

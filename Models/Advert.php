@@ -171,6 +171,10 @@ class Advert
         return $this->pictures;
     }
 
+    /**
+     * Return the email of the user that created the advert
+     * @return mixed
+     */
     public function getEmail()
     {
         $db = DBConnection::getInstance();
@@ -219,6 +223,10 @@ class Advert
         return $output;
     }
 
+    /**
+     * Return the display code for the adverts title
+     * @return null|string
+     */
     public function createDisplayTitle()
     {
         if($this->title == null)
@@ -231,6 +239,10 @@ class Advert
         return $output;
     }
 
+    /**
+     * return the display code for the adverts description
+     * @return null|string
+     */
     public function createDisplayDescription()
     {
         if($this->title == null)
@@ -241,6 +253,10 @@ class Advert
         return $output;
     }
 
+    /**
+     * return the display code for the adverts category
+     * @return null|string
+     */
     public function createDisplayCategory()
     {
         if($this->title == null)
@@ -272,6 +288,10 @@ class Advert
         return $output;
     }
 
+    /**
+     * return the display code for the adverts price
+     * @return null|string
+     */
     public function createDisplayPrice()
     {
         if($this->title == null)
@@ -353,6 +373,11 @@ class Advert
         return $output;
     }
 
+    /**
+     * Return whether or not the advert is on a users wishlist, given the users ID
+     * @param $userID
+     * @return bool
+     */
     public function isOnWishlist($userID)
     {
         $db = DBConnection::getInstance();
@@ -365,6 +390,10 @@ class Advert
         return($count != 0);
     }
 
+    /**
+     * Add the advert to a given user, based on user ID
+     * @param $userID
+     */
     public function addToWishlist($userID)
     {
         $db = DBConnection::getInstance();
@@ -375,6 +404,11 @@ class Advert
         $db->run();
     }
 
+    /**
+     * Remove advert from a users wishlist
+     * Get user based on userID
+     * @param $userID
+     */
     public function removeFromWishlist($userID)
     {
         $db = DBConnection::getInstance();

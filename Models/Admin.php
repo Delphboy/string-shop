@@ -17,6 +17,11 @@ class Admin
     {
     }
 
+    /**
+     * Generate the <tr> and <td> strings that go between <table> tags
+     * To generate a table of user data
+     * @return string
+     */
     public function generateTableOfUsers()
     {
         $output = "";
@@ -56,6 +61,11 @@ class Admin
         return $output;
     }
 
+    /**
+     * Generate the <tr> and <td> strings that go between <table> tags
+     * To generate a table of advert data
+     * @return string
+     */
     public function generateTableOfAdverts()
     {
         $output = "";
@@ -83,6 +93,10 @@ class Admin
         return $output;
     }
 
+    /**
+     * Delete the user based on their ID
+     * @param $ID
+     */
     public function deleteUser($ID)
     {
         $user = new User($ID);
@@ -90,6 +104,10 @@ class Admin
         header("Refresh: 0");
     }
 
+    /**
+     * Delete an advert based on its ID
+     * @param $ID
+     */
     public function deleteAdvert($ID)
     {
         $ad = Advert::buildFromPK($ID);
@@ -97,6 +115,10 @@ class Admin
         header("Refresh: 0");
     }
 
+    /**
+     * Toggle whether or not a user is admin
+     * @param $ID
+     */
     public function toggleAdmin($ID)
     {
         $user = new User($ID);
@@ -104,6 +126,11 @@ class Admin
         header("Refresh: 0");
     }
 
+    /**
+     * Return the expiry rate currently stored in the expire.txt
+     * if the file doesn't exist, default to 2 weeks
+     * @return bool|string
+     */
     public function getExpiryTime()
     {
         try
