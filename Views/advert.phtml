@@ -7,9 +7,11 @@
         echo "<br>" .
             "<form name='advertOptions' action='" . $_SERVER['PHP_SELF'] . "?advert=$view->PKCode' method='post'>";
 
-        if(! $view->isMadeByUser)
+        if(! $view->expired)
         {
-            echo "<div class='col-md-4'>
+            if(! $view->isMadeByUser)
+            {
+                echo "<div class='col-md-4'>
                     
                     <a class='btn btn-success' href='mailto:$view->advertEmail'>
                     <span class=\"glyphicon glyphicon-envelope\"></span> 
@@ -19,18 +21,23 @@
                   </div>";
 //<button name='msgSeller' class='btn btn-success'>
 
-            if($view->isOnWishlist)
-            {
-                echo "<div class='col-md-4'><button name='wishListRemove' class=\"btn btn-success\"><span class=\"glyphicon glyphicon-minus\"></span> Remove from Wish List</button></div>";
+                if($view->isOnWishlist)
+                {
+                    echo "<div class='col-md-4'><button name='wishListRemove' class=\"btn btn-success\"><span class=\"glyphicon glyphicon-minus\"></span> Remove from Wish List</button></div>";
+                }
+                else
+                {
+                    echo "<div class='col-md-4'><button name='wishList' class=\"btn btn-success\"><span class=\"glyphicon glyphicon-plus\"></span> Add to Wish List</button></div>";
+                }
             }
             else
             {
-                echo "<div class='col-md-4'><button name='wishList' class=\"btn btn-success\"><span class=\"glyphicon glyphicon-plus\"></span> Add to Wish List</button></div>";
+                echo "<div class='col-md-4'><button name='deleteAdvert' class=\"btn btn-danger\"><span class=\"glyphicon glyphicon-remove\"></span> Delete Advert</button></div>";
             }
         }
         else
         {
-            echo "<div class='col-md-4'><button name='deleteAdvert' class=\"btn btn-danger\"><span class=\"glyphicon glyphicon-remove\"></span> Delete Advert</button></div>";
+            echo "<div class='col-md-12'><h4 class='label-danger'>Advert Expired</h4></div>";
         }
 
         echo "</form>" .

@@ -20,6 +20,7 @@ if(isset($_GET['advert']))
     $view->PKCode = $advertCode;
     if($advert->getTitle() != null)
     {
+        $view->expired = $advert->hasAdvertExpired();
         $view->pageTitle = "Advert | " . $advert->getTitle();
         $view->advertEmail = $advert->getEmail();
         $view->isMadeByUser = ($advert->getUser() == $_SESSION['userID']);

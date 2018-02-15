@@ -27,7 +27,7 @@ class Search
         switch ($this->expireTimeString)
         {
             case "1 week":
-                $this->expireTime = "7 DAY";
+                $this->expireTime = "4 DAY";
                 break;
             case "2 weeks":
                 $this->expireTime = "14 DAY";

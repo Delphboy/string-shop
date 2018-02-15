@@ -19,6 +19,7 @@ class Advert
     private $hasBow;
     private $price;
     private $pictures;
+    private $creationDate;
 
     /**
      * Advert constructor.
@@ -34,7 +35,7 @@ class Advert
      * @param $price
      * @param $pictures
      */
-    public function __construct($PK, $user, $title, $description, $category, $size, $age, $hasCase, $hasBow, $price, $pictures)
+    public function __construct($PK, $user, $title, $description, $category, $size, $age, $hasCase, $hasBow, $price, $pictures, $date)
     {
         $this->PK = $PK;
         $this->user = $user;
@@ -47,6 +48,7 @@ class Advert
         $this->hasBow = $hasBow;
         $this->price = $price;
         $this->pictures = $pictures;
+        $this->creationDate = $date;
     }
 
     /**
@@ -70,11 +72,11 @@ class Advert
         if($data != null)
         {
             $advert = new Advert($PK, $data[0][1], $data[0][2], $data[0][3], $data[0][4], $data[0][7],
-                $data[0][8], $data[0][9], $data[0][10], $data[0][6], $pictures);
+                $data[0][8], $data[0][9], $data[0][10], $data[0][6], $pictures, $data[0][5]);
         }
         else
         {
-            $advert = new Advert(null, null, null, null, null, null, null, null, null, null, null);
+            $advert = new Advert(null, null, null, null, null, null, null, null, null, null, null, null);
         }
 
         return $advert;
@@ -420,6 +422,34 @@ class Advert
         $db->setQuery($query);
         $db->bindQueryValue(':advert', $this->PK);
         $db->run();
+    }
+
+    /**
+     * return whether or not the advert has expired
+     */
+    function hasAdvertExpired()
+    {
+        $file = fopen("Models/expire.txt", "r") or die("Unable to open file!");
+        $expireTimeString = fread($file,filesize("Models/expire.txt"));
+        fclose($file);
+
+        switch ($expireTimeString )
+        {
+            case "1 week":
+                $expireTime = "4 DAY";
+                break;
+            case "2 weeks":
+                $expireTime = "14";
+                break;
+            case "1 month":
+                $expireTime = "30";
+                break;
+            default:
+                $expireTime = "14";
+                break;
+        }
+        echo (date('Y-m-d') - $expireTime);
+        return (new DateTime($this->creationDate) > (date('Y-m-d') - $expireTime)) == false;
     }
 
 }
