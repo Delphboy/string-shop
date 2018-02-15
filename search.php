@@ -8,7 +8,7 @@ $view = new stdClass();
 $view->pageTitle = 'String Shop | Find an Instrument';
 
 
-if($_SESSION['isSignedIn'])
+if(isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'])
 {
     $user = new User($_SESSION['userID']);
     $search = new Search();

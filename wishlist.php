@@ -5,7 +5,7 @@ $view->pageTitle = 'String Shop | Wishlist';
 require_once ('Models/DBConnection.php');
 require_once ('Models/User.php');
 
-if($_SESSION['isSignedIn'])
+if(isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'])
 {
     $user = new User($_SESSION['userID']);
     if(! isset($_GET['page']))

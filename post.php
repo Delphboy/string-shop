@@ -54,7 +54,7 @@ if(isset($_POST['submit']))
         $postObj->postAdvert($title, $desc, $category, $size, $age, $case, $bow, $price, $images);
 }
 
-if($_SESSION['isSignedIn'])
+if(isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'])
 {
     require_once('Views/post.phtml');
 }

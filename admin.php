@@ -25,7 +25,7 @@ if(isset($_POST['deleteAdvert']))
     $model->deleteAdvert($_POST['deleteAdvert']);
 }
 
-if($_SESSION['isSignedIn'] && $_SESSION['isAdmin'])
+if(isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'] && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'])
 {
     require_once('Views/admin.phtml');
 }

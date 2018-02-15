@@ -57,7 +57,7 @@ if(isset($_POST['deleteAdvert']))
     header("Location: user.php");
 }
 
-if($_SESSION['isSignedIn'])
+if(isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'])
 {
     require_once('Views/advert.phtml');
 }
