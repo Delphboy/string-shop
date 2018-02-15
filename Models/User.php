@@ -13,7 +13,13 @@ require_once ('User.php');
 class User
 {
     private $userID;
+    private $expireTimeString;
+    private $expireTime;
 
+    /**
+     * User constructor.
+     * @param $userID
+     */
     function __construct($userID)
     {
         if(($userID != null))
@@ -21,6 +27,34 @@ class User
         else
         {
             throw new InvalidArgumentException("Cannot make a user object without a valid user ID");
+        }
+
+        $file = fopen("Models/expire.txt", "r") or die("Unable to open file!");
+        $this->expireTimeString = fread($file,filesize("Models/expire.txt"));
+        fclose($file);
+        $this->calcExpireTime();
+    }
+
+    /**
+     * Calcaulate the expiry time limit for the SQL select
+     */
+    private function calcExpireTime()
+    {
+        switch ($this->expireTimeString)
+        {
+            case "1 week":
+                $this->expireTime = "7 DAY";
+                break;
+            case "2 weeks":
+                $this->expireTime = "14 DAY";
+                break;
+            case "1 month":
+                $this->expireTime = "30 DAY";
+                break;
+
+            default:
+                $this->expireTime = "14 DAY";
+                break;
         }
     }
 
@@ -38,7 +72,7 @@ class User
             $page = 0;
             $_GET['page'] = 0;
         }
-        $query = "SELECT * FROM Adverts WHERE userPK = :ID LIMIT " . ($page * 10) . ", 10;";
+        $query = "SELECT * FROM Adverts WHERE userPK = :ID AND date > NOW() - INTERVAL $this->expireTime LIMIT " . ($page * 10) . ", 10;";
         $db->setQuery($query);
         $db->bindQueryValue(':ID', $this->userID);
         $data = $db->getAllResults();
@@ -55,6 +89,12 @@ class User
         return $output;
     }
 
+    /**
+     * Load all the adverts on a users wishlist, then create the display code
+     * for each advert on the list
+     * @param $page
+     * @return string
+     */
     function loadWishlist($page)
     {
         $output = "";
@@ -64,7 +104,7 @@ class User
             $page = 0;
             $_GET['page'] = 0;
         }
-        $query = "SELECT * FROM wishlist INNER JOIN Adverts On wishlist.advertPK = Adverts.advertID WHERE wishlist.userPK = :ID LIMIT " . ($page * 10) . ", 10;";
+        $query = "SELECT * FROM wishlist INNER JOIN Adverts On wishlist.advertPK = Adverts.advertID WHERE wishlist.userPK = :ID AND date > NOW() - INTERVAL $this->expireTime LIMIT " . ($page * 10) . ", 10;";
         $db->setQuery($query);
         $db->bindQueryValue(':ID', $this->userID);
         $data = $db->getAllResults();
@@ -82,6 +122,9 @@ class User
         return $output;
     }
 
+    /**
+     * Delete the user
+     */
     public function delete()
     {
         $db = DBConnection::getInstance();
@@ -110,6 +153,9 @@ class User
         $db->run();
     }
 
+    /**
+     * Change whether or not the user is admin
+     */
     public function toggleAdmin()
     {
         $db = DBConnection::getInstance();

@@ -17,7 +17,24 @@
                     <div class="panel-body">
                         <div class="col-md-3"></div>
                         <div class="col-md-6 col-xs-12 center-block">
-                            <h2>Change Expiry</h2>
+                            <form name="ChangeAdvertExpiry" class="form" action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
+                                <label>
+                                    Change Advert Expiry.<br/>
+                                    <?php
+                                    if(isset($view->expiryTime))
+                                        echo "Current expiry rate is: $view->expiryTime";
+                                    else
+                                        echo "Current expiry rate is: 2 Weeks";
+                                    ?>
+                                </label>
+                                <select name="expiryTime" class="form-control">
+                                    <option value="1 week">1 Week</option>
+                                    <option value="2 weeks">2 Weeks</option>
+                                    <option value="1 month">1 Month</option>
+                                </select>
+                                <br />
+                                <input type="submit" value="Change Expiry Rate" name="changeAdvertExpirySubmit" class="btn-success form-control">
+                            </form>
                         </div>
                         <div class="col-md-3"></div>
                     </div>

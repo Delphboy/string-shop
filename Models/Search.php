@@ -8,15 +8,44 @@
 
 class Search
 {
+    private $expireTimeString;
+    private $expireTime;
+
     function __construct()
     {
+        $file = fopen("Models/expire.txt", "r") or die("Unable to open file!");
+        $this->expireTimeString = fread($file,filesize("Models/expire.txt"));
+        fclose($file);
+        $this->calcExpireTime();
+    }
+
+    /**
+     * Calcaulate the expiry time limit for the SQL select
+     */
+    private function calcExpireTime()
+    {
+        switch ($this->expireTimeString)
+        {
+            case "1 week":
+                $this->expireTime = "7 DAY";
+                break;
+            case "2 weeks":
+                $this->expireTime = "14 DAY";
+                break;
+            case "1 month":
+                $this->expireTime = "30 DAY";
+                break;
+            default:
+                $this->expireTime = "14 DAY";
+                break;
+        }
     }
 
     function loadAdvertsBySearch($category, $search, $hasBow, $hasCase, $group, $page)
     {
         $output = "";
         $db = DBConnection::getInstance();
-        $query = "SELECT * FROM Adverts WHERE TRUE";
+        $query = "SELECT * FROM Adverts WHERE date > NOW() - INTERVAL $this->expireTime";
 
         if(($category != null) && ($category !="everything")) $query = $query . " AND type = :cat";
         if(($search != null) && ($search !="")) $query = $query . " AND title LIKE :searchTitle";
@@ -51,7 +80,6 @@ class Search
                 $output = $output . $advert->createPreviewCode();
             }
         }
-
         return $output;
     }
 }

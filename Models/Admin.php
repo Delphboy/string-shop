@@ -104,4 +104,31 @@ class Admin
         header("Refresh: 0");
     }
 
+    public function getExpiryTime()
+    {
+        try
+        {
+            $file = fopen("Models/expire.txt", "r");
+            $rate = fread($file,filesize("Models/expire.txt"));
+            fclose($file);
+        }
+        catch (Exception $exception)
+        {
+            $rate = "2 Weeks";
+        }
+
+        return $rate;
+    }
+
+    /**
+     * Set the expiry time of the adverts based on the value passed to the function
+     * @param $newTime
+     */
+    public function setExpiryTime($newTime)
+    {
+        $file = fopen("Models/expire.txt", "w") or die("Unable to open file!");
+        fwrite($file, $newTime);
+        fclose($file);
+    }
+
 }
