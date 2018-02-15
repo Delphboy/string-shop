@@ -5,6 +5,7 @@ $view->pageTitle = 'String Shop | Wishlist';
 require_once ('Models/DBConnection.php');
 require_once ('Models/User.php');
 
+//Check whether the page can be displayed and process GET vars in URL
 if(isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'])
 {
     $user = new User($_SESSION['userID']);

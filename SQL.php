@@ -59,13 +59,89 @@ if(isset($_POST['generate']))
         $db->bindQueryValue(':userPK', $userPK);
         $db->bindQueryValue(':title', "Test: " . $i);
         $db->bindQueryValue(':descr', "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet odio vitae faucibus pretium. Phasellus dictum nisi lobortis, venenatis augue eu, pretium dolor. Curabitur sit amet bibendum erat. Ut vel aliquet lectus. Fusce lacus velit, venenatis in est non, lobortis sagittis odio. Morbi id enim pellentesque, varius sapien nec, accumsan nisi. Nullam et arcu hendrerit, molestie lacus sit amet, convallis eros. Aliquam pulvinar bibendum molestie. Curabitur velit risus, blandit a mi eu, sagittis ornare orci. Nam pharetra, leo quis tincidunt porttitor, lorem leo sollicitudin dui, sit amet finibus ligula enim at turpis. In sollicitudin finibus nisi, ut posuere augue scelerisque iaculis. Proin non aliquet nisl. Phasellus feugiat, sem rhoncus mattis auctor, sem nisl vestibulum orci, et consectetur est nulla id nulla. ");
-        $db->bindQueryValue(':type', "violin");
+
+        $rndCat = random_int(1,6);
+        switch ($rndCat)
+        {
+            case 1:
+                $db->bindQueryValue(':type', "violin");
+                break;
+            case 2:
+                $db->bindQueryValue(':type', "viola");
+                break;
+            case 3:
+                $db->bindQueryValue(':type', "cello");
+                break;
+            case 4:
+                $db->bindQueryValue(':type', "bass");
+                break;
+            case 5:
+                $db->bindQueryValue(':type', "music");
+                break;
+            case 6:
+                $db->bindQueryValue(':type', "accessory");
+                break;
+        }
+
+        $rndSize = random_int(1,8);
+        switch ($rndSize)
+        {
+            case 1:
+                $db->bindQueryValue(':size', "0");
+                break;
+            case 2:
+                $db->bindQueryValue(':size', "4/4");
+                break;
+            case 3:
+                $db->bindQueryValue(':size', "3/4");
+                break;
+            case 4:
+                $db->bindQueryValue(':size', "1/2");
+                break;
+            case 5:
+                $db->bindQueryValue(':size', "1/4");
+                break;
+            case 6:
+                $db->bindQueryValue(':size', "1/8");
+                break;
+            case 7:
+                $db->bindQueryValue(':size', "1/16");
+                break;
+            case 8:
+                $db->bindQueryValue(':size', "1/64");
+                break;
+        }
+
+        $rndAge= random_int(1,7);
+        switch ($rndAge)
+        {
+            case 1:
+                $db->bindQueryValue(':age', "unknown");
+                break;
+            case 2:
+                $db->bindQueryValue(':age', "new");
+                break;
+            case 3:
+                $db->bindQueryValue(':age', "<10");
+                break;
+            case 4:
+                $db->bindQueryValue(':age', ">10");
+                break;
+            case 5:
+                $db->bindQueryValue(':age', "<50");
+                break;
+            case 6:
+                $db->bindQueryValue(':age', "<100");
+                break;
+            case 7:
+                $db->bindQueryValue(':age', ">100");
+                break;
+        }
+
         $db->bindQueryValue(':today', $date);
-        $db->bindQueryValue(':price', 12.98);
-        $db->bindQueryValue(':size', "4/4");
-        $db->bindQueryValue(':age', ">100");
-        $db->bindQueryValue(':hasCase', 1);
-        $db->bindQueryValue(':bow', 0);
+        $db->bindQueryValue(':price', random_int(0, 1000));
+        $db->bindQueryValue(':hasCase', random_int(0, 1));
+        $db->bindQueryValue(':bow', random_int(0, 1));
         $db->run();
 
         $advertPK = $db->getLastID();

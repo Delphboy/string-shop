@@ -7,6 +7,7 @@ $view = new stdClass();
 $view->pageTitle = 'Sign In or Register';
 $view->loginMsg = "";
 
+//Check whether the login button has been pressed
 if(isset($_POST['login']))
 {
     $reg = new Login();
@@ -21,6 +22,7 @@ if(isset($_POST['login']))
     }
 }
 
+//Check if the registration form has been submitted
 if(isset($_POST['submit']))
 {
     $reg = new Login();
@@ -63,6 +65,7 @@ if(isset($_POST['submit']))
     }
 }
 
+//Check conditions to display page
 if(isset($_SESSION['isSignedIn']))
 {
     if($_SESSION['isSignedIn'])
@@ -72,6 +75,7 @@ if(isset($_SESSION['isSignedIn']))
 }
 else
 {
+    //Load captcha just before view to prevent it being reloaded
     $cap = new Captcha();
     $view->captchaQuestion = $cap->getNextQuestion();
     require_once('Views/login.phtml');

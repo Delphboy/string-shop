@@ -7,7 +7,7 @@ require_once ('Models/Search.php');
 $view = new stdClass();
 $view->pageTitle = 'String Shop | Find an Instrument';
 
-
+// Check whether page can be displayed and handle GET vars in URL
 if(isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'])
 {
     $user = new User($_SESSION['userID']);

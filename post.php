@@ -6,16 +6,18 @@ $view->errorMsg = "";
 require_once ('Models/Post.php');
 require_once ('Models/Advert.php');
 
+//Check if advert form is submitted
 if(isset($_POST['submit']))
 {
     $postObj = new Post();
-    $title = $_POST['PostTitle'];
-    $desc = $_POST['PostDescription'];
-    $category = $_POST['PostCategory'];
-    $size = $_POST['PostSize'];
-    $age = $_POST['PostAge'];
-    $price = $_POST['PostPrice'];
+    $title = htmlentities($_POST['PostTitle']);
+    $desc = htmlentities($_POST['PostDescription']);
+    $category = htmlentities($_POST['PostCategory']);
+    $size = htmlentities($_POST['PostSize']);
+    $age = htmlentities($_POST['PostAge']);
+    $price = htmlentities($_POST['PostPrice']);
 
+    //Process hasCase and has Bow
     if(isset($_POST['PostCase']))
         $case = 1;
     else
@@ -26,10 +28,11 @@ if(isset($_POST['submit']))
     else
         $bow= 0;
 
+    //Validate image upload
     $images = $_FILES['PostImages'];
     if($images['name'][0] != null)
     {
-        $maxsize    = 2097152;
+        $maxsize    = 2097152; //2Mb in bytes
         $acceptable = array(
             'image/jpeg',
             'image/jpg',
@@ -54,6 +57,8 @@ if(isset($_POST['submit']))
         $postObj->postAdvert($title, $desc, $category, $size, $age, $case, $bow, $price, $images);
 }
 
+
+//Check whether page can be displayed
 if(isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'])
 {
     require_once('Views/post.phtml');

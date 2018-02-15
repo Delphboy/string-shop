@@ -10,7 +10,7 @@ require_once ('Models/Advert.php');
 $view = new stdClass();
 $view->pageTitle = 'Advert Page | Advert';
 
-
+//Get the advert to be displayed, decode it and generate display code
 if(isset($_GET['advert']))
 {
     $advertCode = $_GET['advert'];
@@ -32,6 +32,7 @@ if(isset($_GET['advert']))
 
 }
 
+//Change graphics based on whether the advert is on the user's wishlist
 if(isset($_POST['wishList']))
 {
     if($advertPK != null)
