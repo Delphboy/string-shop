@@ -18,14 +18,12 @@ class Admin
     }
 
     /**
-     * Generate the <tr> and <td> strings that go between <table> tags
-     * To generate a table of user data
+     * Create a container (div) for each user in the database.
+     * Each attribute of the item in a sub div, allowing for responsive design
      * @return string
      */
-    public function generateTableOfUsers()
+    public function generateUserDivs()
     {
-        $output = "";
-
         $sqlQuery = "SELECT userID, firstName, surname, email, isAdmin FROM Users";
 
         $dbHandle = DBConnection::getInstance();
@@ -33,43 +31,44 @@ class Admin
 
         $data = $dbHandle->getAllResults();
 
+        $output = "";
+
+
         for($i = 0; $i < count($data); $i++)
         {
-            $output .= "<tr>";
+            $output .= "<div class=\"col-md-12\" style=\"border: solid\">";
             for($j = 0; $j < (count($data[$i]) / 2); $j++)
             {
                 if($j < 4)
-                    $output .= "<td>" . $data[$i][$j] . "</td>\n";
+                {
+                    $output .= "<div class=\"col-md-2\">" . $data[$i][$j] . "</div>\n";
+                }
                 else
                 {
                     if($data[$i][$j] == 1)
                     {
-                        $output .= "<td><form action=" . $_SERVER['PHP_SELF'] . " method='post'><button type='submit' name='isAdminBtn' value='" . $data[$i][0] . "' class='btn btn-danger'>Remove Admin</button></form></td>";
+                        $output .= "<div class=\"col-md-2\"><form action=" . $_SERVER['PHP_SELF'] . " method='post'><button type='submit' name='isAdminBtn' value='" . $data[$i][0] . "' class='btn btn-danger'>Remove Admin</button></form></div>";
                     }
                     else
                     {
-                        $output .= "<td><form action=" . $_SERVER['PHP_SELF'] . " method='post'><button type='submit' name='isAdminBtn' value='" . $data[$i][0] . "' class='btn btn-success'>Make Admin</button></form></td>";
+                        $output .= "<div class=\"col-md-2\"><form action=" . $_SERVER['PHP_SELF'] . " method='post'><button type='submit' name='isAdminBtn' value='" . $data[$i][0] . "' class='btn btn-success'>Make Admin</button></form></div>";
                     }
                 }
             }
-            $output .= "<td><form action=" . $_SERVER['PHP_SELF'] . " method='post'><button name='deleteUser' value='" . $data[$i][0] . "' type='submit' class='btn btn-danger'>Delete User</button></form></td>";
-            $output .= "</tr>\n";
+            $output .= "<div class=\"col-md-2\"><form action=" . $_SERVER['PHP_SELF'] . " method='post'><button name='deleteUser' value='" . $data[$i][0] . "' type='submit' class='btn btn-danger'>Delete User</button></form></div>
+                        </div><span class=\"col-md-12\" style=\"padding-top: 10px\"></span>";
         }
-
-        $dbHandle = null;
 
         return $output;
     }
 
     /**
-     * Generate the <tr> and <td> strings that go between <table> tags
-     * To generate a table of advert data
+     * Create a container (div) for each advert in the database.
+     * Each attribute of the item in a sub div, allowing for responsive design
      * @return string
      */
-    public function generateTableOfAdverts()
+    public function generateAdvertDivs()
     {
-        $output = "";
-
         $sqlQuery = "SELECT advertID, userPK, title, type, date, price FROM Adverts";
 
         $dbHandle = DBConnection::getInstance();
@@ -77,18 +76,26 @@ class Admin
 
         $data = $dbHandle->getAllResults();
 
+        $output = "";
+
+
         for($i = 0; $i < count($data); $i++)
         {
-            $output .= "<tr>";
+            $output .= "<div class=\"col-md-12\" style=\"border: solid\">";
             for($j = 0; $j < (count($data[$i]) / 2); $j++)
             {
-                $output .= "<td>" . $data[$i][$j] . "</td>\n";
+                if($j < 2)
+                {
+                    $output .= "<div class=\"col-md-1\">" . $data[$i][$j] . "</div>\n";
+                }
+                else
+                {
+                    $output .= "<div class=\"col-md-2\">" . $data[$i][$j] . "</div>\n";
+                }
             }
-            $output .= "<td><form action=" . $_SERVER['PHP_SELF'] . " method='post'><button name='deleteAdvert' value='" . $data[$i][0] . "' type='submit' class='btn btn-danger'>Delete Advert</button></form></td>";
-            $output .= "</tr>\n";
+            $output .= "<div class=\"col-md-2\"><form action=" . $_SERVER['PHP_SELF'] . " method='post'><button name='deleteAdvert' value='" . $data[$i][0] . "' type='submit' class='btn btn-danger'>Delete Advert</button></form></div>";
+            $output .= "</div><span class=\"col-md-12\" style=\"padding-top: 10px\"></span>";
         }
-
-        $dbHandle = null;
 
         return $output;
     }

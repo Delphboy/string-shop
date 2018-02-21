@@ -50,30 +50,25 @@
                 </div>
                 <div id="CollapseUsers" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6 col-xs-12 center-block">
-                            <table class="table table-bordered table-striped table-hover" name="usersTable">
-                                <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Admin</th>
-                                    <th scope="col">Delete Account</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 col-xs-12 center-block">
+                            <div class="col-md-12" style="border: solid">
+                                <div class="col-md-2">ID</div>
+                                <div class="col-md-2">First Name</div>
+                                <div class="col-md-2">Last Name</div>
+                                <div class="col-md-2">Email Name</div>
+                                <div class="col-md-2">Delete User</div>
+                                <div class="col-md-2">Admin User</div>
+                            </div>
+                            <span class="col-md-12" style="padding-top: 5px"></span>
                                 <?php
                                 if(isset($view->usersTable))
                                 {
                                     echo $view->usersTable;
                                 }
                                 ?>
-                                </tbody>
-                            </table>
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-1"></div>
                     </div>
                 </div>
             </div>
@@ -87,31 +82,26 @@
                 </div>
                 <div id="CollapseAdverts" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6 col-xs-12 center-block">
-                            <table class="table table-bordered table-striped table-hover" name="advertsTable">
-                                <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">User Code</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Date Created</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Delete Advert</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-                                if(isset($view->advertsTable))
-                                {
-                                    echo $view->advertsTable;
-                                }
-                                ?>
-                                </tbody>
-                            </table>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 col-xs-12 center-block">
+                            <div class="col-md-12" style="border: solid">
+                                <div class="col-md-1">ID</div>
+                                <div class="col-md-1">User ID</div>
+                                <div class="col-md-2">Title</div>
+                                <div class="col-md-2">Category</div>
+                                <div class="col-md-2">Date</div>
+                                <div class="col-md-2">Price(£)</div>
+                                <div class="col-md-2">Delete</div>
+                            </div>
+                            <span class="col-md-12" style="padding-top: 5px"></span>
+                            <?php
+                            if(isset($view->advertsTable))
+                            {
+                                echo $view->advertsTable;
+                            }
+                            ?>
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-1"></div>
                     </div>
                 </div>
             </div>

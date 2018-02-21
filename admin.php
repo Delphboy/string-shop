@@ -7,8 +7,10 @@ $view->pageTitle = 'String Shop | Admin';
 
 //Load model and create displayable information
 $model = new Admin();
-$view->usersTable = $model->generateTableOfUsers();
-$view->advertsTable = $model->generateTableOfAdverts();
+//$view->usersTable = $model->generateTableOfUsers();
+$view->usersTable = $model->generateUserDivs();
+//$view->advertsTable = $model->generateTableOfAdverts();
+$view->advertsTable = $model->generateAdvertDivs();
 $view->expiryTime = $model->getExpiryTime();
 
 //Check if the admin button has been pressed
