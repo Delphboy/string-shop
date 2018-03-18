@@ -14,10 +14,15 @@ class DBConnection
 
     public $db = NULL; //PDO Object to be accessed
 
-    private $host = "helios.csesalford.com";
-    private $dbName = "stc765";
-    private $user = "stc765";
-    private $pass = 'MySQLPassword';
+//    private $host = "helios.csesalford.com";
+//    private $dbName = "stc765";
+//    private $user = "stc765";
+//    private $pass = 'MySQLPassword';
+
+    private $host = "den1.mysql3.gear.host";
+    private $dbName = "stringshop";
+    private $user = "stringshop";
+    private $pass = 'Sx1Mlm_L_W0i';
 
     private  $SQLQuery;
 
