@@ -1,3 +1,6 @@
+<!-- Link JS -->
+<script type="text/javascript" language="JavaScript" src="/js/search.js"></script>
+
 <!-- Search Field -->
 <section class="container container-fluid">
     <form name="search-function" method="get" action="/search.php">
@@ -16,7 +19,12 @@
                     </select>
                 </div>
                 <div class="form-group col-md-10">
-                    <input name="search" type="text" class="form-control" placeholder="Search for an item here" />
+                    <input name="search" onkeyup="searchBtnClick(this.value)" type="text" class="form-control" autocomplete="off" placeholder="Search for an item here" />
+<!--                    <span class="glyphicon glyphicon-search" style="margin: 5px"></span>-->
+                    <ul class="list-group" id="hintList">
+<!--                        <li class="list-group-item">Live search kinda thing 1</li>-->
+<!--                        <li class="list-group-item">Live search kinda thing 2</li>-->
+                    </ul>
                 </div>
 <!--            </div>-->
 <!--            <div class="form-group col-md-12">-->
@@ -41,11 +49,16 @@
                 </div>
                 <input type="hidden" name="page" value="0" />
                 <div class="form-group col-md-4">
-                    <button class="btn btn-default form-control" type="submit">
+                    <button class="btn btn-default form-control" type="submit" id="searchBtn">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                 </div>
             </div>
         </fieldset>
     </form>
+
+    <!-- Attach JS event handler to the search button -->
+    <script>
+//        document.getElementById('searchBtn').addEventListener('click', searchBtnClick(), true);
+    </script>
 </section>
