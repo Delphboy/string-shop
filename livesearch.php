@@ -28,7 +28,7 @@ if($query !== "")
         if(stristr($query, substr($items[$i][0], 0, $len)))
         {
             if($hint === "")
-                $hint = "<li class='list-group-item container'>
+                $hint = "<li style='display: block' class='list-group-item container dropdown'>
                                 <div class='col-md-1'>
                                     <img src='" . $items[$i][1] . "' style='width: 75px; height: auto' />
                                 </div>
@@ -46,4 +46,4 @@ if($query !== "")
         }
     }
 }
-echo $hint === "" ? "<li class=\"list-group-item\">No suggestions</li>" : $hint;
+echo $hint === "" ? "<li class=\"list-group-item container\">No suggestions</li>" : $hint;
