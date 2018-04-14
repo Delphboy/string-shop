@@ -1,10 +1,15 @@
 function searchBtnClick(str)
 {
+    // Don't display hints if nothing in the search bar
     if(str.length === 0)
     {
         document.getElementById('hintList').innerHTML = "";
         return;
     }
+    /**
+     * Create a new AJAX object
+     * Create an inline function for the object to
+     */
     else
     {
         var xmlHTTP = new XMLHttpRequest();
