@@ -3,7 +3,7 @@
 <!-- Search Field -->
 <?php require_once('template/searchBar.phtml');?>
 
-<div class="container">
+<div id="searchResultDisplay" class="container">
     <?php
     if(isset($view->searchResults) && $view->searchResults != "")
     {

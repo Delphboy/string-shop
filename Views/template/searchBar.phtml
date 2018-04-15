@@ -3,12 +3,12 @@
 
 <!-- Search Field -->
 <section class="container container-fluid">
-    <form name="search-function" method="get" action="/search.php">
+    <form name="search-function" method="get"> <!--action="/search.php"-->
         <fieldset>
             <legend>Search</legend>
             <div class="form-group col-md-12">
                 <div class="form-group col-md-2">
-                    <select name="category" class="form-control col-md-2">
+                    <select id="searchCategory" name="category" onchange="searchFormUpdated()" class="form-control col-md-2">
                         <option value="everything">All Departments</option>
                         <option value="violin">Violins</option>
                         <option value="viola">Violas</option>
@@ -19,17 +19,14 @@
                     </select>
                 </div>
                 <div class="form-group col-md-10">
-                    <input name="search" onkeyup="searchBtnClick(this.value)" type="text" class="form-control" autocomplete="off" placeholder="Search for an item here" />
-<!--                    <span class="glyphicon glyphicon-search" style="margin: 5px"></span>-->
+                    <input name="search" onkeyup="liveSearchBar(this.value)" type="text" class="form-control" autocomplete="off" placeholder="Search for an item here" />
                     <ul class="list-group affix" id="hintList" style="z-index: 1">
-<!--                        <li class="list-group-item">Live search kinda thing 1</li>-->
-<!--                        <li class="list-group-item">Live search kinda thing 2</li>-->
+                        <!-- AJAX method in JS/search.js injects code here-->
                     </ul>
                 </div>
-<!--            </div>-->
-<!--            <div class="form-group col-md-12">-->
+
                 <div class="form-group col-md-4">
-                    <select name="order" class="form-control col-md-2">
+                    <select id="searchOrder" name="order" onchange="searchFormUpdated()" class="form-control col-md-2">
                         <option value="relevant">Most Relevant</option>
                         <option value="highToLow">Price: Highest to Lowest</option>
                         <option value="lowToHigh">Price: Lowest to Highest</option>
@@ -39,12 +36,12 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="hasCase">Has a case
+                        <input id="searchHasCase" type="checkbox" name="hasCase" onchange="searchFormUpdated()">Has a case
                     </label>
                 </div>
                 <div class="form-group col-md-2">
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="hasBow">Has a bow
+                        <input id="searchHasBow" type="checkbox" onchange="searchFormUpdated()" name="hasBow">Has a bow
                     </label>
                 </div>
                 <input type="hidden" name="page" value="0" />

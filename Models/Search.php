@@ -54,7 +54,7 @@ class Search
      * @param $page
      * @return string
      */
-    function loadAdvertsBySearch($category, $search, $hasBow, $hasCase, $group, $page)
+    public function loadAdvertsBySearch($category, $search, $hasBow, $hasCase, $group, $page)
     {
         $output = "";
         $db = DBConnection::getInstance();

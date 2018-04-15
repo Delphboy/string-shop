@@ -6,11 +6,11 @@ require_once ('Models/Search.php');
 
 $view = new stdClass();
 $view->pageTitle = 'String Shop | Find an Instrument';
-
+$viewLoaded = 0;
 // Check whether page can be displayed and handle GET vars in URL
 if(isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'])
 {
-    $user = new User($_SESSION['userID']);
+    //$user = new User($_SESSION['userID']);
     $search = new Search();
     if(isset($_GET['search']))
     {
@@ -52,10 +52,8 @@ if(isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'])
         {
             $group = null;
         }
-
         $view->searchResults =  $search->loadAdvertsBySearch(htmlentities($_GET['category']), htmlentities($_GET['search']), $bow, $case, $group, $_GET['page']);
     }
-
     require_once('Views/search.phtml');
 }
 else
