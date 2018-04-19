@@ -53,10 +53,30 @@ function liveSearchBar(str)
         {
             if (this.readyState === 4 && this.status === 200)
             {
-                var uic = document.getElementById("hintList")
-                uic.innerHTML = this.responseText;
+                var uic = document.getElementById("hintList");
+                var JSONData = JSON.parse(this.responseText);
+
+                if(this.responseText.length > 2)
+                {
+                    JSONData.forEach(function (obj)
+                    {
+                        uic.innerHTML +=
+                            "<li style='position: relative; z-index: 10' class='list-group-item container col-md-12 col-sm-12'>" +
+                                "<div class='col-md-2'>" +
+                                    "<img src='" + obj.pictures + "'  />" +
+                                "</div>" +
+                                "<div class='col-md-9 list-group-item-text'><h4>" + obj.title + "</h4></div>" +
+                                "<div class='col-md-9'>" + obj.description + "</div>" +
+                            "</li>";
+                    });
+                }
+                else
+                {
+                    uic.innerHTML = "<li style='position:relative; z-index: 10' class='col-md-12 list-group-item container'>No suggestions</li>"
+                }
             }
         };
+
         xmlHTTP.open('GET', 'Models/livesearch.php?q=' + str, true);
         xmlHTTP.send();
     }
