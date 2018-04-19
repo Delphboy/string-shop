@@ -28,16 +28,16 @@ if($query !== "")
         if(stristr($query, substr($items[$i][0], 0, $len)))
         {
             if($hint === "")
-                $hint = "<li style='z-index: 1;' class='list-group-item container dropdown'>
-                                <div class='col-md-1'>
+                $hint = "<li style='position:relative; z-index: 10' class='list-group-item container dropdown col-md-12'>
+                                <div class='col-md-2'>
                                     <img src='" . $items[$i][1] . "' style='width: 75px; height: auto' />
                                 </div>
                                 <div class='col-md-9 list-group-item-text'><h4>" . $items[$i][0] . "</h4></div>
                                 <div class='col-md-9'>" . $items[$i][2] . "</div>
                          </li>";
             else
-                $hint .= "<li class='list-group-item container'>
-                                <div class='col-md-1'>
+                $hint .= "<li style='position: relative; z-index: 10' class='list-group-item container col-md-12'>
+                                <div class='col-md-2'>
                                     <img src='" . $items[$i][1] . "' style='width: 75px; height: auto' />
                                 </div>
                                 <div class='col-md-9 list-group-item-text'><h4>" . $items[$i][0] . "</h4></div>
@@ -46,4 +46,4 @@ if($query !== "")
         }
     }
 }
-echo $hint === "" ? "<li class=\"list-group-item container\">No suggestions</li>" : $hint;
+echo $hint === "" ? "<li style='position:relative; z-index: 10' class=\"col-md-12 list-group-item container\">No suggestions</li>" : $hint;
