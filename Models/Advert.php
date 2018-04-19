@@ -6,7 +6,7 @@
  * Time: 13:41
  */
 require_once ('DBConnection.php');
-class Advert
+class Advert implements JsonSerializable
 {
     private $PK;
     private $user;
@@ -498,4 +498,28 @@ class Advert
         return (strtotime($creationDate) <= strtotime(date(DATE_PATTERN, strtotime("-$expireTime"))));
     }
 
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+//            "PK" => $this->PK,
+//            "user" => $this->user,
+            "title" => $this->title,
+            "description" => $this->description,
+//            "category" => $this->category,
+//            "size" => $this->size,
+//            "age" => $this->age,
+//            "hasCase" => $this->hasCase,
+//            "hasBow" => $this->hasBow,
+//            "price" => $this->price,
+            "pictures" => $this->pictures[0][0]
+//            "creationDate" => $this->creationDate
+        ];
+    }
 }

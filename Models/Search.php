@@ -6,6 +6,8 @@
  * Time: 10:46
  */
 
+require_once ('DBConnection.php');
+require_once ('Advert.php');
 class Search
 {
     private $expireTimeString;
@@ -16,10 +18,26 @@ class Search
      */
     function __construct()
     {
-        $file = fopen("Models/expire.txt", "r") or die("Unable to open file!");
-        $this->expireTimeString = fread($file,filesize("Models/expire.txt"));
-        fclose($file);
-        $this->calcExpireTime();
+        try
+        {
+            //Accounts for different file referencing - PHP is stupid
+            if(file_exists("Models/expire.txt"))
+            {
+                $file = fopen("Models/expire.txt", "r") or die("Unable to open file!");
+                $this->expireTimeString = fread($file,filesize("Models/expire.txt"));
+            }
+            else
+            {
+                $file = fopen("expire.txt", "r") or die("Unable to open file!");
+                $this->expireTimeString = fread($file,filesize("expire.txt"));
+            }
+            fclose($file);
+            $this->calcExpireTime();
+        }
+        catch (ErrorException $exception)
+        {
+            $this->expireTime = "14 DAY";
+        }
     }
 
     /**
@@ -54,7 +72,7 @@ class Search
      * @param $page
      * @return string
      */
-    public function loadAdvertsBySearch($category, $search, $hasBow, $hasCase, $group, $page)
+    public function loadAdvertDisplayCode($category, $search, $hasBow, $hasCase, $group, $page)
     {
         $output = "";
         $db = DBConnection::getInstance();
@@ -94,5 +112,54 @@ class Search
             }
         }
         return $output;
+    }
+
+    /**
+     * Generate a JSON object to be returned for use in the live search feature
+     * @param $search
+     * @return string
+     */
+    public function returnAdvertAJAXFromSearch($search)
+    {
+        $adverts = array();
+        $output = "";
+        $db = DBConnection::getInstance();
+        $query = "SELECT * FROM Adverts WHERE date > NOW() - INTERVAL $this->expireTime";
+
+        if(($search != null) && ($search !="")) $query = $query . " AND title LIKE :searchTitle";
+        $query = $query . " LIMIT " . (10) . ", 10";
+        $query = $query . ";";
+        $db->setQuery($query);
+
+        if(($search != null) && ($search !="")) $db->bindQueryValue(':searchTitle', "%" . $search . "%");
+
+        $data = $db->getAllResults();
+        if(! empty($data))
+        {
+            for($rowCount = 0; $rowCount < count($data); $rowCount++)
+            {
+                $db->setQuery("SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :ad");
+                $db->bindQueryValue(":ad", $data[$rowCount][0]);
+                $pictures = $db->getAllResults();
+
+                $advert = new Advert($data[$rowCount][0], $data[$rowCount][1], $data[$rowCount][2], $data[$rowCount][3], $data[$rowCount][4], $data[$rowCount][7],
+                    $data[$rowCount][8], $data[$rowCount][9], $data[$rowCount][10], $data[$rowCount][6], $pictures, $data[$rowCount][5]);
+//                $output = $output . $advert->createPreviewCode();
+                $adverts[] = $advert;
+            }
+        }
+        return json_encode($adverts);
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        // TODO: Implement jsonSerialize() method.
     }
 }

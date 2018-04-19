@@ -57,7 +57,7 @@ function liveSearchBar(str)
                 uic.innerHTML = this.responseText;
             }
         };
-        xmlHTTP.open('GET', 'livesearch.php?q=' + str, true);
+        xmlHTTP.open('GET', 'Models/livesearch.php?q=' + str, true);
         xmlHTTP.send();
     }
 }

@@ -52,7 +52,7 @@ if(isset($_SESSION['isSignedIn']) && $_SESSION['isSignedIn'])
         {
             $group = null;
         }
-        $view->searchResults =  $search->loadAdvertsBySearch(htmlentities($_GET['category']), htmlentities($_GET['search']), $bow, $case, $group, $_GET['page']);
+        $view->searchResults =  $search->loadAdvertDisplayCode(htmlentities($_GET['category']), htmlentities($_GET['search']), $bow, $case, $group, $_GET['page']);
     }
     require_once('Views/search.phtml');
 }

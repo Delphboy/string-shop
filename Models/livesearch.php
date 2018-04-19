@@ -5,18 +5,24 @@
  * Date: 30/03/2018
  * Time: 19:56
  */
+
+include_once ('Search.php');
+$search = new Search();
+
 $items = array
 (
-    array("Anna", "images/uploads/no-image.png", "£150"),
-    array("Amy", "http://www.hondahookup.com/images/100x100.jpg", "£300"),
-    array("Bill", "http://www.hondahookup.com/images/100x100.jpg", "£300"),
-    array("Ben", "http://www.hondahookup.com/images/100x100.jpg", "£300"),
-    array("Charles", "http://www.hondahookup.com/images/100x100.jpg", "£300"),
-    array("Charlie", "http://www.hondahookup.com/images/100x100.jpg", "£300"),
-    array("Henry", "images/advert-pictures/expensive-fullsize-strings.jpg", "£700"),
+//    array("Anna", "images/uploads/no-image.png", "£150"),
+//    array("Amy", "http://www.hondahookup.com/images/100x100.jpg", "£300"),
+//    array("Bill", "http://www.hondahookup.com/images/100x100.jpg", "£300"),
+//    array("Ben", "http://www.hondahookup.com/images/100x100.jpg", "£300"),
+//    array("Charles", "http://www.hondahookup.com/images/100x100.jpg", "£300"),
+//    array("Charlie", "http://www.hondahookup.com/images/100x100.jpg", "£300"),
+//    array("Henry", "images/advert-pictures/expensive-fullsize-strings.jpg", "£700"),
 );
 
 $query = $_REQUEST['q'];
+echo "<h2>$query</h2>";
+echo $search->returnAdvertAJAXFromSearch($query);
 
 $hint = "";
 if($query !== "")
@@ -36,7 +42,7 @@ if($query !== "")
                                 <div class='col-md-9'>" . $items[$i][2] . "</div>
                          </li>";
             else
-                $hint .= "<li style='position: relative; z-index: 10' class='list-group-item container col-md-12'>
+                $hint .= "<li style='position: relative; z-index: 10' class='list-group-item container col-md-12 col-sm-12'>
                                 <div class='col-md-2'>
                                     <img src='" . $items[$i][1] . "' style='width: 75px; height: auto' />
                                 </div>
@@ -46,4 +52,5 @@ if($query !== "")
         }
     }
 }
+
 echo $hint === "" ? "<li style='position:relative; z-index: 10' class=\"col-md-12 list-group-item container\">No suggestions</li>" : $hint;
