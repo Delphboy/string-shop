@@ -129,20 +129,20 @@ class Search
         {
             $query = $query . " AND title LIKE :searchTitle LIMIT 5;";
             $db->setQuery($query);
-            $db->bindQueryValue(':searchTitle', "%" . $search . "%");
+            $db->bindQueryValue(':searchTitle', $search . "%");
 
             $data = $db->getAllResults();
             if(! empty($data))
             {
                 for($rowCount = 0; $rowCount < count($data); $rowCount++)
                 {
-                    $db->setQuery("SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :ad");
+                    $db->setQuery("SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :ad LIMIT 1;");
                     $db->bindQueryValue(":ad", $data[$rowCount][0]);
-                    $pictures = $db->getAllResults();
+                    $picture = $db->getRow()[0];
 
                     $advert = new Advert($data[$rowCount][0], $data[$rowCount][1], $data[$rowCount][2], $data[$rowCount][3],
                         $data[$rowCount][4], $data[$rowCount][7], $data[$rowCount][8], $data[$rowCount][9],
-                        $data[$rowCount][10], $data[$rowCount][6], $pictures, $data[$rowCount][5]);
+                        $data[$rowCount][10], $data[$rowCount][6], $picture, $data[$rowCount][5]);
 
                     $adverts[] = $advert;
                 }

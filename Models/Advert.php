@@ -508,9 +508,10 @@ class Advert implements JsonSerializable
     public function jsonSerialize()
     {
         return [
+            "id" => $this->PK,
             "title" => $this->title,
             "description" => substr($this->description, 0, 120) . "...",
-            "pictures" => $this->pictures[0][0]
+            "pictures" => $this->pictures
         ];
     }
 }

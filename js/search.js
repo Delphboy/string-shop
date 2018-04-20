@@ -63,15 +63,16 @@ function liveSearchBar(str)
                 {
                     JSONData.forEach(function (obj)
                     {
+                        var advertID = (obj.id * 7).toString(16);
                         if(hintDisplay === "")
                         {
                             hintDisplay =
                                 "<li style='position: relative; z-index: 10' class='list-group-item container col-md-12 col-sm-12'>" +
-                                "<div class='col-md-2'>" +
-                                "<img src='" + obj.pictures + "'  />" +
-                                "</div>" +
-                                "<div class='col-md-9 list-group-item-text'><h4>" + obj.title + "</h4></div>" +
-                                "<div class='col-md-9'>" + obj.description + "</div>" +
+                                    "<div class='col-md-2'>" +
+                                        "<img width='50px' height='auto' src='/images/uploads/" + obj.pictures + "'  />" +
+                                    "</div>" +
+                                    "<div class='col-md-9 list-group-item-text'><h4><a href='/advert.php?advert=" + advertID + "'>" + obj.title + "</a></h4></div>" +
+                                    "<div class='col-md-9'>" + obj.description + "</div>" +
                                 "</li>";
                         }
                         else
@@ -79,9 +80,9 @@ function liveSearchBar(str)
                             hintDisplay +=
                                 "<li style='position: relative; z-index: 10' class='list-group-item container col-md-12 col-sm-12'>" +
                                 "<div class='col-md-2'>" +
-                                "<img src='" + obj.pictures + "'  />" +
+                                "<img width='50px' height='auto' src='/images/uploads/" + obj.pictures + "'  />" +
                                 "</div>" +
-                                "<div class='col-md-9 list-group-item-text'><h4>" + obj.title + "</h4></div>" +
+                                "<div class='col-md-9 list-group-item-text'><h4><a href='/advert.php?advert=" + advertID + "'>" + obj.title + "</a></h4></div>" +
                                 "<div class='col-md-9'>" + obj.description + "</div>" +
                                 "</li>";
                         }
