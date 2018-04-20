@@ -6,8 +6,15 @@
  * Time: 19:56
  */
 
-include_once ('Search.php');
-$search = new Search();
+session_start();
+if(isset($_SESSION['isSignedIn']))
+{
+    if($_SESSION['isSignedIn'])
+    {
+        include_once ('Search.php');
+        $search = new Search();
 
-$query = $_REQUEST['q'];
-echo $search->returnAdvertAJAXFromSearch($query);
+        $query = $_REQUEST['q'];
+        echo $search->returnAdvertAJAXFromSearch($query);
+    }
+}

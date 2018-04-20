@@ -41,6 +41,7 @@ function searchFormUpdated()
  */
 function liveSearchBar(str)
 {
+    // console.log("search query: " + str);
     if(str.length === 0)
     {
         document.getElementById('hintList').innerHTML = "";
@@ -49,35 +50,52 @@ function liveSearchBar(str)
     else
     {
         var xmlHTTP = new XMLHttpRequest();
+        xmlHTTP.open('GET', 'Models/livesearch.php?q=' + str, true);
         xmlHTTP.onreadystatechange = function ()
         {
             if (this.readyState === 4 && this.status === 200)
             {
                 var uic = document.getElementById("hintList");
                 var JSONData = JSON.parse(this.responseText);
-
+                var hintDisplay = "";
+                // uic.innerHTML = "<li>" + str + "</li>";
                 if(this.responseText.length > 2)
                 {
                     JSONData.forEach(function (obj)
                     {
-                        uic.innerHTML +=
-                            "<li style='position: relative; z-index: 10' class='list-group-item container col-md-12 col-sm-12'>" +
+                        if(hintDisplay === "")
+                        {
+                            hintDisplay =
+                                "<li style='position: relative; z-index: 10' class='list-group-item container col-md-12 col-sm-12'>" +
                                 "<div class='col-md-2'>" +
-                                    "<img src='" + obj.pictures + "'  />" +
+                                "<img src='" + obj.pictures + "'  />" +
                                 "</div>" +
                                 "<div class='col-md-9 list-group-item-text'><h4>" + obj.title + "</h4></div>" +
                                 "<div class='col-md-9'>" + obj.description + "</div>" +
-                            "</li>";
+                                "</li>";
+                        }
+                        else
+                        {
+                            hintDisplay +=
+                                "<li style='position: relative; z-index: 10' class='list-group-item container col-md-12 col-sm-12'>" +
+                                "<div class='col-md-2'>" +
+                                "<img src='" + obj.pictures + "'  />" +
+                                "</div>" +
+                                "<div class='col-md-9 list-group-item-text'><h4>" + obj.title + "</h4></div>" +
+                                "<div class='col-md-9'>" + obj.description + "</div>" +
+                                "</li>";
+                        }
                     });
                 }
                 else
                 {
-                    uic.innerHTML = "<li style='position:relative; z-index: 10' class='col-md-12 list-group-item container'>No suggestions</li>"
+                    hintDisplay = "<li style='position:relative; z-index: 10' class='col-md-12 list-group-item container'>No suggestions</li>"
                 }
+                uic.innerHTML = hintDisplay;
             }
         };
 
-        xmlHTTP.open('GET', 'Models/livesearch.php?q=' + str, true);
         xmlHTTP.send();
+
     }
 }

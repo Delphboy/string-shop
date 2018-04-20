@@ -70,7 +70,7 @@ if(isset($_SESSION['isSignedIn']))
 {
     if($_SESSION['isSignedIn'])
     {
-        header('Location: user.php');
+        header('Location: index.php');
     }
 }
 else
