@@ -95,8 +95,6 @@ function liveSearchBar(str)
                 uic.innerHTML = hintDisplay;
             }
         };
-
         xmlHTTP.send();
-
     }
 }
