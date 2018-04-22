@@ -127,9 +127,9 @@ class Search
 
         if(($search != null) && ($search !=""))
         {
-            $query = $query . " AND title LIKE :searchTitle LIMIT 5;";
+            $query = $query . " AND SOUNDEX(title) LIKE SOUNDEX(:searchTitle) LIMIT 5;";
             $db->setQuery($query);
-            $db->bindQueryValue(':searchTitle', $search . "%");
+            $db->bindQueryValue(':searchTitle', $search . "%"); //applies a wildcard to the end of the query
 
             $data = $db->getAllResults();
             if(! empty($data))
