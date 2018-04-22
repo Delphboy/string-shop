@@ -83,7 +83,6 @@ class Search
         if(($hasBow != null) && ($hasBow == true)) $query = $query . " AND hasBow = :bow";
         if(($hasCase != null) && ($hasCase == true)) $query = $query . " AND hasCase = :case";
 
-//        if(($group != null) && ($group != "")) $query = $query . " ORDER BY :group";
         if(($group != null) && ($group != "")) $query = $query . $group;
         if(($page !=null) && ($page >= 0)) $query = $query . " LIMIT " . ($page * 10) . ", 10";
 
@@ -94,8 +93,6 @@ class Search
         if(($search != null) && ($search !="")) $db->bindQueryValue(':searchTitle', "%" . $search . "%");
         if(($hasBow != null) && ($hasBow == 1)) $db->bindQueryValue(':bow', $hasBow);
         if(($hasCase != null) && ($hasCase == 1)) $db->bindQueryValue(':case', $hasCase);
-
-//        if(($group != null) && ($group != "")) $db->bindQueryValue(':group', $group);
 
         $data = $db->getAllResults();
         if(! empty($data))
