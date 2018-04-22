@@ -111,6 +111,45 @@ class Search
         return $output;
     }
 
+//    /**
+//     * Generate a JSON object to be returned for use in the live search feature
+//     * @param $search
+//     * @return string
+//     */
+//    public function returnAdvertAJAXFromSearch($search)
+//    {
+//        $adverts = array();
+//        $db = DBConnection::getInstance();
+//        $query = "SELECT * FROM Adverts WHERE date > NOW() - INTERVAL $this->expireTime";
+//
+//        if(($search != null) && ($search !=""))
+//        {
+//            $query = $query . " AND SOUNDEX(title) LIKE SOUNDEX(:searchTitle) LIMIT 5;";
+//            $db->setQuery($query);
+//            $db->bindQueryValue(':searchTitle', $search . "%"); //applies a wildcard to the end of the query
+//
+//            $data = $db->getAllResults();
+//            if(! empty($data))
+//            {
+//                for($rowCount = 0; $rowCount < count($data); $rowCount++)
+//                {
+//                    $db->setQuery("SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :ad LIMIT 1;");
+//                    $db->bindQueryValue(":ad", $data[$rowCount][0]);
+//                    $picture = $db->getRow()[0];
+//
+//                    $advert = new Advert($data[$rowCount][0], $data[$rowCount][1], $data[$rowCount][2], $data[$rowCount][3],
+//                        $data[$rowCount][4], $data[$rowCount][7], $data[$rowCount][8], $data[$rowCount][9],
+//                        $data[$rowCount][10], $data[$rowCount][6], $picture, $data[$rowCount][5]);
+//
+//                    $adverts[] = $advert;
+//                }
+//            }
+//        }
+//
+//        return json_encode($adverts);
+//    }
+
+
     /**
      * Generate a JSON object to be returned for use in the live search feature
      * @param $search
@@ -120,11 +159,11 @@ class Search
     {
         $adverts = array();
         $db = DBConnection::getInstance();
-        $query = "SELECT * FROM Adverts WHERE date > NOW() - INTERVAL $this->expireTime";
+        $query = "SELECT advertID, title, description FROM Adverts WHERE date > NOW() - INTERVAL $this->expireTime";
 
         if(($search != null) && ($search !=""))
         {
-            $query = $query . " AND SOUNDEX(title) LIKE SOUNDEX(:searchTitle) LIMIT 5;";
+            $query = $query . " AND SOUNDEX(title) LIKE SOUNDEX(:searchTitle) LIMIT 3;";
             $db->setQuery($query);
             $db->bindQueryValue(':searchTitle', $search . "%"); //applies a wildcard to the end of the query
 
@@ -137,9 +176,7 @@ class Search
                     $db->bindQueryValue(":ad", $data[$rowCount][0]);
                     $picture = $db->getRow()[0];
 
-                    $advert = new Advert($data[$rowCount][0], $data[$rowCount][1], $data[$rowCount][2], $data[$rowCount][3],
-                        $data[$rowCount][4], $data[$rowCount][7], $data[$rowCount][8], $data[$rowCount][9],
-                        $data[$rowCount][10], $data[$rowCount][6], $picture, $data[$rowCount][5]);
+                    $advert = new Advert($data[$rowCount][0], null, $data[$rowCount][1], $data[$rowCount][2], null, null, null, null, null, null, $picture,null);
 
                     $adverts[] = $advert;
                 }
@@ -148,4 +185,5 @@ class Search
 
         return json_encode($adverts);
     }
+
 }
