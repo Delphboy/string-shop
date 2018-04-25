@@ -5,7 +5,7 @@
  * Date: 30/03/2018
  * Time: 19:56
  */
-
+header('Content-Type: application/json');
 session_start();
 if(isset($_SESSION['isSignedIn']))
 {
