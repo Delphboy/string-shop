@@ -3,28 +3,42 @@
 <!-- Search Field -->
 <?php require_once('template/searchBar.phtml');?>
 
+<!-- Link JS -->
+<script type="text/javascript" language="JavaScript" src="/js/AJAXConnection.js"></script>
+<script type="text/javascript" language="JavaScript" src="/js/infiniteScroll.js"></script>
+
+<script>
+    window.onscroll = function(ev) {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+//            loadMore("c=everything");
+            alert("You're at the bottom on the page");
+        }
+    };
+</script>
+
 <div id="searchResultDisplay" class="container">
     <?php
-    if(isset($view->searchResults) && $view->searchResults != "")
-    {
-        echo $view->searchResults;
-    }
-    else
-    {
-        echo "<h2>No search results</h2>";
-    }
-    ?>
+        if(isset($view->searchResults) && $view->searchResults != "")
+        {
+            echo $view->searchResults;
+        }
+        else
+        {
+            echo "<h2>No search results</h2>";
+        }
+        ?>
 </div>
 
 <div class="container center-block">
-        <ul class="pager">
-            <li><a href="search.php?<?php
-                echo "category=" . $_GET['category'] . "&search=" . $_GET['search'] . "&order=" . $_GET['order'] . "&page=" . ($_GET['page'] - 1);
-                ?>">Previous</a></li>
-
-            <li><a href="search.php?<?php
-                echo "category=" . $_GET['category'] . "&search=" . $_GET['search'] . "&order=" . $_GET['order'] . "&page=" . ($_GET['page'] + 1);
-                ?>">Next</a></li>
-        </ul>
+<!--        <ul class="pager">-->
+<!--            <li><a href="search.php?--><?php
+//                echo "category=" . $_GET['category'] . "&search=" . $_GET['search'] . "&order=" . $_GET['order'] . "&page=" . ($_GET['page'] - 1);
+//                ?><!--">Previous</a></li>-->
+<!---->
+<!--            <li><a href="search.php?--><?php
+//                echo "category=" . $_GET['category'] . "&search=" . $_GET['search'] . "&order=" . $_GET['order'] . "&page=" . ($_GET['page'] + 1);
+//                ?><!--">Next</a></li>-->
+<!--        </ul>-->
+    Loadmore
 </div>
 <?php require('template/footer.phtml') ?>

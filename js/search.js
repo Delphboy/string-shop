@@ -1,6 +1,6 @@
-let ajax = new AJAXConnection();
-let search = "";
-let hintDisplay = "";
+var ajax = new AJAXConnection();
+var search = "";
+var hintDisplay = "";
 
 /**
  * Live search bar
@@ -39,7 +39,7 @@ function handleResponse()
     }
     else
     {
-        hintDisplay = "<li style='position:relative; z-index: 10' class='col-md-12 list-group-item container'>Loading...</li>"
+        hintDisplay = "var "
     }
 
     //Update display
