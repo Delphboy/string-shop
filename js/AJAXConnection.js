@@ -53,7 +53,7 @@ class AJAXConnection
         }
         // else
         // {
-        //     setTimeout(this.process(method, url, stateChangeMethod), 1000);
+        //     setTimeout(ajax.process(method, url, stateChangeMethod), 100);
         // }
     }
 

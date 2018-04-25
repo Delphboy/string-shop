@@ -17,9 +17,9 @@ function liveSearchBar(str)
  */
 function handleResponse()
 {
+    let uic = document.getElementById("hintList");
     if(ajax.xmlHTTP.readyState === 4 && ajax.xmlHTTP.status === 200)
     {
-        let uic = document.getElementById("hintList");
         let JSONData = JSON.parse(ajax.xmlHTTP.responseText);
         let hintDisplay = "";
         if(ajax.xmlHTTP.responseText.length > 2)
@@ -57,13 +57,18 @@ function handleResponse()
         }
         uic.innerHTML = hintDisplay;
 
-        setTimeout(ajax.process(), 1000);
+        // setTimeout(ajax.process(), 100);
+    }
+    else if(ajax.xmlHTTP.readyState !== 4)
+    {
+        uic.innerHTML = "<li style='position:relative; z-index: 10' class='col-md-12 list-group-item container'>Loading...</li>";
     }
     else
     {
         console.log("An error occurred");
-        console.log(ajax.xmlHTTP.readyState);
-        console.log(ajax.xmlHTTP.status);
+        console.log("Ready State: " + ajax.xmlHTTP.readyState);
+        console.log("Status: " + ajax.xmlHTTP.status + "\n");
+        console.log(ajax);
     }
 
 }
