@@ -6,6 +6,7 @@
  * Time: 19:56
  */
 //header('Content-Type: application/json');
+header('Content-Type: text/plain');
 session_start();
 if(isset($_SESSION['isSignedIn']))
 {
@@ -14,17 +15,32 @@ if(isset($_SESSION['isSignedIn']))
         include_once ('Search.php');
         $search = new Search();
 
-        $cat = $_REQUEST['c'];
-//        $search = $_REQUEST['s'];
-//        $bow = $_REQUEST['b'];
-//        $case = $_REQUEST['ca'];
-//        $group = $_REQUEST['g'];
+        switch($_REQUEST['order'])
+        {
+            case "relevant":
+                $group = " ORDER BY title";
+                break;
+            case "highToLow":
+                $group = " ORDER BY price DESC";
+                break;
+            case "lowToHigh":
+                $group = " ORDER BY price";
+                break;
+            case "newToOld":
+                $group = " ORDER BY date DESC";
+                break;
+            case "oldToNew":
+                $group = " ORDER BY date";
+                break;
+            default:
+                $group = " ORDER BY title";
+                break;
+        }
 
-//        echo $_REQUEST['a'] . "<br/>";
-//        echo $_REQUEST['b'] . "<br/>";
-//        echo $_REQUEST['c'] . "<br/>";
-
-//        echo $search->loadAdvertDisplayCode($cat, $search, $bow, $case, $group, 1);
-        echo $search->loadAdvertDisplayCode($cat, null, null, null, null, 0);
+        $cat = $_REQUEST['cat'];
+        $bow = $_REQUEST['bow'];
+        $case = $_REQUEST['case'];
+        $page = $_REQUEST['page'];
+        echo $search->loadAdvertDisplayCode($cat, null, $bow, $case, $group, $page);
     }
 }

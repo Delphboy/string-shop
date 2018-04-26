@@ -1,33 +1,80 @@
-var ajax = new AJAXConnection();
-let display = "";
+let ajaxConn = new AJAXConnection();
 
-window.onscroll = function(ev) {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        alert("Hello there");
-    }
-};
+let searchCategory = "";
+let searchOrder = "";
+let searchHasCase = "";
+let searchHasBow = "";
+let page = 0;
 
-function loadMore(getString)
+
+function loadMore(queryString)
 {
-    ajax.process('GET', '/Models/loadmore.php?' + getString, displayMoreAds);
+    ajaxConn.process("GET", "Models/loadmore.php?" + queryString, displayMoreAds);
 }
+
 
 function displayMoreAds()
 {
-    let previews = document.getElementByID("searchResultDisplay");
-
-    if(ajax.xmlHTTP.readyState === 4 && ajax.xmlHTTP.status === 200)
+    let output = "";
+    let outputLocation = document.getElementById("searchResultDisplay");
+    if(ajaxConn.xmlHTTP.readyState === 4 && ajaxConn.xmlHTTP.status === 200)
     {
-        display = ajax.xmlHTTP.responseText;
+        output = ajaxConn.xmlHTTP.responseText;
     }
     else
     {
-        display = "Loading";
+        output = "Loading...";
     }
-
-    //Update display
-    if(search.length > 0)
-        previews.innerHTML = display;
-    else
-        previews.innerHTML = "";
+    outputLocation.innerHTML = output;
 }
+
+/**
+ * EVENT HANDLER: Handles the search form being updated
+ */
+function handleSearch()
+{
+    let str = createSearchString();
+    console.log(
+        "Search Params\n" +
+        searchCategory + "\n" +
+        searchOrder + "\n" +
+        searchHasCase + "\n" +
+        searchHasBow + "\n" +
+        page
+    );
+    loadMore(str);
+}
+
+function createSearchString()
+{
+    searchCategory = document.getElementById("searchCategory").value;
+    searchOrder = document.getElementById("searchOrder").value;
+    searchHasCase = document.getElementById("searchHasCase").value;
+    searchHasBow = document.getElementById("searchHasBow").value;
+
+    //Convert JS bools to PHP bools
+    if(searchHasCase === "on")
+        searchHasCase = 1;
+    else
+        searchHasCase = 0;
+
+    if(searchHasBow === "on")
+        searchHasBow = 1;
+    else
+        searchHasBow = 0;
+
+    let str = "cat=" + searchCategory
+        + "&order=" + searchOrder
+        + "&bow=" + searchHasBow
+        + "&case=" + searchHasCase
+        + "&page=" + page;
+    console.log("Search String: " + str);
+
+    return str;
+}
+function bottomOfPage()
+{
+    page++;
+    createSearchString();
+}
+

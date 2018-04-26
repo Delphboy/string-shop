@@ -1,44 +1,73 @@
 <?php require('template/header.phtml') ?>
 
-<!-- Search Field -->
-<?php require_once('template/searchBar.phtml');?>
-
 <!-- Link JS -->
 <script type="text/javascript" language="JavaScript" src="/js/AJAXConnection.js"></script>
 <script type="text/javascript" language="JavaScript" src="/js/infiniteScroll.js"></script>
+<script type="text/javascript" language="JavaScript" src="/js/search.js"></script>
+<!--<script>-->
+<!--    window.onscroll = function(ev) {-->
+<!--        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {-->
+<!--            bottomOfPage();-->
+<!--        }-->
+<!--    };-->
+<!--</script>-->
 
-<script>
-    window.onscroll = function(ev) {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-//            loadMore("c=everything");
-            alert("You're at the bottom on the page");
-        }
-    };
-</script>
+<!-- Search Field -->
+<section class="container container-fluid">
+    <form name="search-function">
+        <fieldset>
+            <legend>Search</legend>
+            <div class="form-group col-md-12">
+                <div class="form-group col-md-2">
+                    <select id="searchCategory" name="category" onchange="handleSearch()" class="form-control col-md-2">
+                        <option value="everything">All Departments</option>
+                        <option value="violin">Violins</option>
+                        <option value="viola">Violas</option>
+                        <option value="cello">Cellos</option>
+                        <option value="bass">Double Basses</option>
+                        <option value="music">Sheet Music</option>
+                        <option value="accessory">Accessories</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-10">
+                    <input name="search" id="searchBar" onkeyup="liveSearchBar(this.value)" type="text" class="form-control" autocomplete="off" placeholder="Search for an item here" />
+                    <ul class="list-group col-md-12" id="hintList" style='position:absolute; z-index: 10'>
+                        <!-- AJAX method in JS/search.js injects code here-->
+                    </ul>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <select id="searchOrder" name="order" onchange="handleSearch()" class="form-control col-md-2">
+                        <option value="relevant">Most Relevant</option>
+                        <option value="highToLow">Price: Highest to Lowest</option>
+                        <option value="lowToHigh">Price: Lowest to Highest</option>
+                        <option value="newToOld">Date: Newest Adverts</option>
+                        <option value="oldToNew">Date: Oldest Adverts</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="checkbox-inline">
+                        <input id="searchHasCase" onchange="handleSearch()" type="checkbox" name="hasCase">Has a case
+                    </label>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="checkbox-inline">
+                        <input id="searchHasBow" onchange="handleSearch()" type="checkbox" name="hasBow">Has a bow
+                    </label>
+                </div>
+                <input type="hidden" name="page" value="0" />
+                <div class="form-group col-md-4">
+                    <button class="btn btn-default form-control" type="button" onclick="handleSearch()" id="searchBtn">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</section>
 
 <div id="searchResultDisplay" class="container">
-    <?php
-        if(isset($view->searchResults) && $view->searchResults != "")
-        {
-            echo $view->searchResults;
-        }
-        else
-        {
-            echo "<h2>No search results</h2>";
-        }
-        ?>
+    <!--    Place items here through AJAX call-->
 </div>
 
-<div class="container center-block">
-<!--        <ul class="pager">-->
-<!--            <li><a href="search.php?--><?php
-//                echo "category=" . $_GET['category'] . "&search=" . $_GET['search'] . "&order=" . $_GET['order'] . "&page=" . ($_GET['page'] - 1);
-//                ?><!--">Previous</a></li>-->
-<!---->
-<!--            <li><a href="search.php?--><?php
-//                echo "category=" . $_GET['category'] . "&search=" . $_GET['search'] . "&order=" . $_GET['order'] . "&page=" . ($_GET['page'] + 1);
-//                ?><!--">Next</a></li>-->
-<!--        </ul>-->
-    Loadmore
-</div>
 <?php require('template/footer.phtml') ?>
