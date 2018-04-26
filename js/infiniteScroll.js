@@ -1,15 +1,16 @@
 let ajaxConn = new AJAXConnection();
-
+let searchQuery = "";
 let searchCategory = "";
 let searchOrder = "";
 let searchHasCase = "";
 let searchHasBow = "";
 let page = 0;
-
+let isMoreResults = true;
 
 function loadMore(queryString)
 {
     ajaxConn.process("GET", "Models/loadmore.php?" + queryString, displayMoreAds);
+    searchQuery = queryString;
 }
 
 
@@ -19,13 +20,38 @@ function displayMoreAds()
     let outputLocation = document.getElementById("searchResultDisplay");
     if(ajaxConn.xmlHTTP.readyState === 4 && ajaxConn.xmlHTTP.status === 200)
     {
-        output = ajaxConn.xmlHTTP.responseText;
+        if(ajaxConn.xmlHTTP.responseText !== "")
+        {
+            output = ajaxConn.xmlHTTP.responseText;
+            console.log("found one");
+        }
+        else
+        {
+            document.getElementById("message").innerHTML = "<h4>No More Adverts</h4>";
+            isMoreResults = false;
+            console.log("No more adverts");
+        }
     }
     else
     {
-        output = "Loading...";
+        //Still more adverts to come, but they're not here yet - loading
+        if(isMoreResults)
+        {
+            document.getElementById("message").innerHTML = "<h4>Loading...</h4>";
+            console.log("Loading");
+        }
     }
-    outputLocation.innerHTML = output;
+
+    if(outputLocation.innerHTML.length = 0)
+    {
+        outputLocation.innerHTML = output;
+        // document.getElementById("message").innerHTML = "";
+    }
+    else
+    {
+        outputLocation.innerHTML += output;
+        // document.getElementById("message").innerHTML = "";
+    }
 }
 
 /**
@@ -33,15 +59,18 @@ function displayMoreAds()
  */
 function handleSearch()
 {
+    isMoreResults = true;
+    document.getElementById("searchResultDisplay").innerHTML = "";
     let str = createSearchString();
-    console.log(
-        "Search Params\n" +
-        searchCategory + "\n" +
-        searchOrder + "\n" +
-        searchHasCase + "\n" +
-        searchHasBow + "\n" +
-        page
-    );
+    page = 0;
+    // console.log(
+    //     "Search Params\n" +
+    //     searchCategory + "\n" +
+    //     searchOrder + "\n" +
+    //     searchHasCase + "\n" +
+    //     searchHasBow + "\n" +
+    //     page
+    // );
     loadMore(str);
 }
 
@@ -68,13 +97,16 @@ function createSearchString()
         + "&bow=" + searchHasBow
         + "&case=" + searchHasCase
         + "&page=" + page;
-    console.log("Search String: " + str);
+
+    // console.log("Search String: " + str);
 
     return str;
 }
+
 function bottomOfPage()
 {
-    page++;
-    createSearchString();
+    page += 1;
+    searchQuery = createSearchString();
+    loadMore(searchQuery);
 }
 
