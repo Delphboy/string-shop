@@ -74,4 +74,16 @@
     <!--    Place messages here through ajax call-->
 </div>
 
+<!-- Function to load in adverts once page has rendered -->
+<script type = "text/javascript">
+    let requestedCategory = window.location.search.substr(3);
+    if(requestedCategory === "")
+        requestedCategory = "everything";
+
+    var category = document.getElementById("searchCategory");
+    category.value = requestedCategory;
+
+    loadMore(createSearchString());
+</script>
+
 <?php require('template/footer.phtml') ?>
