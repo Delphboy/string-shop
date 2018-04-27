@@ -17,6 +17,16 @@ function liveSearchBar(str)
 }
 
 /**
+ * EVENT HANDLER: Clear the live search when the text box has lost focus
+ */
+function clearSearch()
+{
+    // alert("Hello ladies");
+    let uic = document.getElementById("hintList");
+    uic.innerHTML = "";
+}
+
+/**
  * Process the the AJAX call to the server
  * Display the live createSearchString bar results
  */

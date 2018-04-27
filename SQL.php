@@ -48,7 +48,7 @@ if(isset($_POST['search']))
 
 if(isset($_POST['generate']))
 {
-    for($i = 0; $i < 100; $i++)
+    for($i = 100; $i < 200; $i++)
     {
         $db = DBConnection::getInstance();
         $date = date('Y-m-d');

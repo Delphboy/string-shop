@@ -1,5 +1,7 @@
 let ajaxConn = new AJAXConnection();
 let searchQuery = "";
+
+let searchString = "";
 let searchCategory = "";
 let searchOrder = "";
 let searchHasCase = "";
@@ -7,13 +9,22 @@ let searchHasBow = "";
 let page = 0;
 let isMoreResults = true;
 
+/**
+ * EVENT HANDLER: Run when the user types in the search bar.
+ * Create AJAX request and update query string
+ * @param queryString
+ */
 function loadMore(queryString)
 {
     ajaxConn.process("GET", "Models/loadmore.php?" + queryString, displayMoreAds);
     searchQuery = queryString;
 }
 
-
+/**
+ * Use the returned value from the AJAX request to append extra results to the bottom of the page
+ * If there are no more results, display the "No More Results" message
+ * Whilst waiting on the AJAX request, display a "Loading..." message
+ */
 function displayMoreAds()
 {
     let output = "";
@@ -42,7 +53,7 @@ function displayMoreAds()
         }
     }
 
-    if(outputLocation.innerHTML.length = 0)
+    if(outputLocation.innerHTML.length === 0)
     {
         outputLocation.innerHTML = output;
         // document.getElementById("message").innerHTML = "";
@@ -74,9 +85,14 @@ function handleSearch()
     loadMore(str);
 }
 
+/**
+ * User the search bar elements to build a query string for the AJAX request
+ * @returns {string}
+ */
 function createSearchString()
 {
     searchCategory = document.getElementById("searchCategory").value;
+    searchString = document.getElementById("searchBar").value;
     searchOrder = document.getElementById("searchOrder").value;
     searchHasCase = document.getElementById("searchHasCase").value;
     searchHasBow = document.getElementById("searchHasBow").value;
@@ -93,16 +109,20 @@ function createSearchString()
         searchHasBow = 0;
 
     let str = "cat=" + searchCategory
+        + "&search=" + searchString
         + "&order=" + searchOrder
         + "&bow=" + searchHasBow
         + "&case=" + searchHasCase
         + "&page=" + page;
 
-    // console.log("Search String: " + str);
+    console.log("Search String: " + str);
 
     return str;
 }
 
+/**
+ * EVENT HANDLER: Run this code when the user reaches the bottom of the page
+ */
 function bottomOfPage()
 {
     page += 1;

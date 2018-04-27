@@ -38,9 +38,16 @@ if(isset($_SESSION['isSignedIn']))
         }
 
         $cat = $_REQUEST['cat'];
+
+        $searchString = "";
+        if(!isset($_REQUEST['search']) || $_REQUEST['search'] === "")
+            $searchString = "";
+        else
+            $searchString = $_REQUEST['search'];
+
         $bow = $_REQUEST['bow'];
         $case = $_REQUEST['case'];
         $page = $_REQUEST['page'];
-        echo $search->loadAdvertDisplayCode($cat, null, $bow, $case, $group, $page);
+        echo $search->loadAdvertDisplayCode($cat, $searchString, $bow, $case, $group, $page);
     }
 }
