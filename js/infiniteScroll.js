@@ -72,8 +72,8 @@ function handleSearch()
 {
     isMoreResults = true;
     document.getElementById("searchResultDisplay").innerHTML = "";
-    let str = createSearchString();
     page = 0;
+    let str = createSearchString();
     loadMore(str);
 }
 
