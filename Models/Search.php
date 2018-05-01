@@ -80,6 +80,7 @@ class Search
 
         if(($category != null) && ($category !="everything")) $query = $query . " AND type = :cat";
         if(($search != null) && ($search !="")) $query = $query . " AND title LIKE :searchTitle";
+
         if(($hasBow != null) && ($hasBow == true)) $query = $query . " AND hasBow = :bow";
         if(($hasCase != null) && ($hasCase == true)) $query = $query . " AND hasCase = :case";
 
@@ -90,9 +91,9 @@ class Search
         $db->setQuery($query);
 
         if(($category != null) && ($category !="everything")) $db->bindQueryValue(':cat', $category);
-        if(($search != null) && ($search !="")) $db->bindQueryValue(':searchTitle', "%" . $search . "%");
-        if(($hasBow != null) && ($hasBow == 1)) $db->bindQueryValue(':bow', $hasBow);
-        if(($hasCase != null) && ($hasCase == 1)) $db->bindQueryValue(':case', $hasCase);
+        if(($search != null) && ($search !="")) $db->bindQueryValue(':searchTitle', $search . "%");
+        if(($hasBow != null) && ($hasBow == true)) $db->bindQueryValue(':bow', $hasBow);
+        if(($hasCase != null) && ($hasCase == true)) $db->bindQueryValue(':case', $hasCase);
 
         $data = $db->getAllResults();
         if(! empty($data))

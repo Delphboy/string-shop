@@ -17,11 +17,30 @@ function liveSearchBar(str)
 }
 
 /**
+ * EVENT HANDLER: Handle Keypress for the search bar
+ * If the key is RETURN: short circuit the form return and run AJAX search
+ * else: Run live search
+ */
+function handleKeyPress(e, val) {
+    console.log(e.keyCode);
+    if(e.keyCode === 13)
+    {
+        handleSearch();
+        clearSearch();
+        return false;
+    }
+    else
+    {
+        liveSearchBar(val);
+        return true;
+    }
+}
+
+/**
  * EVENT HANDLER: Clear the live search when the text box has lost focus
  */
 function clearSearch()
 {
-    // alert("Hello ladies");
     let uic = document.getElementById("hintList");
     uic.innerHTML = "";
 }

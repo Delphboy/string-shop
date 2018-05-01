@@ -74,14 +74,6 @@ function handleSearch()
     document.getElementById("searchResultDisplay").innerHTML = "";
     let str = createSearchString();
     page = 0;
-    // console.log(
-    //     "Search Params\n" +
-    //     searchCategory + "\n" +
-    //     searchOrder + "\n" +
-    //     searchHasCase + "\n" +
-    //     searchHasBow + "\n" +
-    //     page
-    // );
     loadMore(str);
 }
 
@@ -98,12 +90,12 @@ function createSearchString()
     searchHasBow = document.getElementById("searchHasBow").value;
 
     //Convert JS bools to PHP bools
-    if(searchHasCase === "on")
+    if(searchHasCase.checked)
         searchHasCase = 1;
     else
         searchHasCase = 0;
 
-    if(searchHasBow === "on")
+    if(searchHasBow.checked)
         searchHasBow = 1;
     else
         searchHasBow = 0;

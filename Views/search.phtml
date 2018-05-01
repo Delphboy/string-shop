@@ -14,7 +14,7 @@
 
 <!-- Search Field -->
 <section class="container container-fluid">
-    <form name="search-function">
+    <form name="search-function" disabled="">
         <fieldset>
             <legend>Search</legend>
             <div class="form-group col-md-12">
@@ -30,7 +30,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-10">
-                    <input name="search" id="searchBar" onblur="clearSearch()" onkeyup="liveSearchBar(this.value)" type="text" class="form-control" autocomplete="off" placeholder="Search for an item here" />
+                    <input name="searchBar" id="searchBar" onblur="clearSearch()" onkeydown="return handleKeyPress(event, this.value)" type="text" class="form-control" autocomplete="off" placeholder="Search for an item here" />
                     <ul class="list-group col-md-12" id="hintList" style='position:absolute; z-index: 10'>
                         <!-- AJAX method in JS/search.js injects code here-->
                     </ul>
@@ -84,6 +84,11 @@
     category.value = requestedCategory;
 
     loadMore(createSearchString());
+</script>
+
+<!-- Script to have event handler for enter key pressed in search bar -->
+<script type="text/javascript">
+
 </script>
 
 <?php require('template/footer.phtml') ?>
