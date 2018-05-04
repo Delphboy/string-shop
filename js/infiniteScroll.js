@@ -48,7 +48,17 @@ function displayMoreAds()
         //Still more adverts to come, but they're not here yet - loading
         if(isMoreResults)
         {
-            document.getElementById("message").innerHTML = "<h4>Loading...</h4>";
+            document.getElementById("message").innerHTML = "" +
+                "<div class='col-md-12'>" +
+                    "<div class='col-md-5'></div>" +
+                        "<div class='col-md-2'<h4>Loading...</h4></div>" +
+                    "<div class='col-md-5'></div>" +
+                "</div>" +
+                "<div class='col-md-12'>" +
+                    "<div class='col-md-5'></div>" +
+                        "<div class='col-md-2'><img src='/images/loading.gif' width='100' height='100'></div>" +
+                    "<div class='col-md-5'></div>" +
+                "</div>";
             console.log("Loading");
         }
     }
