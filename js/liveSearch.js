@@ -1,5 +1,5 @@
 var ajax = new AJAXConnection();
-var search = "";
+var previousSearchQuery = "";
 var resultsDisplay = "";
 
 /**
@@ -13,13 +13,13 @@ function liveSearchBar(str)
 {
     ajax.process('GET', 'Models/livesearch.php?q=' + str, handleResponse);
     console.log(ajax);
-    search = str;
+    previousSearchQuery = str;
 }
 
 /**
- * EVENT HANDLER: Handle Keypress for the search bar
- * If the key is RETURN: short circuit the form return and run AJAX search
- * else: Run live search
+ * EVENT HANDLER: Handle Keypress for the previousSearchQuery bar
+ * If the key is RETURN: short circuit the form return and run AJAX previousSearchQuery
+ * else: Run live previousSearchQuery
  */
 function handleKeyPress(e, val) {
     console.log(e.keyCode);
@@ -37,7 +37,7 @@ function handleKeyPress(e, val) {
 }
 
 /**
- * EVENT HANDLER: Clear the live search when the text box has lost focus
+ * EVENT HANDLER: Clear the live previousSearchQuery when the text box has lost focus
  */
 function clearSearch()
 {
@@ -73,7 +73,7 @@ function handleResponse()
     }
 
     //Update display
-    if(search.length > 0)
+    if(previousSearchQuery.length > 0)
         uic.innerHTML = resultsDisplay;
     else
         uic.innerHTML = "";

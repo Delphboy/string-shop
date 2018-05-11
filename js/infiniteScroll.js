@@ -10,7 +10,7 @@ let page = 0;
 let isMoreResults = true;
 
 /**
- * EVENT HANDLER: Run when the user types in the search bar.
+ * EVENT HANDLER: Run when the user types in the previousSearchQuery bar.
  * Create AJAX request and update query string
  * @param queryString
  */
@@ -76,7 +76,7 @@ function displayMoreAds()
 }
 
 /**
- * EVENT HANDLER: Handles the search form being updated
+ * EVENT HANDLER: Handles the previousSearchQuery form being updated
  */
 function handleSearch()
 {
@@ -88,7 +88,7 @@ function handleSearch()
 }
 
 /**
- * User the search bar elements to build a query string for the AJAX request
+ * User the previousSearchQuery bar elements to build a query string for the AJAX request
  * @returns {string}
  */
 function createSearchString()
@@ -111,7 +111,7 @@ function createSearchString()
         searchHasBow = 0;
 
     let str = "cat=" + searchCategory
-        + "&search=" + searchString
+        + "&previousSearchQuery=" + searchString
         + "&order=" + searchOrder
         + "&bow=" + searchHasBow
         + "&case=" + searchHasCase

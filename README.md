@@ -15,7 +15,7 @@ such as captcha technology.
  - Information stored about users must include their email address, which 
 is used as their username, password, address and mobile number. All 
 passwords must be appropriately encrypted.
- - Visitors must be able to search adverts by title, price and at least one 
+ - Visitors must be able to liveSearch adverts by title, price and at least one 
 other appropriate attribute (I.e: size, colour or location as 
 appropriate)
  - The site should provide information about each advert including price, 
