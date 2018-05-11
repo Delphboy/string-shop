@@ -15,3 +15,19 @@ class AJAXConnection
         }
     }
 }
+
+// function AJAXConnection(method, url, operation)
+// {
+//     let obj = new XMLHttpRequest();
+//     if(obj.readyState === 0 || obj.readyState === 4)
+//     {
+//         obj.open(method, url, true);
+//         obj.onreadystatechange = operation;
+//         obj.send(null);
+//     }
+// }
+
+function makeNewAJAX()
+{
+    return new XMLHttpRequest();
+}
