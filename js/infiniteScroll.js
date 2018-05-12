@@ -56,12 +56,10 @@ function displayMoreAds()
     if(outputLocation.innerHTML.length === 0)
     {
         outputLocation.innerHTML = output;
-        // document.getElementById("message").innerHTML = "";
     }
     else
     {
         outputLocation.innerHTML += output;
-        // document.getElementById("message").innerHTML = "";
     }
 }
 
@@ -83,8 +81,8 @@ function handleSearch()
  */
 function createSearchString()
 {
-    searchCategory = document.getElementById("searchCategory").value;
     searchString = document.getElementById("searchBar").value;
+    searchCategory = document.getElementById("searchCategory").value;
     searchOrder = document.getElementById("searchOrder").value;
     searchHasCase = document.getElementById("searchHasCase");
     searchHasBow = document.getElementById("searchHasBow");
