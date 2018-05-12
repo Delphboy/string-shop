@@ -86,8 +86,8 @@ function createSearchString()
     searchCategory = document.getElementById("searchCategory").value;
     searchString = document.getElementById("searchBar").value;
     searchOrder = document.getElementById("searchOrder").value;
-    searchHasCase = document.getElementById("searchHasCase").value;
-    searchHasBow = document.getElementById("searchHasBow").value;
+    searchHasCase = document.getElementById("searchHasCase");
+    searchHasBow = document.getElementById("searchHasBow");
 
     //Convert JS bools to PHP bools
     if(searchHasCase.checked)
