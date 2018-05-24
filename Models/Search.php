@@ -88,6 +88,9 @@ class Search
         if(($page !== null) && ($page >= 0)) $query = $query . " LIMIT " . ($page * 10) . ", 10";
 
         $query = $query . ";";
+
+//        echo "<h2>$query</h2>";
+
         $db->setQuery($query);
 
         if(($category != null) && ($category !="everything")) $db->bindQueryValue(':cat', $category);
@@ -115,20 +118,20 @@ class Search
 
     /**
      * Generate a JSON object to be returned for use in the live createSearchString feature
-     * @param $search
+     * @param $searchString
      * @return string
      */
-    public function returnAdvertAJAXFromSearch($search)
+    public function returnAdvertAJAXFromSearchString($searchString)
     {
         $adverts = array();
         $db = DBConnection::getInstance();
         $query = "SELECT advertID, title, description FROM Adverts WHERE date > NOW() - INTERVAL $this->expireTime";
 
-        if(($search != null) && ($search !=""))
+        if(($searchString != null) && ($searchString !=""))
         {
             $query = $query . " AND title LIKE :searchTitle LIMIT 3;";
             $db->setQuery($query);
-            $db->bindQueryValue(':searchTitle', $search . "%"); //applies a wildcard to the end of the query
+            $db->bindQueryValue(':searchTitle', $searchString . "%"); //applies a wildcard to the end of the query
 
             $data = $db->getAllResults();
             if(! empty($data))
@@ -159,7 +162,7 @@ class Search
      * @param $page
      * @return string
      */
-    public function returnAdvertAJAXFromQuery($category, $search, $hasBow, $hasCase, $group, $page)
+    public function returnAdvertAJAXFromSearchQuery($category, $search, $hasBow, $hasCase, $group, $page)
     {
         $adverts = array();
 
@@ -186,12 +189,12 @@ class Search
         {
             for($rowCount = 0; $rowCount < count($data); $rowCount++)
             {
-                $db->setQuery("SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :ad");
+                $db->setQuery("SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :ad LIMIT 1");
                 $db->bindQueryValue(":ad", $data[$rowCount][0]);
-                $pictures = $db->getAllResults();
+                $picture = $db->getRow();
 
                 $advert = new Advert($data[$rowCount][0], $data[$rowCount][1], $data[$rowCount][2], $data[$rowCount][3], $data[$rowCount][4], $data[$rowCount][7],
-                    $data[$rowCount][8], $data[$rowCount][9], $data[$rowCount][10], $data[$rowCount][6], $pictures, $data[$rowCount][5]);
+                    $data[$rowCount][8], $data[$rowCount][9], $data[$rowCount][10], $data[$rowCount][6], $picture, $data[$rowCount][5]);
                 $adverts[] = $advert;
             }
         }

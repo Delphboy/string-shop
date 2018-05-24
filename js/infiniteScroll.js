@@ -8,6 +8,7 @@ let searchHasCase = "";
 let searchHasBow = "";
 let page = 0;
 let isMoreResults = true;
+let isLoaded = false;
 
 /**
  * EVENT HANDLER: Run when the user types in the previousSearchQuery bar.
@@ -27,19 +28,20 @@ function loadMore(queryString)
  */
 function displayMoreAds()
 {
+    let JSONResult = null;
     let output = "";
     let outputLocation = document.getElementById("searchResultDisplay");
     if(ajaxConn.xmlHTTP.readyState === 4 && ajaxConn.xmlHTTP.status === 200)
     {
         if(ajaxConn.xmlHTTP.responseText !== "")
         {
-            output = ajaxConn.xmlHTTP.responseText;
-            console.log("found one");
+            JSONResult = JSON.parse(ajaxConn.xmlHTTP.responseText);
         }
         else
         {
             document.getElementById("message").innerHTML = "<h4>No More Adverts</h4>";
             isMoreResults = false;
+            isLoaded = true;
             console.log("No more adverts");
         }
     }
@@ -49,17 +51,38 @@ function displayMoreAds()
         if(isMoreResults)
         {
             document.getElementById("message").innerHTML = "<h4>Loading...</h4>";
+            isLoaded = false;
             console.log("Loading");
         }
+    }
+
+    if(JSONResult !== null)
+    {
+        JSONResult.forEach(function (obj)
+        {
+            var advertID = (obj.id * 7).toString(16);
+            output += "<div class='col-md-6'>" +
+                "<div class='col-md-6'>" +
+                "<img src='/images/uploads/" + obj.picture + "' class='previewImage'>" +
+                "</div>" +
+                "<div class='col-md-6'>" +
+                "<h2><a href='/advert.php?advert=" + advertID + "'>" + obj.title + "</a></h2>" +
+                "<p>" + obj.description + "</p>" +
+                "</div>" +
+                "<div class='col-xs-12' style='height: 50px'></div> " +
+                "</div>";
+        });
     }
 
     if(outputLocation.innerHTML.length === 0)
     {
         outputLocation.innerHTML = output;
+        isLoaded = true;
     }
     else
     {
         outputLocation.innerHTML += output;
+        isLoaded = true;
     }
 }
 
@@ -115,7 +138,9 @@ function createSearchString()
  */
 function bottomOfPage()
 {
-    page += 1;
+    if(isMoreResults && isLoaded)
+        page += 1;
+    isLoaded = false;
     searchQuery = createSearchString();
     loadMore(searchQuery);
 }

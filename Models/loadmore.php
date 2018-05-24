@@ -5,8 +5,8 @@
  * Date: 25/05/2018
  * Time: 19:56
  */
-//header('Content-Type: application/json');
-header('Content-Type: text/plain');
+header('Content-Type: application/json');
+//header('Content-Type: text/plain');
 session_start();
 
 //Allow 3 requests
@@ -36,7 +36,7 @@ if(isset($_SESSION['isSignedIn']))
         $_SESSION['REQ_COUNT'] = $req_count;
         $_SESSION['FIRST_REQUEST_TIME'] = $first_request_time;
         header('X-RateLimit-Limit: '.cap);
-        header('X-RateLimit-Remaining: ' . ( cap-$req_count ) );
+        header('X-RateLimit-Remaining: ' . ( cap - $req_count ) );
         if( $req_count > cap)//Too many requests
         {
             http_response_code( 429 );
@@ -80,7 +80,7 @@ if(isset($_SESSION['isSignedIn']))
             $bow = $_REQUEST['bow'];
             $case = $_REQUEST['case'];
             $page = $_REQUEST['page'];
-            echo $search->loadAdvertDisplayCode($cat, $searchString, $bow, $case, $group, $page);
+            echo $search->returnAdvertAJAXFromSearchQuery($cat, $searchString, $bow, $case, $group, $page);
         }
     }
 }

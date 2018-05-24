@@ -511,7 +511,7 @@ class Advert implements JsonSerializable
             "id" => $this->PK,
             "title" => $this->title,
             "description" => substr($this->description, 0, 120) . "...",
-            "pictures" => $this->pictures
+            "picture" => $this->pictures[0]
         ];
     }
 }
