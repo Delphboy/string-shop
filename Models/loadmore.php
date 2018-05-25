@@ -9,8 +9,9 @@ header('Content-Type: application/json');
 //header('Content-Type: text/plain');
 session_start();
 
-//Allow 3 requests
+//Allow 5 requests
 const cap = 5;
+const perSec = 1;
 
 if(isset($_SESSION['isSignedIn']))
 {
@@ -23,7 +24,7 @@ if(isset($_SESSION['isSignedIn']))
         $first_request_time = $_SESSION['FIRST_REQUEST_TIME'];
 
         //set expiry time to 3 seconds
-        $stamp_expire = date( "Y-m-d H:i:s", strtotime( $first_request_time )+( 3 ) );
+        $stamp_expire = date( "Y-m-d H:i:s", strtotime( $first_request_time )+( perSec ) );
         if( !isset( $_SESSION['REQ_COUNT'] ) ){
             $_SESSION['REQ_COUNT'] = 0;
         }
