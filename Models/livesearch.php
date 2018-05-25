@@ -7,7 +7,7 @@
  */
 header('Content-Type: application/json');
 session_start();
-const cap = 3;
+const cap = 5;
 if(isset($_SESSION['isSignedIn']))
 {
     if($_SESSION['isSignedIn'])

@@ -56,7 +56,7 @@ function displayMoreAds()
                 document.getElementById("message").innerHTML = "<h4>Loading... (Loaded " + advertCount + " of " + totalAdverts + ")</h4>";
             else
             {
-                document.getElementById("message").innerHTML = "<h4>No More Adverts</h4>";
+                document.getElementById("message").innerHTML = "<h4>No More Adverts</h4><br/><p><a href=''>Top of page</a></p>";
                 isMoreResults = false;
                 console.log("No more adverts");
             }

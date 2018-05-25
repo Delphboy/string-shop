@@ -10,7 +10,7 @@ header('Content-Type: application/json');
 session_start();
 
 //Allow 3 requests
-const cap = 3;
+const cap = 5;
 
 if(isset($_SESSION['isSignedIn']))
 {
