@@ -93,7 +93,7 @@ function processJSON(JSONData)
             resultsDisplay =
                 "<li style='position: relative; z-index: 10' class='list-group-item container col-md-12 col-sm-12'>" +
                 "<div class='col-md-2'>" +
-                "<img width='50px' height='auto' src='/images/uploads/" + obj.pictures + "'  />" +
+                "<img width='50px' height='auto' src='/images/uploads/" + obj.picture + "'  />" +
                 "</div>" +
                 "<div class='col-md-9 list-group-item-text'><h4><a href='/advert.php?advert=" + advertID + "'>" + obj.title + "</a></h4></div>" +
                 "<div class='col-md-9'>" + obj.description + "</div>" +
@@ -104,7 +104,7 @@ function processJSON(JSONData)
             resultsDisplay +=
                 "<li style='position: relative; z-index: 10' class='list-group-item container col-md-12 col-sm-12'>" +
                 "<div class='col-md-2'>" +
-                "<img width='50px' height='auto' src='/images/uploads/" + obj.pictures + "'  />" +
+                "<img width='50px' height='auto' src='/images/uploads/" + obj.picture + "'  />" +
                 "</div>" +
                 "<div class='col-md-9 list-group-item-text'><h4><a href='/advert.php?advert=" + advertID + "'>" + obj.title + "</a></h4></div>" +
                 "<div class='col-md-9'>" + obj.description + "</div>" +

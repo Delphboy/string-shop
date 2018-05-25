@@ -140,7 +140,7 @@ class Search
                 {
                     $db->setQuery("SELECT pictureLocation FROM AdvertPictures WHERE advertPK = :ad LIMIT 1;");
                     $db->bindQueryValue(":ad", $data[$rowCount][0]);
-                    $picture = $db->getRow()[0];
+                    $picture = $db->getRow();
 
                     $advert = new Advert($data[$rowCount][0], null, $data[$rowCount][1], $data[$rowCount][2], null, null, null, null, null, null, $picture,null);
 
