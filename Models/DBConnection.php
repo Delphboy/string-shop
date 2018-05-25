@@ -136,6 +136,7 @@ class DBConnection
      */
     public function getRowCount()
     {
+        $this->SQLQuery->execute();
         return $this->SQLQuery->rowCount();
     }
 

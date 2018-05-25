@@ -201,4 +201,27 @@ class Search
         return json_encode($adverts);
     }
 
+    public function getResultCount($category, $search, $hasBow, $hasCase, $group)
+    {
+        $db = DBConnection::getInstance();
+        $query = "SELECT title FROM Adverts WHERE date > NOW() - INTERVAL $this->expireTime";
+
+        if(($category != null) && ($category !="everything")) $query = $query . " AND type = :cat";
+        if(($search != null) && ($search !="")) $query = $query . " AND title LIKE :searchTitle";
+        if(($hasBow != null) && ($hasBow == true)) $query = $query . " AND hasBow = :bow";
+        if(($hasCase != null) && ($hasCase == true)) $query = $query . " AND hasCase = :case";
+
+        if(($group != null) && ($group != "")) $query = $query . $group;
+
+        $query = $query . ";";
+        $db->setQuery($query);
+
+        if(($category != null) && ($category !="everything")) $db->bindQueryValue(':cat', $category);
+        if(($search != null) && ($search !="")) $db->bindQueryValue(':searchTitle', "%" . $search . "%");
+        if(($hasBow != null) && ($hasBow == 1)) $db->bindQueryValue(':bow', $hasBow);
+        if(($hasCase != null) && ($hasCase == 1)) $db->bindQueryValue(':case', $hasCase);
+
+        return $db->getRowCount();
+    }
+
 }

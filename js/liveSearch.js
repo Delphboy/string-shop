@@ -95,7 +95,7 @@ function processJSON(JSONData)
                 "<div class='col-md-2'>" +
                 "<img width='50px' height='auto' src='/images/uploads/" + obj.picture + "'  />" +
                 "</div>" +
-                "<div class='col-md-9 list-group-item-text'><h4><a href='/advert.php?advert=" + advertID + "'>" + obj.title + "</a></h4></div>" +
+                "<div class='col-md-9 list-group-item-text'><h4><a href='/advert.php?advert=" + advertID + "'>" + obj.title + "</a></h4></div></div>" +
                 "<div class='col-md-9'>" + obj.description + "</div>" +
                 "</li>";
         }

@@ -1,4 +1,5 @@
-let ajaxConn = new AJAXConnection();
+let ajaxLoad = new AJAXConnection();
+let ajaxCount = new AJAXConnection();
 let searchQuery = "";
 
 let searchString = "";
@@ -8,7 +9,9 @@ let searchHasCase = "";
 let searchHasBow = "";
 let page = 0;
 let isMoreResults = true;
-let isLoaded = false;
+
+let advertCount = 0;
+let totalAdverts = 1;
 
 /**
  * EVENT HANDLER: Run when the user types in the previousSearchQuery bar.
@@ -17,8 +20,8 @@ let isLoaded = false;
  */
 function loadMore(queryString)
 {
-    ajaxConn.process("GET", "Models/loadmore.php?" + queryString, displayMoreAds);
-    searchQuery = queryString;
+    ajaxLoad.process("GET", "Models/loadmore.php?" + queryString, displayMoreAds);
+    // searchQuery = queryString;
 }
 
 /**
@@ -31,17 +34,16 @@ function displayMoreAds()
     let JSONResult = null;
     let output = "";
     let outputLocation = document.getElementById("searchResultDisplay");
-    if(ajaxConn.xmlHTTP.readyState === 4 && ajaxConn.xmlHTTP.status === 200)
+    if(ajaxLoad.xmlHTTP.readyState === 4 && ajaxLoad.xmlHTTP.status === 200)
     {
-        if(ajaxConn.xmlHTTP.responseText !== "")
+        if(ajaxLoad.xmlHTTP.responseText !== "")
         {
-            JSONResult = JSON.parse(ajaxConn.xmlHTTP.responseText);
+            JSONResult = JSON.parse(ajaxLoad.xmlHTTP.responseText);
         }
         else
         {
             document.getElementById("message").innerHTML = "<h4>No More Adverts</h4>";
             isMoreResults = false;
-            isLoaded = true;
             console.log("No more adverts");
         }
     }
@@ -50,13 +52,18 @@ function displayMoreAds()
         //Still more adverts to come, but they're not here yet - loading
         if(isMoreResults)
         {
-            document.getElementById("message").innerHTML = "<h4>Loading...</h4>";
-            isLoaded = false;
-            console.log("Loading");
+            if(advertCount < totalAdverts)
+                document.getElementById("message").innerHTML = "<h4>Loading... (Loaded " + advertCount + " of " + totalAdverts + ")</h4>";
+            else
+            {
+                document.getElementById("message").innerHTML = "<h4>No More Adverts</h4>";
+                isMoreResults = false;
+                console.log("No more adverts");
+            }
         }
     }
 
-    if(JSONResult !== null)
+    if(JSONResult !== null && isMoreResults)
     {
         JSONResult.forEach(function (obj)
         {
@@ -71,18 +78,17 @@ function displayMoreAds()
                 "</div>" +
                 "<div class='col-xs-12' style='height: 50px'></div> " +
                 "</div>";
+            advertCount++;
         });
     }
 
     if(outputLocation.innerHTML.length === 0)
     {
         outputLocation.innerHTML = output;
-        isLoaded = true;
     }
     else
     {
         outputLocation.innerHTML += output;
-        isLoaded = true;
     }
 }
 
@@ -91,6 +97,8 @@ function displayMoreAds()
  */
 function handleSearch()
 {
+    advertCount = 0;
+    ajaxCount.process("GET", "Models/queryCount.php?" + createSearchString(), setTotalAdCount);
     isMoreResults = true;
     document.getElementById("searchResultDisplay").innerHTML = "";
     page = 0;
@@ -110,7 +118,7 @@ function createSearchString()
     searchHasCase = document.getElementById("searchHasCase");
     searchHasBow = document.getElementById("searchHasBow");
 
-    //Convert JS bools to PHP bools
+        //Convert JS bools to PHP bools
     if(searchHasCase.checked)
         searchHasCase = 1;
     else
@@ -138,10 +146,18 @@ function createSearchString()
  */
 function bottomOfPage()
 {
-    if(isMoreResults && isLoaded)
+    if(isMoreResults && (ajaxLoad.xmlHTTP.readyState === 0 || ajaxLoad.xmlHTTP.readyState === 4))
+    {
         page += 1;
-    isLoaded = false;
-    searchQuery = createSearchString();
-    loadMore(searchQuery);
+        loadMore(createSearchString());
+    }
+}
+
+function setTotalAdCount()
+{
+    if(ajaxCount.xmlHTTP.readyState === 4 && ajaxCount.xmlHTTP.status === 200)
+    {
+        totalAdverts = parseInt(ajaxCount.xmlHTTP.responseText);
+    }
 }
 
