@@ -35,7 +35,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-10">
-                    <input name="searchBar" id="searchBar" on onkeyup="return handleKeyPress(event, this.value)" type="text" class="form-control" autocomplete="off" placeholder="Search for an item here" />
+                    <input name="searchBar" id="searchBar" onkeypress="return handleKeyPress(event, this.value)" type="text" class="form-control" autocomplete="off" placeholder="Search for an item here" />
                     <ul class="list-group col-md-12" id="hintList" style='position:absolute; z-index: 10' tabindex="1">
                         <!-- AJAX method in JS/search.js injects code here-->
                     </ul>

@@ -48,7 +48,7 @@ if(isset($_SESSION['isSignedIn']))
             include_once ('Search.php');
             $search = new Search();
 
-            switch($_REQUEST['order'])
+            switch(htmlentities($_REQUEST['order']))
             {
                 case "relevant":
                     $group = " ORDER BY title";
@@ -73,14 +73,14 @@ if(isset($_SESSION['isSignedIn']))
             $cat = $_REQUEST['cat'];
 
             $searchString = "";
-            if(!isset($_REQUEST['search']) || $_REQUEST['search'] === "")
+            if(!isset($_REQUEST['search']) || htmlentities($_REQUEST['search']) === "")
                 $searchString = "";
             else
-                $searchString = $_REQUEST['search'];
+                $searchString = htmlentities($_REQUEST['search']);
 
-            $bow = $_REQUEST['bow'];
-            $case = $_REQUEST['case'];
-            $page = $_REQUEST['page'];
+            $bow = htmlentities($_REQUEST['bow']);
+            $case = htmlentities($_REQUEST['case']);
+            $page = htmlentities($_REQUEST['page']);
             echo $search->returnAdvertAJAXFromSearchQuery($cat, $searchString, $bow, $case, $group, $page);
         }
     }

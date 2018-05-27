@@ -44,7 +44,7 @@ if(isset($_SESSION['isSignedIn']))
         }
         else
         {
-            $query = $_REQUEST['q'];
+            $query = htmlentities($_REQUEST['q']);
             echo $search->returnAdvertAJAXFromSearchString($query);
         }
     }

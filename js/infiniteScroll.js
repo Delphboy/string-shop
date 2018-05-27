@@ -56,7 +56,7 @@ function displayMoreAds()
                 document.getElementById("message").innerHTML = "<h4>Loading... (Loaded " + advertCount + " of " + totalAdverts + ")</h4>";
             else
             {
-                document.getElementById("message").innerHTML = "<h4>No More Adverts</h4><br/><p><a href=''>Top of page</a></p>";
+                document.getElementById("message").innerHTML = "<h4>No More Adverts</h4><br/><p><a onclick='document.documentElement.scrollTop = 0;'>Top of page</a></p>";
                 isMoreResults = false;
                 console.log("No more adverts");
             }
@@ -98,11 +98,13 @@ function displayMoreAds()
 function handleSearch()
 {
     advertCount = 0;
-    ajaxCount.process("GET", "Models/queryCount.php?" + createSearchString(), setTotalAdCount);
+    let str = createSearchString();
+    console.log(str);
+    ajaxCount.process("GET", "Models/queryCount.php?" + str, setTotalAdCount);
     isMoreResults = true;
     document.getElementById("searchResultDisplay").innerHTML = "";
     page = 0;
-    let str = createSearchString();
+
     loadMore(str);
 }
 
@@ -130,7 +132,7 @@ function createSearchString()
         searchHasBow = 0;
 
     let str = "cat=" + searchCategory
-        + "&previousSearchQuery=" + searchString
+        + "&search=" + searchString
         + "&order=" + searchOrder
         + "&bow=" + searchHasBow
         + "&case=" + searchHasCase
