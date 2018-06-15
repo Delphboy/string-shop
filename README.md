@@ -1,6 +1,8 @@
 # Client-Server Systems Assignment
 
-## Task
+This repo holds all my work for my 2nd Year Client/Server Systems module.
+
+## Task Overview
 Your task is to develop an Interactive classified adverts website using 
 PHP, MySQL, HTML/CSS and JavaScript, which allows users to post and 
 manage adverts. You can choose an existing range of products or invent 
@@ -30,6 +32,8 @@ The site should be developed using MySQL to hold all the relevant
 information and the MVC Design Pattern with the Bootstrap CSS framework,
  as demonstrated in the workshops. You are recommended to use the 
  provided workshop template as your start point.
+
+During second semester, implement AJAX in two places to provide extra functionality such as infinite scrolling, livesearch, or to improve functionality on one of the pages.
  
- ## Idea
- A gumtree like site for buying and selling stringed instruments
+## Solution Details
+I chose to create a web system for buying and selling second hand stringed instruments and their associated accessories.
